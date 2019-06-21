@@ -1,5 +1,7 @@
-require "ruby_bandwidth_bxml/version"
 require 'builder'
+Dir[File.dirname(__FILE__) + '/verbs/*'].each {|file|
+  require_relative file
+}
 
 module RubyBandwidthBxml
   class Response
