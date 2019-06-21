@@ -1,5 +1,4 @@
-module Bandwidth
-  module Xml
+module RubyBandwidthBxml
     module Verbs
       class PhoneNumber
         include XmlVerb
@@ -15,5 +14,4 @@ module Bandwidth
         end
       end
     end
-  end
 end

@@ -1,5 +1,4 @@
-module Bandwidth
-  module Xml
+module RubyBandwidthBxml
     module Verbs
       # The Hangup verb is used to hangup current call
       class Hangup
@@ -10,5 +9,4 @@ module Bandwidth
         end
       end
     end
-  end
 end

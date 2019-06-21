@@ -1,5 +1,4 @@
-module Bandwidth
-  module Xml
+module RubyBandwidthBxml
     module Verbs
       # The SpeakSentence verb is used to convert any text into speak for the caller
       class SpeakSentence
@@ -14,5 +13,4 @@ module Bandwidth
         end
       end
     end
-  end
 end

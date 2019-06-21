@@ -1,5 +1,4 @@
-module Bandwidth
-  module Xml
+module RubyBandwidthBxml
     module Verbs
       class SendDtmf
         include XmlVerb
@@ -9,5 +8,4 @@ module Bandwidth
         end
       end
     end
-  end
 end

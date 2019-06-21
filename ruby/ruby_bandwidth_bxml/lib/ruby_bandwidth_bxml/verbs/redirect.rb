@@ -1,5 +1,4 @@
-module Bandwidth
-  module Xml
+module RubyBandwidthBxml
     module Verbs
       # The Redirect verb is used to redirect the current XML execution to another URL
       class Redirect
@@ -14,5 +13,4 @@ module Bandwidth
         end
       end
     end
-  end
 end

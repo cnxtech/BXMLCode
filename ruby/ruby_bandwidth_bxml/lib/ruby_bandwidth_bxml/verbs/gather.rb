@@ -1,5 +1,4 @@
-module Bandwidth
-  module Xml
+module RubyBandwidthBxml
     module Verbs
       # The Gather verb is used to collect digits for some period of time
       class Gather
@@ -33,5 +32,4 @@ module Bandwidth
         end
       end
     end
-  end
 end

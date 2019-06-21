@@ -1,5 +1,4 @@
-module Bandwidth
-  module Xml
+module RubyBandwidthBxml
     module Verbs
       # The PlayAudio verb is used to play an audio file in the call
       class PlayAudio
@@ -10,5 +9,4 @@ module Bandwidth
         end
       end
     end
-  end
 end

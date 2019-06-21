@@ -1,5 +1,4 @@
-module Bandwidth
-  module Xml
+module RubyBandwidthBxml
     module Verbs
       # The Transfer verb is used to transfer the call to another number
       class Transfer
@@ -34,5 +33,4 @@ module Bandwidth
         end
       end
     end
-  end
 end
