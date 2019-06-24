@@ -15,4 +15,15 @@ class AbstractBxmlVerb(ABC):
         """
         Initializes the values attribute to build the BXML
 
-        @param values [dict]: The
+        :param dict values: The values to build the BXML
+        """
+        self.values = values
+
+    @abstractmethod
+    def to_xml():
+        """
+        Converts the class into its xml representation
+
+        :return str: The string xml representation
+        """
+        pass
