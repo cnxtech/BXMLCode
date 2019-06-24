@@ -132,15 +132,6 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
     assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
   end
 
-  # Validate failure for pause against xsd with no duration
-  def test_validate_pause_no_duration()
-    pause = RubyBandwidthBxml::Pause.new()
-    @response_class.push(pause)
-    xml_string = @response_class.to_xml()
-    xml_object = Nokogiri::XML(xml_string)
-    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
-  end
-
   # Validate redirect against xsd
   def test_validate_redirect()
     redirect = RubyBandwidthBxml::Redirect.new({
@@ -152,15 +143,6 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
     xml_string = @response_class.to_xml()
     xml_object = Nokogiri::XML(xml_string)
     assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
-  end
-
-  # Validate failure for redirect against xsd with no url
-  def test_validate_redirect_no_url()
-    redirect = RubyBandwidthBxml::Redirect.new()
-    @response_class.push(redirect)
-    xml_string = @response_class.to_xml()
-    xml_object = Nokogiri::XML(xml_string)
-    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
   end
 
   # Validate transfer against xsd
@@ -266,37 +248,6 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
     assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
   end
   
-  # Validate failure for no dtmf
-  def test_validate_send_dtmf_no_dtmf()
-    send_dtmf = RubyBandwidthBxml::SendDtmf.new()
-    @response_class.push(send_dtmf)
-    xml_string = @response_class.to_xml()
-    xml_object = Nokogiri::XML(xml_string)
-    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
-  end
-
-  # Validate failure for empty dtmf
-  def test_validate_send_dtmf_empty_dtmf()
-    send_dtmf = RubyBandwidthBxml::SendDtmf.new({
-        :dtmf => ""
-    })
-    @response_class.push(send_dtmf)
-    xml_string = @response_class.to_xml()
-    xml_object = Nokogiri::XML(xml_string)
-    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
-  end
-
-  # Validate failure for invalid dtmf
-  def test_validate_send_dtmf_invalid_dtmf()
-    send_dtmf = RubyBandwidthBxml::SendDtmf.new({
-        :dtmf => "invalid dtmf"
-    })
-    @response_class.push(send_dtmf)
-    xml_string = @response_class.to_xml()
-    xml_object = Nokogiri::XML(xml_string)
-    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
-  end
-
   # Validate hangup against xsd
   def test_validate_hangup()
     hangup = RubyBandwidthBxml::Hangup.new()
@@ -319,28 +270,6 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
     assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
   end
 
-=begin
-  # Validate failure for play_audio with no url
-  def test_validate_play_audio_no_url()
-    play_audio = RubyBandwidthBxml::PlayAudio.new()
-    @response_class.push(play_audio)
-    xml_string = @response_class.to_xml()
-    xml_object = Nokogiri::XML(xml_string)
-    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
-  end
-
-  # Validate failure for play_audio with invalid url
-  def test_validate_play_audio_invalid_url()
-    play_audio = RubyBandwidthBxml::PlayAudio.new({
-        :url => "invalid url"
-    })
-    @response_class.push(play_audio)
-    xml_string = @response_class.to_xml()
-    xml_object = Nokogiri::XML(xml_string)
-    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
-  end
-=end
-
   # Validate speak_sentence against xsd
   def test_validate_speak_sentence()
     speak_sentence = RubyBandwidthBxml::SpeakSentence.new({
@@ -353,16 +282,5 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
     xml_object = Nokogiri::XML(xml_string)
     assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
   end
-
-=begin
-  # Validate failure for speak_sentence with no sentence
-  def test_validate_speak_sentence_no_sentence()
-    speak_sentence = RubyBandwidthBxml::SpeakSentence.new()
-    @response_class.push(speak_sentence)
-    xml_string = @response_class.to_xml()
-    xml_object = Nokogiri::XML(xml_string)
-    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
-  end
-=end
 
 end
