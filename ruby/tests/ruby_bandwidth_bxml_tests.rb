@@ -1,6 +1,10 @@
 require 'test/unit'
+require 'nokogiri'
 
 require_relative '../lib/ruby_bandwidth_bxml'
+
+$XSD_PATH = 'schema.xsd'
+$XSD_SCHEMA = Nokogiri::XML::Schema(File.read($XSD_PATH))
 
 class RubyBandwidthBxmlTest < Test::Unit::TestCase
   def setup()
@@ -11,11 +15,13 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
   #  @str = ""
   #end
 
+  # Test for no verbs
   def test_to_xml_no_verbs()
     expected_xml = '<?xml version="1.0" encoding="UTF-8"?><Response></Response>'
     assert_equal(expected_xml, @response_class.to_xml())
   end
 
+  # Test that covers all verbs
   def test_to_xml_all_verbs()
     expected_xml = '<?xml version="1.0" encoding="UTF-8"?><Response><Redirect redirectUrl="redirect url" redirectMethod="redirect method" tag="tag"/><Hangup/><PlayAudio>url</PlayAudio><SpeakSentence voice="voice" locale="locale" gender="gender">hi</SpeakSentence><Gather gatherUrl="gather url" gatherMethod="gather method" terminatingDigits="terminating digits" tag="tag" timeout="timeout" username="username" password="password"><SpeakSentence voice="voice" locale="locale" gender="gender">hi</SpeakSentence><PlayAudio>url</PlayAudio></Gather><SendDtmf>dtmf</SendDtmf><Pause duration="duration"/><Forward to="to" from="from" callTimeout="calltimeout" diversionTreatment="diversion treatment" diversionReason="diversion reason"/><Transfer transferCallerId="transfer caller id" callTimeout="call timeout" tag="tag" transferCompleteUrl="transfer complete url" transferCompleteMethod="transfer complete method" username="username" password="password" diversionTreatment="diversion treatment" diversionReason="diversion reason"><PhoneNumber transferAnswerUrl="transfer answer url 1" transferAnswerMethod="transfer answer method 1" username="username 1" password="password 1" tag="tag 1">number 1</PhoneNumber><PhoneNumber transferAnswerUrl="transfer answer url 2" transferAnswerMethod="transfer answer method 2" username="username 2" password="password 2" tag="tag 2">number 2</PhoneNumber></Transfer></Response>'
     redirect = RubyBandwidthBxml::Redirect.new({
@@ -100,4 +106,21 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
 
     assert_equal(expected_xml, @response_class.to_xml())
   end
+
+  # Validate forward against xsd
+  # Validate pause against xsd
+  # Validate redirect against xsd
+  # Validate transfer against xsd
+  # Validate gather against xsd
+  # Validate send_dtmf against xsd
+  # Validate hangup against xsd
+  def test_validate_hangup()
+    hangup = RubyBandwidthBxml::Hangup.new()
+    @response_class.push(hangup)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
+  end
+  # Validate play_audio against xsd
+  # Validate speak_sentence against xsd
 end
