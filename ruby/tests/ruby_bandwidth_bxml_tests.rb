@@ -23,7 +23,7 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
 
   # Test that covers all verbs
   def test_to_xml_all_verbs()
-    expected_xml = '<?xml version="1.0" encoding="UTF-8"?><Response><Redirect redirectUrl="redirect url" redirectMethod="redirect method" tag="tag"/><Hangup/><PlayAudio>url</PlayAudio><SpeakSentence voice="voice" locale="locale" gender="gender">hi</SpeakSentence><Gather gatherUrl="gather url" gatherMethod="gather method" terminatingDigits="terminating digits" tag="tag" timeout="timeout" username="username" password="password"><SpeakSentence voice="voice" locale="locale" gender="gender">hi</SpeakSentence><PlayAudio>url</PlayAudio></Gather><SendDtmf>dtmf</SendDtmf><Pause duration="duration"/><Forward to="to" from="from" callTimeout="calltimeout" diversionTreatment="diversion treatment" diversionReason="diversion reason"/><Transfer transferCallerId="transfer caller id" callTimeout="call timeout" tag="tag" transferCompleteUrl="transfer complete url" transferCompleteMethod="transfer complete method" username="username" password="password" diversionTreatment="diversion treatment" diversionReason="diversion reason"><PhoneNumber transferAnswerUrl="transfer answer url 1" transferAnswerMethod="transfer answer method 1" username="username 1" password="password 1" tag="tag 1">number 1</PhoneNumber><PhoneNumber transferAnswerUrl="transfer answer url 2" transferAnswerMethod="transfer answer method 2" username="username 2" password="password 2" tag="tag 2">number 2</PhoneNumber></Transfer></Response>'
+    expected_xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Redirect redirectUrl=\"redirect url\" redirectMethod=\"redirect method\" tag=\"tag\"/><Hangup/><PlayAudio>url</PlayAudio><SpeakSentence voice=\"voice\" locale=\"locale\" gender=\"gender\">hi</SpeakSentence><Gather gatherUrl=\"gather url\" gatherMethod=\"gather method\" terminatingDigits=\"terminating digits\" tag=\"tag\" maxDigits=\"max digits\" interDigitTimeout=\"inter_digit_timeout\" username=\"username\" password=\"password\" firstDigitTimeout=\"first_digit_timeout\"><SpeakSentence voice=\"voice\" locale=\"locale\" gender=\"gender\">hi</SpeakSentence><PlayAudio>url</PlayAudio></Gather><SendDtmf>dtmf</SendDtmf><Pause duration=\"duration\"/><Forward to=\"to\" from=\"from\" callTimeout=\"calltimeout\" diversionTreatment=\"diversion treatment\" diversionReason=\"diversion reason\"/><Transfer transferCallerId=\"transfer caller id\" callTimeout=\"call timeout\" tag=\"tag\" transferCompleteUrl=\"transfer complete url\" transferCompleteMethod=\"transfer complete method\" username=\"username\" password=\"password\" diversionTreatment=\"diversion treatment\" diversionReason=\"diversion reason\"><PhoneNumber transferAnswerUrl=\"transfer answer url 1\" transferAnswerMethod=\"transfer answer method 1\" username=\"username 1\" password=\"password 1\" tag=\"tag 1\">number 1</PhoneNumber><PhoneNumber transferAnswerUrl=\"transfer answer url 2\" transferAnswerMethod=\"transfer answer method 2\" username=\"username 2\" password=\"password 2\" tag=\"tag 2\">number 2</PhoneNumber></Transfer></Response>"
     redirect = RubyBandwidthBxml::Redirect.new({
         :redirect_url => "redirect url",
         :redirect_method => "redirect method",
@@ -44,12 +44,11 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
         :gather_method => "gather method",
         :terminating_digits => "terminating digits",
         :tag => "tag",
-        :maxDigits => "max digits",
-        :interDigitTimeout => "inter_digit_timeout",
-        :timeout => "timeout",
+        :max_digits => "max digits",
+        :inter_digit_timeout => "inter_digit_timeout",
         :username => "username",
         :password => "password",
-        :firstDigitTimeout => "first_digit_timeout",
+        :first_digit_timeout => "first_digit_timeout",
         :speak_sentence => speak_sentence,
         :play_audio => play_audio
     })
@@ -108,11 +107,196 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
   end
 
   # Validate forward against xsd
+  def test_validate_forward()
+    forward = RubyBandwidthBxml::Forward.new({
+        :to => "+19999999999",
+        :from => "+19999999999",
+        :call_timeout => "3",
+        :diversion_treatment => "none",
+        :diversion_reason => "away"
+    })
+    @response_class.push(forward)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
+  end
+
   # Validate pause against xsd
+  def test_validate_pause()
+    pause = RubyBandwidthBxml::Pause.new({
+        :duration => 3
+    })
+    @response_class.push(pause)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
+  end
+
+  # Validate failure for pause against xsd with no duration
+  def test_validate_pause_no_duration()
+    pause = RubyBandwidthBxml::Pause.new()
+    @response_class.push(pause)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
+  end
+
   # Validate redirect against xsd
+  def test_validate_redirect()
+    redirect = RubyBandwidthBxml::Redirect.new({
+        :redirect_url => "https://test.com",
+        :redirect_method => "GET",
+        :tag => "tag"
+    })
+    @response_class.push(redirect)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
+  end
+
+  # Validate failure for redirect against xsd with no url
+  def test_validate_redirect_no_url()
+    redirect = RubyBandwidthBxml::Redirect.new()
+    @response_class.push(redirect)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
+  end
+
   # Validate transfer against xsd
-  # Validate gather against xsd
+  def test_validate_transfer()
+    transfer = RubyBandwidthBxml::Transfer.new({
+        :transfer_caller_id => "+19999999999",
+        :call_timeout => "3",
+        :tag => "tag",
+        :transfer_complete_url => "https://test.com",
+        :transfer_complete_method => "GET",
+        :username => "user",
+        :password => "pass",
+        :diversion_treatment => "none",
+        :diversion_reason => "away",
+        :phone_numbers => [
+            RubyBandwidthBxml::PhoneNumber.new({
+                :number => "+19999999999",
+                :transfer_answer_url => "https://test.com",
+                :transfer_answer_method => "GET",
+                :username => "user",
+                :password => "pass"
+            })
+        ]
+    })
+    @response_class.push(transfer)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
+  end
+
+  # Validate gather against xsd with no children
+  def test_validate_gather_no_children()
+    gather = RubyBandwidthBxml::Gather.new({
+        :gather_url => "https://test.com",
+        :gather_method => "GET",
+        :terminating_digits => "1",
+        :tag => "tag",
+        :maxDigits => "3",
+        :inter_digit_timeout => "3",
+        :username => "username",
+        :password => "password",
+        :firstDigitTimeout => "3"
+    })
+    @response_class.push(gather)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
+  end
+
+  # Validate gather against xsd with play audio child
+  def test_validate_gather_play_audio()
+    gather = RubyBandwidthBxml::Gather.new({
+        :gather_url => "https://test.com",
+        :gather_method => "GET",
+        :terminating_digits => "1",
+        :tag => "tag",
+        :max_digits => "3",
+        :inter_digit_timeout => "3",
+        :username => "username",
+        :password => "password",
+        :first_digit_timeout => "3",
+        :play_audio => RubyBandwidthBxml::PlayAudio.new({
+            :url => "https://test.mp3"
+        })
+    })
+    @response_class.push(gather)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
+  end
+
+  # Validate gather against xsd with speak sentence child
+  def test_validate_gather_speak_sentence()
+    gather = RubyBandwidthBxml::Gather.new({
+        :gather_url => "https://test.com",
+        :gather_method => "GET",
+        :terminating_digits => "1",
+        :tag => "tag",
+        :max_digits => "3",
+        :inter_digit_timeout => "3",
+        :username => "username",
+        :password => "password",
+        :first_digit_timeout => "3",
+        :speak_sentence => RubyBandwidthBxml::SpeakSentence.new({
+            :sentence => "Test",
+            :voice => "susan",
+            :locale => "en_US"
+        })
+    })
+    @response_class.push(gather)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
+  end
   # Validate send_dtmf against xsd
+  def test_validate_send_dtmf()
+    send_dtmf = RubyBandwidthBxml::SendDtmf.new({
+        :dtmf => "123"
+    })
+    @response_class.push(send_dtmf)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
+  end
+  
+  # Validate failure for no dtmf
+  def test_validate_send_dtmf_no_dtmf()
+    send_dtmf = RubyBandwidthBxml::SendDtmf.new()
+    @response_class.push(send_dtmf)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
+  end
+
+  # Validate failure for empty dtmf
+  def test_validate_send_dtmf_empty_dtmf()
+    send_dtmf = RubyBandwidthBxml::SendDtmf.new({
+        :dtmf => ""
+    })
+    @response_class.push(send_dtmf)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
+  end
+
+  # Validate failure for invalid dtmf
+  def test_validate_send_dtmf_invalid_dtmf()
+    send_dtmf = RubyBandwidthBxml::SendDtmf.new({
+        :dtmf => "invalid dtmf"
+    })
+    @response_class.push(send_dtmf)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
+  end
+
   # Validate hangup against xsd
   def test_validate_hangup()
     hangup = RubyBandwidthBxml::Hangup.new()
@@ -121,6 +305,64 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
     xml_object = Nokogiri::XML(xml_string)
     assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
   end
+
   # Validate play_audio against xsd
+  def test_validate_play_audio()
+    play_audio = RubyBandwidthBxml::PlayAudio.new({
+        :url => "https://test.mp3",
+        :username => "user",
+        :password => "pass"
+    })
+    @response_class.push(play_audio)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
+  end
+
+=begin
+  # Validate failure for play_audio with no url
+  def test_validate_play_audio_no_url()
+    play_audio = RubyBandwidthBxml::PlayAudio.new()
+    @response_class.push(play_audio)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
+  end
+
+  # Validate failure for play_audio with invalid url
+  def test_validate_play_audio_invalid_url()
+    play_audio = RubyBandwidthBxml::PlayAudio.new({
+        :url => "invalid url"
+    })
+    @response_class.push(play_audio)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
+  end
+=end
+
   # Validate speak_sentence against xsd
+  def test_validate_speak_sentence()
+    speak_sentence = RubyBandwidthBxml::SpeakSentence.new({
+        :sentence => "Test",
+        :voice => "susan",
+        :locale => "en_US"
+    })
+    @response_class.push(speak_sentence)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
+  end
+
+=begin
+  # Validate failure for speak_sentence with no sentence
+  def test_validate_speak_sentence_no_sentence()
+    speak_sentence = RubyBandwidthBxml::SpeakSentence.new()
+    @response_class.push(speak_sentence)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert($XSD_SCHEMA.validate(xml_object).length >= 1)
+  end
+=end
+
 end

@@ -8,7 +8,6 @@ module RubyBandwidthBxml
     def to_xml(xml)
       xml.Transfer(compact_hash({
        'transferCallerId' => transfer_caller_id,
-       'requestUrlTimeout' => request_url_timeout,
        'callTimeout' => call_timeout,
        'tag' => tag,
        'transferCompleteUrl' => transfer_complete_url,

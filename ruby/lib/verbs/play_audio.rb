@@ -6,7 +6,10 @@ module RubyBandwidthBxml
     include XmlVerb
 
     def to_xml(xml)
-      xml.PlayAudio(url)
+      xml.PlayAudio(url, compact_hash({
+       'username' => username,
+       'password' => password
+      }))
     end
   end
 end

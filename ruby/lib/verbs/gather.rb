@@ -13,7 +13,6 @@ module RubyBandwidthBxml
        'tag' => tag,
        'maxDigits' => max_digits,
        'interDigitTimeout' => inter_digit_timeout,
-       'timeout' => timeout,
        'username' => username,
        'password' => password,
        'firstDigitTimeout' => first_digit_timeout
