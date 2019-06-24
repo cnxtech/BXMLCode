@@ -7,18 +7,18 @@ Class that allows user to generate BXML programatically in python
 @copyright Bandwidth INC
 """
 
-class Response():
+RESPONSE_TAG = "Response"
+XML_HEADER = '<?xml version="1.0" encoding="UTF-8"?>'
 
-    response_tag = "Response"
-    xml_header = '<?xml version="1.0" encoding="UTF-8"?>'
+class Response:
 
-    def __init__(self, verbs=[]):
+    def __init__(self):
         """
         Creates the Response class with an optional list of verbs
 
         :param list<Verb> verbs: optional ordered list of verbs to build the response
         """
-        self.verbs = verbs
+        self.verbs = [] #= verbs
 
     def add_verb(self, verb):
         """
@@ -26,7 +26,7 @@ class Response():
 
         :param Verb verb: The Verb to add
         """
-        self.verbs.push(verb)
+        self.verbs.append(verb)
 
     def to_xml(self):
         """
@@ -34,10 +34,10 @@ class Response():
 
         :rtype str: The XML representation of the Response class
         """
-        xml_string = Response.xml_header
-        xml_string += '<' + Response.response_tag + '>'
+        xml_string = XML_HEADER
+        xml_string += '<' + RESPONSE_TAG + '>'
         for verb in self.verbs:
             xml_string += verb.to_xml()
-        xml_string += '</' + Response.response_tag + '>' 
+        xml_string += '</' + RESPONSE_TAG + '>' 
 
         return xml_string

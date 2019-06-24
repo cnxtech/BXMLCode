@@ -9,9 +9,10 @@ Defines the abstract class for all BXML verbs
 
 from abc import ABC, abstractmethod
 
+
 class AbstractBxmlVerb(ABC):
 
-    def __init__(self, values):
+    def __init__(self, values={}):
         """
         Initializes the values attribute to build the BXML
 
@@ -20,7 +21,7 @@ class AbstractBxmlVerb(ABC):
         self.values = values
 
     @abstractmethod
-    def to_xml():
+    def to_xml(self):
         """
         Converts the class into its xml representation
 
