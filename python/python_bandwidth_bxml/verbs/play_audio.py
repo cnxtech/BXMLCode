@@ -28,7 +28,12 @@ class PlayAudio(AbstractBxmlVerb):
         self.username = username
         self.password = password
 
-    def to_xml(self):
+    def to_etree_element(self):
+        """
+        Converts the class into an etree element. Used for other verb classes to build xml
+
+        :return etree.Element: The etree Element representing this class
+        """
         root = etree.Element(PLAY_AUDIO_TAG)
         if self.url is not None:
             root.text = self.url
@@ -36,4 +41,7 @@ class PlayAudio(AbstractBxmlVerb):
             root.set("username", self.username)
         if self.password is not None:
             root.set("password", self.password)
-        return etree.tostring(root).decode()
+        return root
+
+    def to_xml(self):
+        return etree.tostring(self.to_etree_element()).decode()
