@@ -33,7 +33,15 @@ class Forward(AbstractBxmlVerb):
         self.diversion_reason = diversion_reason
 
     def to_xml(self):
-        root = etree.Element(FORWARD_TAG, to=self.to, callTimeout=self.call_timeout,
-                            diversionTreatment=self.diversion_treatment, diversionReason=self.diversion_reason)
-        root.set("from", self.from_) # Workaround since `from` is a keyword in Python and needs to be declared as an attribute separately
+        root = etree.Element(FORWARD_TAG)
+        if self.to is not None:
+            root.set("to", self.to)
+        if self.call_timeout is not None:
+            root.set("callTimeout", self.call_timeout)
+        if self.from_ is not None:
+            root.set("from", self.from_)
+        if self.diversion_treatment is not None:
+            root.set("diversionTreatment", self.diversion_treatment)
+        if self.diversion_reason is not None:
+            root.set("diversionReason", self.diversion_reason)
         return etree.tostring(root).decode()
