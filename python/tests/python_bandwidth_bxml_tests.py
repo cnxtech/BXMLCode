@@ -17,6 +17,9 @@ from python_bandwidth_bxml.verbs import forward as forward
 from python_bandwidth_bxml.verbs import pause as pause
 from python_bandwidth_bxml.verbs import redirect as redirect
 from python_bandwidth_bxml.verbs import play_audio as play_audio
+from python_bandwidth_bxml.verbs import speak_sentence as speak_sentence
+from python_bandwidth_bxml.verbs import phone_number as phone_number
+from python_bandwidth_bxml.verbs import transfer as transfer
 
 schema_doc = None
 with open("schema.xsd", "r") as f:
@@ -92,6 +95,25 @@ class TestPythonBandwidthBxml(unittest.TestCase):
         Test case for the play audio verb
         """
         self.response_class.add_verb(play_audio.PlayAudio(url="https://test.com", username="user", password="pass"))
+        etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
+
+    def test_speak_sentence(self):
+        """
+        Test case for the speak sentence verb
+        """
+        self.response_class.add_verb(speak_sentence.SpeakSentence(sentence="Test", voice="susan", locale="en_US"))
+        etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
+
+    def test_transfer(self):
+        """
+        Test case for the transfer verb
+        """
+        phone_number_1 = phone_number.PhoneNumber(number="+18888888888", transfer_answer_url="https://test.com", transfer_answer_method="GET", username="user", password="pass", tag="tag")
+        phone_number_2 = phone_number.PhoneNumber(number="+18888888889", transfer_answer_url="https://test.com", transfer_answer_method="GET", username="user", password="pass", tag="tag")
+
+        self.response_class.add_verb(transfer.Transfer(transfer_caller_id="+17777777777", call_timeout=3, tag="tag", transfer_complete_url="https://test.com",
+                transfer_complete_method="GET", username="user", password="pass", diversion_treatment="none",
+                diversion_reason="away", phone_numbers=[phone_number_1, phone_number_2]))
         etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
 
 if __name__ == '__main__':
