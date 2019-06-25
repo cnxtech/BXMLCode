@@ -13,6 +13,7 @@ from lxml import etree
 import python_bandwidth_bxml.response as response
 from python_bandwidth_bxml.verbs import hangup as hangup
 from python_bandwidth_bxml.verbs import send_dtmf as send_dtmf
+from python_bandwidth_bxml.verbs import forward as forward
 
 schema_doc = None
 with open("schema.xsd", "r") as f:
@@ -54,6 +55,19 @@ class TestPythonBandwidthBxml(unittest.TestCase):
         Test case for send_dtmf verb
         """
         self.response_class.add_verb(send_dtmf.SendDtmf("123"))
+        etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
+
+    def test_forward(self):
+        """
+        Test case for the forward verb
+        """
+        self.response_class.add_verb(forward.Forward(
+            to="+19999999999",
+            from_="+19999999999",
+            call_timeout=3,
+            diversion_treatment="none",
+            diversion_reason="away"
+        ))
         etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
 
 if __name__ == '__main__':
