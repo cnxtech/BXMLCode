@@ -28,7 +28,12 @@ class SpeakSentence(AbstractBxmlVerb):
         self.voice = voice
         self.locale = locale
 
-    def to_xml(self):
+    def to_etree_element(self):
+        """
+        Converts the class into an etree element. Used for other verb classes to build xml
+
+        :return etree.Element: The etree Element representing this class
+        """
         root = etree.Element(SPEAK_SENTENCE_TAG)
         if self.sentence is not None:
             root.text = self.sentence
@@ -36,4 +41,7 @@ class SpeakSentence(AbstractBxmlVerb):
             root.set("voice", self.voice)
         if self.locale is not None:
             root.set("locale", self.locale)
-        return etree.tostring(root).decode()
+        return root
+
+    def to_xml(self):
+        return etree.tostring(self.to_etree_element()).decode()

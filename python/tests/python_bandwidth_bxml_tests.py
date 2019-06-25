@@ -20,6 +20,7 @@ from python_bandwidth_bxml.verbs import play_audio as play_audio
 from python_bandwidth_bxml.verbs import speak_sentence as speak_sentence
 from python_bandwidth_bxml.verbs import phone_number as phone_number
 from python_bandwidth_bxml.verbs import transfer as transfer
+from python_bandwidth_bxml.verbs import gather as gather
 
 schema_doc = None
 with open("schema.xsd", "r") as f:
@@ -114,6 +115,34 @@ class TestPythonBandwidthBxml(unittest.TestCase):
         self.response_class.add_verb(transfer.Transfer(transfer_caller_id="+17777777777", call_timeout=3, tag="tag", transfer_complete_url="https://test.com",
                 transfer_complete_method="GET", username="user", password="pass", diversion_treatment="none",
                 diversion_reason="away", phone_numbers=[phone_number_1, phone_number_2]))
+        etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
+
+    def test_gather_no_nested_verbs(self):
+        """
+        Test case for the gather verb with no nested verbs
+        """
+        self.response_class.add_verb(gather.Gather(gather_url="https://test.com", gather_method="GET", terminating_digits="123", tag="tag",
+                max_digits=3, inter_digit_timeout=3, username="user", password="pass", first_digit_timeout=3))
+        etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
+
+    def test_gather_nested_speak_sentence(self):
+        """
+        Test case for the gather verb with a nested SpeakSentence
+        """
+        speak_sentence_ = speak_sentence.SpeakSentence(sentence="Test", voice="susan", locale="en_US")
+        self.response_class.add_verb(gather.Gather(gather_url="https://test.com", gather_method="GET", terminating_digits="123", tag="tag",
+                max_digits=3, inter_digit_timeout=3, username="user", password="pass", first_digit_timeout=3,
+                speak_sentence=speak_sentence_))
+        etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
+
+    def test_gather_nested_play_audio(self):
+        """
+        Test case for the gather verb with a nested PlayAudio
+        """
+        play_audio_ = play_audio.PlayAudio(url="https://test.com", username="user", password="pass")
+        self.response_class.add_verb(gather.Gather(gather_url="https://test.com", gather_method="GET", terminating_digits="123", tag="tag",
+                max_digits=3, inter_digit_timeout=3, username="user", password="pass", first_digit_timeout=3,
+                play_audio=play_audio_))
         etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
 
 if __name__ == '__main__':
