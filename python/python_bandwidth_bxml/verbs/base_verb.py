@@ -12,14 +12,6 @@ from abc import ABC, abstractmethod
 
 class AbstractBxmlVerb(ABC):
 
-    def __init__(self, values={}):
-        """
-        Initializes the values attribute to build the BXML
-
-        :param dict values: The values to build the BXML
-        """
-        self.values = values
-
     @abstractmethod
     def to_xml(self):
         """

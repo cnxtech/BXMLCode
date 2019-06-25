@@ -12,6 +12,7 @@ from lxml import etree
 
 import python_bandwidth_bxml.response as response
 from python_bandwidth_bxml.verbs import hangup as hangup
+from python_bandwidth_bxml.verbs import send_dtmf as send_dtmf
 
 schema_doc = None
 with open("schema.xsd", "r") as f:
@@ -37,10 +38,23 @@ class TestPythonBandwidthBxml(unittest.TestCase):
     def test_hangup(self):
         """
         Test case for the hangup verb
+
+        etree.fromstring expects strings to be encoded with utf-8, which is
+        why response_class.to_xml() is followed by encode('utf-8').
+
+        Also these tests raise an exception if the parse is incorrect. Python
+        does not have a assert_does_not_raise test case, and most Python developers
+        tend to just leave the statement as is if an error would be raised.
         """
         self.response_class.add_verb(hangup.Hangup())
         etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
 
+    def test_send_dtmf(self):
+        """
+        Test case for send_dtmf verb
+        """
+        self.response_class.add_verb(send_dtmf.SendDtmf("123"))
+        etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
 
 if __name__ == '__main__':
     unittest.main()
