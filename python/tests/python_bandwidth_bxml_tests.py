@@ -14,6 +14,7 @@ import python_bandwidth_bxml.response as response
 from python_bandwidth_bxml.verbs import hangup as hangup
 from python_bandwidth_bxml.verbs import send_dtmf as send_dtmf
 from python_bandwidth_bxml.verbs import forward as forward
+from python_bandwidth_bxml.verbs import pause as pause
 
 schema_doc = None
 with open("schema.xsd", "r") as f:
@@ -68,6 +69,13 @@ class TestPythonBandwidthBxml(unittest.TestCase):
             diversion_treatment="none",
             diversion_reason="away"
         ))
+        etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
+
+    def test_pause(self):
+        """
+        Test case for the pause verb
+        """
+        self.response_class.add_verb(pause.Pause(3))
         etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
 
 if __name__ == '__main__':
