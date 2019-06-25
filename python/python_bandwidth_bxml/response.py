@@ -10,15 +10,14 @@ Class that allows user to generate BXML programatically in python
 RESPONSE_TAG = "Response"
 XML_HEADER = '<?xml version="1.0" encoding="UTF-8"?>'
 
+
 class Response:
 
     def __init__(self):
         """
-        Creates the Response class with an optional list of verbs
-
-        :param list<Verb> verbs: optional ordered list of verbs to build the response
+        Creates the Response class 
         """
-        self.verbs = [] #= verbs
+        self.verbs = []
 
     def add_verb(self, verb):
         """
