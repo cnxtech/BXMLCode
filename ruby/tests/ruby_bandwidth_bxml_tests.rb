@@ -180,11 +180,11 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
         :gather_method => "GET",
         :terminating_digits => "1",
         :tag => "tag",
-        :maxDigits => "3",
+        :max_digits => "3",
         :inter_digit_timeout => "3",
         :username => "username",
         :password => "password",
-        :firstDigitTimeout => "3"
+        :first_digit_timeout => "3"
     })
     @response_class.push(gather)
     xml_string = @response_class.to_xml()
