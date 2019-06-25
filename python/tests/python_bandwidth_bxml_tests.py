@@ -16,6 +16,7 @@ from python_bandwidth_bxml.verbs import send_dtmf as send_dtmf
 from python_bandwidth_bxml.verbs import forward as forward
 from python_bandwidth_bxml.verbs import pause as pause
 from python_bandwidth_bxml.verbs import redirect as redirect
+from python_bandwidth_bxml.verbs import play_audio as play_audio
 
 schema_doc = None
 with open("schema.xsd", "r") as f:
@@ -84,6 +85,13 @@ class TestPythonBandwidthBxml(unittest.TestCase):
         Test case for the redirect verb
         """
         self.response_class.add_verb(redirect.Redirect(redirect_url="https://test.com", redirect_method="GET", tag="tag"))
+        etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
+
+    def test_play_audio(self):
+        """
+        Test case for the play audio verb
+        """
+        self.response_class.add_verb(play_audio.PlayAudio(url="https://test.com", username="user", password="pass"))
         etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
 
 if __name__ == '__main__':
