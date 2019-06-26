@@ -1,5 +1,5 @@
 """
-bxml_verb.py
+base_verb.py
 
 Defines the abstract class for all BXML verbs
 
