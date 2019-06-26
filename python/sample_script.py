@@ -36,7 +36,11 @@ print(response.to_xml())
 ### Make a redirect response ###
 
 response = python_bandwidth_bxml.response.Response()
-redirect = python_bandwidth_bxml.verbs.redirect.Redirect(redirect_url="https://test.com", redirect_method="GET", tag="tag")
+redirect = python_bandwidth_bxml.verbs.redirect.Redirect(
+    redirect_url="https://test.com",
+    redirect_method="GET",
+    tag="tag"
+)
 
 response.add_verb(redirect)
 print(response.to_xml())
@@ -44,7 +48,11 @@ print(response.to_xml())
 ### Make a play audio response ###
 
 response = python_bandwidth_bxml.response.Response()
-play_audio = python_bandwidth_bxml.verbs.play_audio.PlayAudio(url="https://test.com", username="user", password="pass")
+play_audio = python_bandwidth_bxml.verbs.play_audio.PlayAudio(
+    url="https://test.com",
+    username="user",
+    password="pass"
+)
 
 response.add_verb(play_audio)
 print(response.to_xml())
@@ -52,7 +60,11 @@ print(response.to_xml())
 ### Make a speak sentence response ###
 
 response = python_bandwidth_bxml.response.Response()
-speak_sentence = python_bandwidth_bxml.verbs.speak_sentence.SpeakSentence(sentence="Test", voice="susan", locale="en_US")
+speak_sentence = python_bandwidth_bxml.verbs.speak_sentence.SpeakSentence(
+    sentence="Test",
+    voice="susan",
+    locale="en_US"
+)
 
 response.add_verb(speak_sentence)
 print(response.to_xml())
@@ -125,7 +137,11 @@ gather = python_bandwidth_bxml.verbs.gather.Gather(
 )
 
 #Gathers can be optionally nested with one of the PlayAudio or SpeakSentence verbs
-speak_sentence = python_bandwidth_bxml.verbs.speak_sentence.SpeakSentence(sentence="Test", voice="susan", locale="en_US")
+speak_sentence = python_bandwidth_bxml.verbs.speak_sentence.SpeakSentence(
+    sentence="Test",
+    voice="susan",
+    locale="en_US"
+)
 gather_nested_speak_sentence = python_bandwidth_bxml.verbs.gather.Gather(
     gather_url="https://test.com",
     gather_method="GET",
@@ -139,7 +155,11 @@ gather_nested_speak_sentence = python_bandwidth_bxml.verbs.gather.Gather(
     speak_sentence=speak_sentence
 )
 
-play_audio = python_bandwidth_bxml.verbs.play_audio.PlayAudio(url="https://test.com", username="user", password="pass")
+play_audio = python_bandwidth_bxml.verbs.play_audio.PlayAudio(
+    url="https://test.com",
+    username="user",
+    password="pass"
+)
 gather_nested_play_audio = python_bandwidth_bxml.verbs.gather.Gather(
     gather_url="https://test.com",
     gather_method="GET",
