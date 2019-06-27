@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandwidthBXML", "src\BandwidthBXML\BandwidthBXML.csproj", "{CE01CAFD-B658-4A92-98D2-A0B3B916755A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandwidthBXML", "BandwidthBXML\BandwidthBXML.csproj", "{CE01CAFD-B658-4A92-98D2-A0B3B916755A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
