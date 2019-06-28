@@ -53,7 +53,7 @@ namespace BandwidthBXML
     {
       if (!string.IsNullOrEmpty(Gender))
       {
-	writer.WriteAttributeString("gender", Gender);
+        writer.WriteAttributeString("gender", Gender);
       }
       if (!string.IsNullOrEmpty(Locale))
       {

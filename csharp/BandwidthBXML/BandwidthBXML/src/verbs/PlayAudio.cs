@@ -38,7 +38,6 @@ namespace BandwidthBXML
 
     void IXmlSerializable.WriteXml(XmlWriter writer)
     {
-      writer.WriteString(Url);
       if (!string.IsNullOrEmpty(Username))
       {
         writer.WriteAttributeString("username", Username);
@@ -47,6 +46,7 @@ namespace BandwidthBXML
       {
         writer.WriteAttributeString("password", Password);
       }
+      writer.WriteString(Url);
     }
   }
 }

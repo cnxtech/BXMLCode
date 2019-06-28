@@ -66,7 +66,7 @@ namespace BandwidthBXML
     /// <returns>Generated XML string</returns>
     public string ToXml()
     {
-      using (var writer = new Utf8StringWriter {NewLine = "\n"})
+      using (var writer = new Utf8StringWriter {NewLine = ""})
       {
         Serializer.Serialize(writer, this);
         return writer.ToString();
