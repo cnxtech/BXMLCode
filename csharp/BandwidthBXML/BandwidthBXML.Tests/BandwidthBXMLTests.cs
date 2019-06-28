@@ -86,5 +86,23 @@ namespace BandwidthBXML.Tests
 
             Assert.Equal(response_xml,expected_xml);
         }
+
+        [Fact]
+        public void TestForwardResponse()
+        {
+            Forward forward = new Forward();
+            forward.To = "+18888888888";
+            forward.From = "+17777777777";
+            forward.DiversionTreatment = "none";
+            forward.DiversionReason = "away";
+            Response response = new Response(forward);
+
+            string response_xml = response.ToXml();
+            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Forward to=\"+18888888888\" from=\"+17777777777\" callTimeout=\"0\" diversionTreatment=\"none\" diversionReason=\"away\" /></Response>";
+
+            Console.WriteLine(response_xml);
+
+            Assert.Equal(response_xml,expected_xml);
+        }
     }
 }
