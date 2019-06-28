@@ -69,7 +69,20 @@ namespace BandwidthBXML.Tests
             string response_xml = response.ToXml();
             string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <SpeakSentence gender=\"female\" locale=\"en_US\" voice=\"susan\">test</SpeakSentence></Response>";
 
-            Console.WriteLine(response_xml);
+            Assert.Equal(response_xml,expected_xml);
+        }
+
+        [Fact]
+        public void TestSendDtmfResponse()
+        {
+            SendDtmf sendDtmf = new SendDtmf();
+            sendDtmf.Digits = "123";
+            Response response = new Response(sendDtmf);
+
+            string response_xml = response.ToXml();
+            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <SendDtmf>123</SendDtmf></Response>";
+
+            //Console.WriteLine(response_xml);
 
             Assert.Equal(response_xml,expected_xml);
         }
