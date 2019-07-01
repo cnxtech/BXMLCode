@@ -102,15 +102,35 @@ namespace BandwidthBXML.Tests
         [Fact]
         public void TestTransferResponse()
         {
-            Forward forward = new Forward();
-            forward.To = "+18888888888";
-            forward.From = "+17777777777";
-            forward.DiversionTreatment = "none";
-            forward.DiversionReason = "away";
-            Response response = new Response(forward);
+            Transfer transfer = new Transfer();
+            transfer.TransferCallerId = "+17777777777";
+            transfer.CallTimeout = 3;
+            transfer.Tag = "tag";
+            transfer.TransferCompleteUrl = "https://test.com";
+            transfer.TransferCompleteMethod = "GET";
+            transfer.Username = "user";
+            transfer.Password = "pass";
+            transfer.DiversionTreatment = "none";
+            transfer.DiversionReason = "away";
+            PhoneNumber phoneNumber1 = new PhoneNumber();
+            phoneNumber1.Number = "+18888888888";
+            phoneNumber1.TransferAnswerUrl = "https://test.com";
+            phoneNumber1.TransferAnswerMethod = "POST";
+            phoneNumber1.Username = "user";
+            phoneNumber1.Password = "pass";
+            phoneNumber1.Tag = "tag";
+            PhoneNumber phoneNumber2 = new PhoneNumber();
+            phoneNumber2.Number = "+18888888888";
+            phoneNumber2.TransferAnswerUrl = "https://test.com";
+            phoneNumber2.TransferAnswerMethod = "POST";
+            phoneNumber2.Username = "user";
+            phoneNumber2.Password = "pass";
+            phoneNumber2.Tag = "tag";
+            transfer.PhoneNumbers = new PhoneNumber[] {phoneNumber1, phoneNumber2};
+            Response response = new Response(transfer);
 
             string response_xml = response.ToXml();
-            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Forward to=\"+18888888888\" from=\"+17777777777\" callTimeout=\"0\" diversionTreatment=\"none\" diversionReason=\"away\" /></Response>";
+            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Transfer transferCallerId=\"+17777777777\" callTimeout=\"3\" tag=\"tag\" transferCompleteUrl=\"https://test.com\" transferCompleteMethod=\"GET\" username=\"user\" password=\"pass\" diversionTreatment=\"none\" diversionReason=\"away\">    <PhoneNumber tag=\"tag\" username=\"user\" password=\"pass\" transferAnswerUrl=\"https://test.com\" transferAnswerMethod=\"POST\">+18888888888</PhoneNumber>    <PhoneNumber tag=\"tag\" username=\"user\" password=\"pass\" transferAnswerUrl=\"https://test.com\" transferAnswerMethod=\"POST\">+18888888888</PhoneNumber>  </Transfer></Response>";
 
             Assert.Equal(response_xml,expected_xml);
         }
