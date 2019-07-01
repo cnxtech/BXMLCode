@@ -102,7 +102,7 @@ class TestPythonBandwidthBxml(unittest.TestCase):
         """
         Test case for the speak sentence verb
         """
-        self.response_class.add_verb(speak_sentence.SpeakSentence(sentence="Test", voice="susan", locale="en_US"))
+        self.response_class.add_verb(speak_sentence.SpeakSentence(sentence="Test", voice="susan", locale="en_US", gender="female"))
         etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
 
     def test_transfer(self):

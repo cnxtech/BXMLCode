@@ -63,7 +63,8 @@ response = python_bandwidth_bxml.response.Response()
 speak_sentence = python_bandwidth_bxml.verbs.speak_sentence.SpeakSentence(
     sentence="Test",
     voice="susan",
-    locale="en_US"
+    locale="en_US",
+    gender="female"
 )
 
 response.add_verb(speak_sentence)

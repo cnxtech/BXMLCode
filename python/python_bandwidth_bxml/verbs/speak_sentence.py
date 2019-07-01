@@ -16,17 +16,19 @@ SPEAK_SENTENCE_TAG = "SpeakSentence"
 
 class SpeakSentence(AbstractBxmlVerb):
 
-    def __init__(self, sentence=None, voice=None, locale=None):
+    def __init__(self, sentence=None, voice=None, locale=None, gender=None):
         """
         Initializes the SpeakSentence class with the following parameters
 
         :param str sentence: The sentence to speak 
         :param str voice: The voice to speak the sentence
         :param str locale: The locale of the voice
+        :param str gender: The gender of the voice
         """
         self.sentence = sentence
         self.voice = voice
         self.locale = locale
+        self.gender = gender
 
     def to_etree_element(self):
         """
@@ -41,6 +43,8 @@ class SpeakSentence(AbstractBxmlVerb):
             root.set("voice", self.voice)
         if self.locale is not None:
             root.set("locale", self.locale)
+        if self.gender is not None:
+            root.set("gender", self.gender)
         return root
 
     def to_xml(self):
