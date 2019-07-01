@@ -275,7 +275,8 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
     speak_sentence = RubyBandwidthBxml::SpeakSentence.new({
         :sentence => "Test",
         :voice => "susan",
-        :locale => "en_US"
+        :locale => "en_US",
+        :gender => "female"
     })
     @response_class.push(speak_sentence)
     xml_string = @response_class.to_xml()

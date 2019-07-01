@@ -78,7 +78,8 @@ response = RubyBandwidthBxml::Response.new()
 speak_sentence = RubyBandwidthBxml::SpeakSentence.new({
     :sentence => "Test",
     :voice => "susan",
-    :locale => "en_US"
+    :locale => "en_US",
+    :gender => "female"
 })
 
 response.push(speak_sentence)
