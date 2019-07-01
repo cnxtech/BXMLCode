@@ -203,5 +203,21 @@ namespace BandwidthBXML.Tests
 
             Assert.Equal(response_xml,expected_xml);
         }
+
+        [Fact]
+        public void TestRedirectResponse()
+        {
+            Redirect redirect = new Redirect();
+            redirect.RedirectUrl = "https://test.com";
+            redirect.RedirectMethod = "GET";
+            redirect.Tag = "Tag";
+
+            Response response = new Response(redirect);
+
+            string response_xml = response.ToXml();
+            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Redirect redirectUrl=\"https://test.com\" redirectMethod=\"GET\" tag=\"Tag\" /></Response>";
+
+            Assert.Equal(response_xml,expected_xml);
+        }
     }
 }
