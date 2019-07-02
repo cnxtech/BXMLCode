@@ -6,7 +6,7 @@ require_once "BxmlVerbs/verbs/speakSentence.php";
 use PHPUnit\Framework\TestCase;
 
 class SpeakSentenceTest extends TestCase {
-    public function testHangup() {
+    public function testSpeakSentence() {
         $speakSentence = new BxmlVerbs\SpeakSentence("Test");
         $speakSentence->voice("susan");
         $speakSentence->locale("en_US");
