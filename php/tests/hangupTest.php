@@ -1,12 +1,11 @@
 <?php
 
-require "BxmlVerbs/response.php";
-require "BxmlVerbs/verbs/hangup.php";
+require_once "BxmlVerbs/response.php";
+require_once "BxmlVerbs/verbs/hangup.php";
 
 use PHPUnit\Framework\TestCase;
 
-class BxmlVerbsTest extends TestCase {
-
+class HangupTest extends TestCase {
     public function testHangup() {
         $hangup = new BxmlVerbs\Hangup();
         $response = new BxmlVerbs\Response();
