@@ -1,0 +1,4 @@
+Writing these here for now, will find a better way in the future
+
+tests:
+python -m tests.python_bandwidth_bxml_tests
