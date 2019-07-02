@@ -26,5 +26,17 @@ namespace BandwidthBXML
     /// </summary>
     [XmlAttribute("tag")]
     public string Tag { get; set; }
+
+    /// <summary>
+    /// Username for basic auth for the callback
+    /// </summary>
+    [XmlAttribute("username")]
+    public string Username { get; set; }
+
+    /// <summary>
+    /// Password for basic auth for the callback
+    /// </summary>
+    [XmlAttribute("password")]
+    public string Password { get; set; }
   }
 }

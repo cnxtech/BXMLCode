@@ -211,11 +211,13 @@ namespace BandwidthBXML.Tests
             redirect.RedirectUrl = "https://test.com";
             redirect.RedirectMethod = "GET";
             redirect.Tag = "Tag";
+            redirect.Username = "user";
+            redirect.Password = "pass";
 
             Response response = new Response(redirect);
 
             string response_xml = response.ToXml();
-            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Redirect redirectUrl=\"https://test.com\" redirectMethod=\"GET\" tag=\"Tag\" /></Response>";
+            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Redirect redirectUrl=\"https://test.com\" redirectMethod=\"GET\" tag=\"Tag\" username=\"user\" password=\"pass\" /></Response>";
 
             Assert.Equal(response_xml,expected_xml);
         }
