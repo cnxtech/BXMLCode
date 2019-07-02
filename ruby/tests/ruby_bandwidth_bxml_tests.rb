@@ -137,7 +137,9 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
     redirect = RubyBandwidthBxml::Redirect.new({
         :redirect_url => "https://test.com",
         :redirect_method => "GET",
-        :tag => "tag"
+        :tag => "tag",
+        :username => "user",
+        :password => "pass"
     })
     @response_class.push(redirect)
     xml_string = @response_class.to_xml()

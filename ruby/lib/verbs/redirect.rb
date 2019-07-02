@@ -9,7 +9,9 @@ module RubyBandwidthBxml
       xml.Redirect(compact_hash({
        'redirectUrl' => redirect_url,
        'redirectMethod' => redirect_method,
-       'tag' => tag
+       'tag' => tag,
+       'username' => username,
+       'password' => password
       }))
     end
   end

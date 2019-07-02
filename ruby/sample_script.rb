@@ -42,7 +42,9 @@ response = RubyBandwidthBxml::Response.new()
 redirect = RubyBandwidthBxml::Redirect.new({
     :redirect_url => "https://test.com",
     :redirect_method => "GET",
-    :tag => "tag"
+    :tag => "tag",
+    :username => "user",
+    :password => "pass"
 })
 
 response.push(redirect)
