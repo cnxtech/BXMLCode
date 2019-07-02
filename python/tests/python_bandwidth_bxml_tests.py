@@ -28,6 +28,7 @@ with open("schema.xsd", "r") as f:
 schema = etree.XMLSchema(schema_doc)
 PARSER = etree.XMLParser(schema=schema)
 
+
 class TestPythonBandwidthBxml(unittest.TestCase):
 
     def setUp(self):
@@ -88,7 +89,7 @@ class TestPythonBandwidthBxml(unittest.TestCase):
         """
         Test case for the redirect verb
         """
-        self.response_class.add_verb(redirect.Redirect(redirect_url="https://test.com", redirect_method="GET", tag="tag"))
+        self.response_class.add_verb(redirect.Redirect(redirect_url="https://test.com", redirect_method="GET", tag="tag", username="user", password="pass"))
         etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
 
     def test_play_audio(self):

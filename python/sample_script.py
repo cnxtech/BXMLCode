@@ -39,7 +39,9 @@ response = python_bandwidth_bxml.response.Response()
 redirect = python_bandwidth_bxml.verbs.redirect.Redirect(
     redirect_url="https://test.com",
     redirect_method="GET",
-    tag="tag"
+    tag="tag",
+    username="user",
+    password="pass"
 )
 
 response.add_verb(redirect)
