@@ -6,6 +6,7 @@ require 'BxmlVerbs/verbs/speakSentence.php';
 require 'BxmlVerbs/verbs/playAudio.php';
 require 'BxmlVerbs/verbs/sendDtmf.php';
 require 'BxmlVerbs/verbs/forward.php';
+require 'BxmlVerbs/verbs/pause.php';
 
 //Hangup response
 $hangup = new BxmlVerbs\Hangup();
@@ -53,6 +54,15 @@ $forward->diversionTreatment("none");
 $forward->diversionReason("away");
 $response = new BxmlVerbs\Response();
 $response->addVerb($forward);
+
+echo $response->toXml();
+echo "\n";
+
+//Pause response
+$pause = new BxmlVerbs\Pause();
+$pause->duration("3");
+$response = new BxmlVerbs\Response();
+$response->addVerb($pause);
 
 echo $response->toXml();
 echo "\n";
