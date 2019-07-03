@@ -7,6 +7,7 @@ require 'BxmlVerbs/verbs/playAudio.php';
 require 'BxmlVerbs/verbs/sendDtmf.php';
 require 'BxmlVerbs/verbs/forward.php';
 require 'BxmlVerbs/verbs/pause.php';
+require 'BxmlVerbs/verbs/redirect.php';
 
 //Hangup response
 $hangup = new BxmlVerbs\Hangup();
@@ -63,6 +64,19 @@ $pause = new BxmlVerbs\Pause();
 $pause->duration("3");
 $response = new BxmlVerbs\Response();
 $response->addVerb($pause);
+
+echo $response->toXml();
+echo "\n";
+
+//Redirect response
+$redirect = new BxmlVerbs\Redirect();
+$redirect->username("user");
+$redirect->password("pass");
+$redirect->redirectUrl("https://test.com");
+$redirect->redirectMethod("GET");
+$redirect->tag("tag");
+$response = new BxmlVerbs\Response();
+$response->addVerb($redirect);
 
 echo $response->toXml();
 echo "\n";
