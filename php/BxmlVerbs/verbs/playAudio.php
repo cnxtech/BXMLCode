@@ -5,32 +5,38 @@ namespace BxmlVerbs;
 use DOMDocument;
 use DOMElement;
 
-class PlayAudio {
+require_once "verb.php";
 
+class PlayAudio extends Verb {
+
+    /**
+     * Constructor for PlayAudio
+     *
+     * @param string $url The URL of the audio to be played
+     */
     public function __construct($url) {
         $this->url = $url;
     }
 
+    /**
+     * Sets the username attribute for PlayAudio
+     *
+     * @param string $username The username for http authentication on the audio url
+     */
     public function username($username) {
         $this->username = $username;
     }
 
+    /**
+     * Sets the password attribute for PlayAudio
+     *
+     * @param string $password The password for http authentication on the audio url
+     */
     public function password($password) {
         $this->password = $password;
     }
 
     public function toXml($doc) {
-        /*
-        $xml = "<PlayAudio";
-        if(isset($this->username)) {
-            $xml .= (' username="' . $this->username . '"');
-        }
-        if(isset($this->password)) {
-            $xml .= (' password="' . $this->password . '"');
-        }
-
-        $xml .= (">" . $this->url . "</PlayAudio>");
-        return $xml;*/
         $element = $doc->createElement("PlayAudio", $this->url);
 
         if(isset($this->username)) {

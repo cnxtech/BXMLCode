@@ -1,4 +1,12 @@
 <?php
+/**
+ * response.php
+ *
+ * Class that represents the BXML response. Is built by adding verbs to it
+ *
+ * @author Jacob Mulford
+ * @copyright Bandwidth INC
+ */
 
 namespace BxmlVerbs;
 
@@ -7,25 +15,28 @@ use DOMElement;
 
 class Response {
 
+    /**
+     * Creates the Response class with an emty list of verbs
+     */
     public function __construct() {
         $this->verbs = array();
     }
     
+    /**
+     * Adds the verb to the verbs
+     *
+     * @param Verb $verb The verb to add to the list
+     */
     public function addVerb($verb) {
         array_push($this->verbs, $verb);
     }
 
+    /**
+     * Converts the Response class into its BXML representation
+     *
+     * @return string The xml representation of the class
+     */
     public function toXml() {
-        /*$xml = '<?xml version="1.0" encoding="UTF-8"?>';
-        $xml .= "<Response>";
-
-        foreach ($this->verbs as $verb) {
-            $xml .= $verb->toXml();
-        }
-
-        $xml .= "</Response>";
-
-        return $xml;*/
         $doc = new DOMDocument('1.0', 'UTF-8');
         $responseElement = $doc->createElement("Response");
 

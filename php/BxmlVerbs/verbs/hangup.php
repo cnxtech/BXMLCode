@@ -4,10 +4,9 @@ namespace BxmlVerbs;
 
 use DOMElement;
 
-class Hangup {
+require_once "verb.php";
 
-    public function __construct() {
-    }
+class Hangup extends Verb {
 
     public function toXml($doc) {
         $element = $doc->createElement("Hangup");
