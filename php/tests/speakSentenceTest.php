@@ -13,7 +13,7 @@ class SpeakSentenceTest extends TestCase {
         $speakSentence->gender("female");
         $response = new BxmlVerbs\Response();
         $response->addVerb($speakSentence);
-        $expectedXml = '<?xml version="1.0" encoding="UTF-8"?><Response><SpeakSentence voice="susan" locale="en_US" gender="female">Test</SpeakSentence></Response>';
+        $expectedXml = '<?xml version="1.0" encoding="UTF-8"?><Response><SpeakSentence locale="en_US" gender="female" voice="susan">Test</SpeakSentence></Response>';
         $responseXml = $response->toXml();
         $this->assertEquals($expectedXml, $responseXml);
     }

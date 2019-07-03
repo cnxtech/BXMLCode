@@ -20,19 +20,21 @@ class SpeakSentence {
         $this->gender = $gender;
     }
 
-    public function toXml() {
-        $xml = "<SpeakSentence";
-        if(isset($this->voice)) {
-            $xml .= (' voice="' . $this->voice . '"');
-        }
+    public function toXml($doc) {
+        $element = $doc->createElement("SpeakSentence", $this->sentence);
+
         if(isset($this->locale)) {
-            $xml .= (' locale="' . $this->locale . '"');
-        }
-        if(isset($this->gender)) {
-            $xml .= (' gender="' . $this->gender . '"');
+            $element->setAttribute("locale", $this->locale);
         }
 
-        $xml .= (">" . $this->sentence . "</SpeakSentence>");
-        return $xml;
+        if(isset($this->gender)) {
+            $element->setAttribute("gender", $this->gender);
+        }
+
+        if(isset($this->voice)) {
+            $element->setAttribute("voice", $this->voice);
+        }
+
+        return $element;
     }
 }
