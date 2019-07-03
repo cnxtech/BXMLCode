@@ -1,4 +1,12 @@
 <?php
+/**
+ * speakSentence.php
+ *
+ * Implementation of the BXML SpeakSentence verb
+ *
+ * @author Jacob Mulford
+ * @copyright Bandwidth INC
+ */
   
 namespace BxmlVerbs;
 

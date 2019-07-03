@@ -1,4 +1,12 @@
 <?php
+/**
+ * playAudioTest.php
+ *
+ * Test for the BXML PlayAudio verb
+ *
+ * @author Jacob Mulford
+ * @copyright Bandwidth INC
+ */
 
 require_once "BxmlVerbs/response.php";
 require_once "BxmlVerbs/verbs/playAudio.php";
@@ -6,6 +14,9 @@ require_once "BxmlVerbs/verbs/playAudio.php";
 use PHPUnit\Framework\TestCase;
 
 class PlayAudioTest extends TestCase {
+    /**
+     * Validates the creation of a PlayAudio verb
+     */
     public function testPlayAudio() {
         $playAudio = new BxmlVerbs\PlayAudio("https://test.com");
         $playAudio->username("user");

@@ -4,6 +4,7 @@ require 'BxmlVerbs/response.php';
 require 'BxmlVerbs/verbs/hangup.php';
 require 'BxmlVerbs/verbs/speakSentence.php';
 require 'BxmlVerbs/verbs/playAudio.php';
+require 'BxmlVerbs/verbs/sendDtmf.php';
 
 //Hangup response
 $hangup = new BxmlVerbs\Hangup();
@@ -30,6 +31,14 @@ $playAudio->username("user");
 $playAudio->password("pass");
 $response = new BxmlVerbs\Response();
 $response->addVerb($playAudio);
+
+echo $response->toXml();
+echo "\n";
+
+//SendDtmf response
+$sendDtmf = new BxmlVerbs\SendDtmf("123");
+$response = new BxmlVerbs\Response();
+$response->addVerb($sendDtmf);
 
 echo $response->toXml();
 echo "\n";

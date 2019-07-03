@@ -1,4 +1,12 @@
 <?php
+/**
+ * hangupTest.php
+ *
+ * Test for the BXML Hangup verb
+ *
+ * @author Jacob Mulford
+ * @copyright Bandwidth INC
+ */
 
 require_once "BxmlVerbs/response.php";
 require_once "BxmlVerbs/verbs/hangup.php";
@@ -6,6 +14,9 @@ require_once "BxmlVerbs/verbs/hangup.php";
 use PHPUnit\Framework\TestCase;
 
 class HangupTest extends TestCase {
+    /**
+     * Validates the creation of a Hangup verb
+     */
     public function testHangup() {
         $hangup = new BxmlVerbs\Hangup();
         $response = new BxmlVerbs\Response();

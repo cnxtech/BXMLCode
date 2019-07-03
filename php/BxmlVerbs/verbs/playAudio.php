@@ -1,5 +1,13 @@
 <?php
-  
+/**
+ * playAudio.php
+ *
+ * Implementation of the BXML PlayAudio verb
+ *
+ * @author Jacob Mulford
+ * @copyright Bandwidth INC
+ */
+
 namespace BxmlVerbs;
 
 use DOMDocument;
