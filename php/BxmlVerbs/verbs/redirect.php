@@ -15,25 +15,25 @@ require_once "verb.php";
 class Redirect extends Verb {
 
     /**
-     * Sets the username attribute for PlayAudio
+     * Sets the username attribute for Redirect
      *
-     * @param string $username The username for http authentication on the audio url
+     * @param string $username The username for http authentication on the redirect callback url
      */
     public function username($username) {
         $this->username = $username;
     }
 
     /**
-     * Sets the password attribute for PlayAudio
+     * Sets the password attribute for Redirect
      *
-     * @param string $password The password for http authentication on the audio url
+     * @param string $password The password for http authentication on the redirect callback url
      */
     public function password($password) {
         $this->password = $password;
     }
 
     /**
-     * Sets the redirectUrl attribute for PlayAudio
+     * Sets the redirectUrl attribute for Redirect
      *
      * @param string $redirectUrl The url to receive the redirect callback 
      */
@@ -42,7 +42,7 @@ class Redirect extends Verb {
     }
 
     /**
-     * Sets the redirectMethod attribute for PlayAudio
+     * Sets the redirectMethod attribute for Redirect
      *
      * @param string $redirectMethod The http method to send the redirect callback 
      */
@@ -51,7 +51,7 @@ class Redirect extends Verb {
     }
 
     /**
-     * Sets the tag attribute for PlayAudio
+     * Sets the tag attribute for Redirect
      *
      * @param string $tag A custom string to be included in callbacks 
      */

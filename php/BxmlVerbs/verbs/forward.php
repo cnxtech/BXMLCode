@@ -24,7 +24,7 @@ class Forward extends Verb {
     }
 
     /**
-     * Sets the from attribute for PlayAudio
+     * Sets the from attribute for Forward
      *
      * @param string $from The phone number to make the phone call
      */
@@ -33,7 +33,7 @@ class Forward extends Verb {
     }
 
     /**
-     * Sets the callTimeout attribute for PlayAudio
+     * Sets the callTimeout attribute for Forward
      *
      * @param string $callTimeout The timeout in seconds for the phone call 
      */
@@ -42,7 +42,7 @@ class Forward extends Verb {
     }
 
     /**
-     * Sets the diversionTreatment attribute for PlayAudio
+     * Sets the diversionTreatment attribute for Forward
      *
      * @param string $diversionTreatment The diversion treatment for the phone call 
      */
@@ -51,7 +51,7 @@ class Forward extends Verb {
     }
 
     /**
-     * Sets the diversionReason attribute for PlayAudio
+     * Sets the diversionReason attribute for Forward
      *
      * @param string $diversionReason The diversion treatment for the phone call 
      */

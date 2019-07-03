@@ -17,7 +17,7 @@ class Transfer extends Verb {
     /**
      * Sets the username attribute for Transfer
      *
-     * @param string $username The username for http authentication on the audio url
+     * @param string $username The username for http authentication on the transfer answered callback url
      */
     public function username($username) {
         $this->username = $username;
@@ -26,7 +26,7 @@ class Transfer extends Verb {
     /**
      * Sets the password attribute for Transfer
      *
-     * @param string $password The password for http authentication on the audio url
+     * @param string $password The password for http authentication on the transfer answered callback url
      */
     public function password($password) {
         $this->password = $password;
@@ -51,7 +51,7 @@ class Transfer extends Verb {
     }
 
     /**
-     * Sets the trasnferCallerId attribute for Transfer
+     * Sets the transferCallerId attribute for Transfer
      *
      * @param string $transferCallerId The caller id to use when the call is transferred
      */
