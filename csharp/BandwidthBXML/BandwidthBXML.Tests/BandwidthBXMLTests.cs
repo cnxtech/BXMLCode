@@ -91,10 +91,11 @@ namespace BandwidthBXML.Tests
             forward.From = "+17777777777";
             forward.DiversionTreatment = "none";
             forward.DiversionReason = "away";
+            forward.CallTimeout = 3;
             Response response = new Response(forward);
 
             string response_xml = response.ToXml();
-            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Forward to=\"+18888888888\" from=\"+17777777777\" callTimeout=\"0\" diversionTreatment=\"none\" diversionReason=\"away\" /></Response>";
+            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Forward to=\"+18888888888\" from=\"+17777777777\" callTimeout=\"3\" diversionTreatment=\"none\" diversionReason=\"away\" /></Response>";
 
             Assert.Equal(response_xml,expected_xml);
         }
