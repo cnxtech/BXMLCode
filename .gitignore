@@ -188,4 +188,7 @@ coverage.xml
 .vscode
 Json.Designer.cs
 
-Json.Designer.cs
+*.pyc
+__pycache__
+python/env
+*.swp
