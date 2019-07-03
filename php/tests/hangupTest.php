@@ -24,5 +24,9 @@ class HangupTest extends TestCase {
         $expectedXml = '<?xml version="1.0" encoding="UTF-8"?><Response><Hangup/></Response>';
         $responseXml = $response->toXml();
         $this->assertEquals($expectedXml, $responseXml);
+        //Validate against schema
+        $doc = new DOMDocument();
+        $doc->loadXML($responseXml);
+        $this->assertTrue($doc->schemaValidate("schema.xsd"));
     }
 }

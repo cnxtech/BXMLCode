@@ -24,5 +24,9 @@ class SendDtmfTest extends TestCase {
         $expectedXml = '<?xml version="1.0" encoding="UTF-8"?><Response><SendDtmf>123</SendDtmf></Response>';
         $responseXml = $response->toXml();
         $this->assertEquals($expectedXml, $responseXml);
+        //Validate against schema
+        $doc = new DOMDocument();
+        $doc->loadXML($responseXml);
+        $this->assertTrue($doc->schemaValidate("schema.xsd"));
     }
 }

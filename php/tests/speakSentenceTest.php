@@ -27,5 +27,9 @@ class SpeakSentenceTest extends TestCase {
         $expectedXml = '<?xml version="1.0" encoding="UTF-8"?><Response><SpeakSentence locale="en_US" gender="female" voice="susan">Test</SpeakSentence></Response>';
         $responseXml = $response->toXml();
         $this->assertEquals($expectedXml, $responseXml);
+        //Validate against schema
+        $doc = new DOMDocument();
+        $doc->loadXML($responseXml);
+        $this->assertTrue($doc->schemaValidate("schema.xsd"));
     }
 }

@@ -29,5 +29,9 @@ class RedirectTest extends TestCase {
         $expectedXml = '<?xml version="1.0" encoding="UTF-8"?><Response><Redirect username="user" password="pass" tag="tag" redirectUrl="https://test.com" redirectMethod="GET"/></Response>';
         $responseXml = $response->toXml();
         $this->assertEquals($expectedXml, $responseXml);
+        //Validate against schema
+        $doc = new DOMDocument();
+        $doc->loadXML($responseXml);
+        $this->assertTrue($doc->schemaValidate("schema.xsd"));
     }
 }

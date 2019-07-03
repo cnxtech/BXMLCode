@@ -35,6 +35,10 @@ class GatherTest extends TestCase {
         $expectedXml = '<?xml version="1.0" encoding="UTF-8"?><Response><Gather username="user" password="pass" tag="tag" gatherUrl="https://test.com" gatherMethod="GET" terminatingDigits="123" maxDigits="3" interDigitTimeout="4" firstDigitTimeout="5"/></Response>';
         $responseXml = $response->toXml();
         $this->assertEquals($expectedXml, $responseXml);
+        //Validate against schema
+        $doc = new DOMDocument();
+        $doc->loadXML($responseXml);
+        $this->assertTrue($doc->schemaValidate("schema.xsd"));
     }
 
     /**
@@ -61,6 +65,10 @@ class GatherTest extends TestCase {
         $expectedXml = '<?xml version="1.0" encoding="UTF-8"?><Response><Gather username="user" password="pass" tag="tag" gatherUrl="https://test.com" gatherMethod="GET" terminatingDigits="123" maxDigits="3" interDigitTimeout="4" firstDigitTimeout="5"><SpeakSentence locale="en_US" gender="female" voice="susan">Test</SpeakSentence></Gather></Response>';
         $responseXml = $response->toXml();
         $this->assertEquals($expectedXml, $responseXml);
+        //Validate against schema
+        $doc = new DOMDocument();
+        $doc->loadXML($responseXml);
+        $this->assertTrue($doc->schemaValidate("schema.xsd"));
     }
 
     /**
@@ -87,5 +95,9 @@ class GatherTest extends TestCase {
         $expectedXml = '<?xml version="1.0" encoding="UTF-8"?><Response><Gather username="user" password="pass" tag="tag" gatherUrl="https://test.com" gatherMethod="GET" terminatingDigits="123" maxDigits="3" interDigitTimeout="4" firstDigitTimeout="5"><PlayAudio username="user" password="pass">https://test.com</PlayAudio></Gather></Response>';
         $responseXml = $response->toXml();
         $this->assertEquals($expectedXml, $responseXml);
+        //Validate against schema
+        $doc = new DOMDocument();
+        $doc->loadXML($responseXml);
+        $this->assertTrue($doc->schemaValidate("schema.xsd"));
     }
 }
