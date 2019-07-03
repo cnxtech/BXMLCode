@@ -10,6 +10,7 @@ require 'BxmlVerbs/verbs/pause.php';
 require 'BxmlVerbs/verbs/redirect.php';
 require 'BxmlVerbs/verbs/phoneNumber.php';
 require 'BxmlVerbs/verbs/transfer.php';
+require 'BxmlVerbs/verbs/gather.php';
 
 //Hangup response
 $hangup = new BxmlVerbs\Hangup();
@@ -109,6 +110,69 @@ $transfer->diversionReason("away");
 $transfer->phoneNumbers(array($number1, $number2));
 $response = new BxmlVerbs\Response();
 $response->addVerb($transfer);
+
+echo $response->toXml();
+echo "\n";
+
+//Gather responses
+
+//Gather no nested verb
+$gather = new BxmlVerbs\Gather();
+$gather->gatherUrl("https://test.com");
+$gather->gatherMethod("GET");
+$gather->username("user");
+$gather->password("pass");
+$gather->tag("tag");
+$gather->terminatingDigits("123");
+$gather->maxDigits(3);
+$gather->interDigitTimeout(4);
+$gather->firstDigitTimeout(5);
+$response = new BxmlVerbs\Response();
+$response->addVerb($gather);
+
+echo $response->toXml();
+echo "\n";
+
+//Gather nested speak sentence
+$speakSentence = new BxmlVerbs\SpeakSentence("Test");
+$speakSentence->voice("susan");
+$speakSentence->locale("en_US");
+$speakSentence->gender("female");
+$gather = new BxmlVerbs\Gather();
+$gather->gatherUrl("https://test.com");
+$gather->gatherMethod("GET");
+$gather->username("user");
+$gather->password("pass");
+$gather->tag("tag");
+$gather->terminatingDigits("123");
+$gather->maxDigits(3);
+$gather->interDigitTimeout(4);
+$gather->firstDigitTimeout(5);
+$gather->speakSentence($speakSentence);
+$response = new BxmlVerbs\Response();
+$response->addVerb($gather);
+
+echo $response->toXml();
+echo "\n";
+
+//Gather nested play audio
+$playAudio = new BxmlVerbs\PlayAudio("https://test.com");
+$playAudio->username("user");
+$playAudio->password("pass");
+$response = new BxmlVerbs\Response();
+$gather = new BxmlVerbs\Gather();
+$gather->gatherUrl("https://test.com");
+$gather->gatherMethod("GET");
+$gather->username("user");
+$gather->password("pass");
+$gather->tag("tag");
+$gather->terminatingDigits("123");
+$gather->maxDigits(3);
+$gather->interDigitTimeout(4);
+$gather->firstDigitTimeout(5);
+$gather->playAudio($playAudio);
+$response = new BxmlVerbs\Response();
+$response->addVerb($gather);
 
 echo $response->toXml();
 echo "\n";
