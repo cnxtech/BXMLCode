@@ -11,7 +11,6 @@
 namespace BxmlVerbs;
 
 use DOMDocument;
-use DOMElement;
 
 class Response {
 

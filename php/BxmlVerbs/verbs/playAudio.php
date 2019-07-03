@@ -10,9 +10,6 @@
 
 namespace BxmlVerbs;
 
-use DOMDocument;
-use DOMElement;
-
 require_once "verb.php";
 
 class PlayAudio extends Verb {

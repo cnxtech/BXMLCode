@@ -10,8 +10,6 @@
   
 namespace BxmlVerbs;
 
-use DOMElement;
-
 require_once "verb.php";
 
 class Hangup extends Verb {
