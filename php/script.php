@@ -5,6 +5,7 @@ require 'BxmlVerbs/verbs/hangup.php';
 require 'BxmlVerbs/verbs/speakSentence.php';
 require 'BxmlVerbs/verbs/playAudio.php';
 require 'BxmlVerbs/verbs/sendDtmf.php';
+require 'BxmlVerbs/verbs/forward.php';
 
 //Hangup response
 $hangup = new BxmlVerbs\Hangup();
@@ -39,6 +40,19 @@ echo "\n";
 $sendDtmf = new BxmlVerbs\SendDtmf("123");
 $response = new BxmlVerbs\Response();
 $response->addVerb($sendDtmf);
+
+echo $response->toXml();
+echo "\n";
+
+//Forward response
+$forward = new BxmlVerbs\Forward();
+$forward->to("+18888888888");
+$forward->from("+18889999999");
+$forward->callTimeout(3);
+$forward->diversionTreatment("none");
+$forward->diversionReason("away");
+$response = new BxmlVerbs\Response();
+$response->addVerb($forward);
 
 echo $response->toXml();
 echo "\n";
