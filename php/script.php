@@ -8,6 +8,8 @@ require 'BxmlVerbs/verbs/sendDtmf.php';
 require 'BxmlVerbs/verbs/forward.php';
 require 'BxmlVerbs/verbs/pause.php';
 require 'BxmlVerbs/verbs/redirect.php';
+require 'BxmlVerbs/verbs/phoneNumber.php';
+require 'BxmlVerbs/verbs/transfer.php';
 
 //Hangup response
 $hangup = new BxmlVerbs\Hangup();
@@ -77,6 +79,36 @@ $redirect->redirectMethod("GET");
 $redirect->tag("tag");
 $response = new BxmlVerbs\Response();
 $response->addVerb($redirect);
+
+echo $response->toXml();
+echo "\n";
+
+//Transfer response
+$number1 = new BxmlVerbs\PhoneNumber("+17777777777");
+$number1->transferAnswerUrl("https://test.com");
+$number1->transferAnswerMethod("GET");
+$number1->username("user");
+$number1->password("pass");
+$number1->tag("tag");
+$number2 = new BxmlVerbs\PhoneNumber("+17777777779");
+$number2->transferAnswerUrl("https://test2.com");
+$number2->transferAnswerMethod("GET");
+$number2->username("user2");
+$number2->password("pass2");
+$number2->tag("tag2");
+$transfer = new BxmlVerbs\Transfer();
+$transfer->transferCallerId("+18999999999");
+$transfer->transferCompleteUrl("https://test.com");
+$transfer->transferCompleteMethod("GET");
+$transfer->username("user");
+$transfer->password("pass");
+$transfer->tag("tag");
+$transfer->callTimeout(3);
+$transfer->diversionTreatment("none");
+$transfer->diversionReason("away");
+$transfer->phoneNumbers(array($number1, $number2));
+$response = new BxmlVerbs\Response();
+$response->addVerb($transfer);
 
 echo $response->toXml();
 echo "\n";
