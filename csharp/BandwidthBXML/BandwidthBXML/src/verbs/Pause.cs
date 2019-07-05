@@ -9,6 +9,13 @@ namespace BandwidthBXML
   /// <seealso href="http://ap.bandwidth.com/docs/xml/pause/" />
   public class Pause : IVerb
   {
+
+    /// <summary>
+    /// Initialize the integer fields to Bandwidth's default value
+    /// </summary>
+    public Pause() {
+        Duration = 1;
+    }
     /// <summary>
     ///  How many seconds Bandwidth will wait silently before continuing on.
     /// </summary>

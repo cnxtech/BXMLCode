@@ -6,6 +6,9 @@ namespace BandwidthBXML.Tests
 {
     public class BandwidthBXMLTests
     {
+        /**
+         * Test that Response is built properly
+         */
         [Fact]
         public void TestEmptyResponse()
         {
@@ -16,6 +19,9 @@ namespace BandwidthBXML.Tests
             Assert.Equal(responseXml, expectedXml);
         }
 
+        /**
+         * Test for Hangup verb
+         */
         [Fact]
         public void TestHangupResponse()
         {
@@ -26,6 +32,9 @@ namespace BandwidthBXML.Tests
             Assert.Equal(response_xml,expected_xml);
         }
 
+        /**
+         * Test for Pause verb
+         */
         [Fact]
         public void TestPauseResponse()
         {
@@ -39,6 +48,24 @@ namespace BandwidthBXML.Tests
             Assert.Equal(response_xml,expected_xml);
         }
 
+        /**
+         * Test for Pause verb with default Duration value
+         */
+        [Fact]
+        public void TestPauseResponseDefaultDuration()
+        {
+            Pause pause = new Pause();
+            Response response = new Response(pause);
+
+            string response_xml = response.ToXml();
+            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Pause duration=\"1\" /></Response>";
+
+            Assert.Equal(response_xml,expected_xml);
+        }
+
+        /**
+         * Test for PlayAudio
+         */
         [Fact]
         public void TestPlayAudioResponse()
         {
@@ -54,6 +81,9 @@ namespace BandwidthBXML.Tests
             Assert.Equal(response_xml,expected_xml);
         }
 
+        /**
+         * Test for SpeakSentence
+         */
         [Fact]
         public void TestSpeakSentenceResponse()
         {
@@ -70,6 +100,9 @@ namespace BandwidthBXML.Tests
             Assert.Equal(response_xml,expected_xml);
         }
 
+        /**
+         * Test for SendDtmf
+         */
         [Fact]
         public void TestSendDtmfResponse()
         {
@@ -83,6 +116,9 @@ namespace BandwidthBXML.Tests
             Assert.Equal(response_xml,expected_xml);
         }
 
+        /**
+         * Test for Forward
+         */
         [Fact]
         public void TestForwardResponse()
         {
@@ -100,6 +136,28 @@ namespace BandwidthBXML.Tests
             Assert.Equal(response_xml,expected_xml);
         }
 
+        /**
+         * Test for Forward with default CallTimeout value
+         */
+        [Fact]
+        public void TestForwardResponseDefaultCallTimeout()
+        {
+            Forward forward = new Forward();
+            forward.To = "+18888888888";
+            forward.From = "+17777777777";
+            forward.DiversionTreatment = "none";
+            forward.DiversionReason = "away";
+            Response response = new Response(forward);
+
+            string response_xml = response.ToXml();
+            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Forward to=\"+18888888888\" from=\"+17777777777\" callTimeout=\"30\" diversionTreatment=\"none\" diversionReason=\"away\" /></Response>";
+
+            Assert.Equal(response_xml,expected_xml);
+        }
+
+        /**
+         * Test for Transfer
+         */
         [Fact]
         public void TestTransferResponse()
         {
@@ -135,7 +193,48 @@ namespace BandwidthBXML.Tests
 
             Assert.Equal(response_xml,expected_xml);
         }
+        
+        /**
+         * Test for Transfer with default CallTimeout value
+         */
+        [Fact]
+        public void TestTransferResponseDefaultCallTimeout()
+        {
+            Transfer transfer = new Transfer();
+            transfer.TransferCallerId = "+17777777777";
+            transfer.Tag = "tag";
+            transfer.TransferCompleteUrl = "https://test.com";
+            transfer.TransferCompleteMethod = "GET";
+            transfer.Username = "user";
+            transfer.Password = "pass";
+            transfer.DiversionTreatment = "none";
+            transfer.DiversionReason = "away";
+            PhoneNumber phoneNumber1 = new PhoneNumber();
+            phoneNumber1.Number = "+18888888888";
+            phoneNumber1.TransferAnswerUrl = "https://test.com";
+            phoneNumber1.TransferAnswerMethod = "POST";
+            phoneNumber1.Username = "user";
+            phoneNumber1.Password = "pass";
+            phoneNumber1.Tag = "tag";
+            PhoneNumber phoneNumber2 = new PhoneNumber();
+            phoneNumber2.Number = "+18888888888";
+            phoneNumber2.TransferAnswerUrl = "https://test.com";
+            phoneNumber2.TransferAnswerMethod = "POST";
+            phoneNumber2.Username = "user";
+            phoneNumber2.Password = "pass";
+            phoneNumber2.Tag = "tag";
+            transfer.PhoneNumbers = new PhoneNumber[] {phoneNumber1, phoneNumber2};
+            Response response = new Response(transfer);
 
+            string response_xml = response.ToXml();
+            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Transfer transferCallerId=\"+17777777777\" callTimeout=\"30\" tag=\"tag\" transferCompleteUrl=\"https://test.com\" transferCompleteMethod=\"GET\" username=\"user\" password=\"pass\" diversionTreatment=\"none\" diversionReason=\"away\">    <PhoneNumber tag=\"tag\" username=\"user\" password=\"pass\" transferAnswerUrl=\"https://test.com\" transferAnswerMethod=\"POST\">+18888888888</PhoneNumber>    <PhoneNumber tag=\"tag\" username=\"user\" password=\"pass\" transferAnswerUrl=\"https://test.com\" transferAnswerMethod=\"POST\">+18888888888</PhoneNumber>  </Transfer></Response>";
+
+            Assert.Equal(response_xml,expected_xml);
+        }
+
+        /**
+         * Test for Gather with no nested verbs
+         */
         [Fact]
         public void TestGatherResponseNoNestedVerb()
         {
@@ -157,6 +256,30 @@ namespace BandwidthBXML.Tests
             Assert.Equal(response_xml,expected_xml);
         }
 
+        /**
+         * Test for Gather with default max digits and timeout values
+         */
+        [Fact]
+        public void TestGatherResponseDefaultValues()
+        {
+            Gather gather = new Gather();
+            gather.GatherUrl = "https://test.com";
+            gather.GatherMethod = "POST";
+            gather.TerminatingDigits = "123";
+            gather.Tag = "tag";
+            gather.Username = "user";
+            gather.Password = "pass";
+            Response response = new Response(gather);
+
+            string response_xml = response.ToXml();
+            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Gather gatherUrl=\"https://test.com\" gatherMethod=\"POST\" terminatingDigits=\"123\" tag=\"tag\" maxDigits=\"50\" interDigitTimeout=\"5\" username=\"user\" password=\"pass\" firstDigitTimeout=\"5\" /></Response>";
+
+            Assert.Equal(response_xml,expected_xml);
+        }
+
+        /**
+         * Test for Gather with a nested SpeakSentence tag
+         */
         [Fact]
         public void TestGatherResponseNestedSpeakSentence()
         {
@@ -181,6 +304,9 @@ namespace BandwidthBXML.Tests
             Assert.Equal(response_xml,expected_xml);
         }
 
+        /**
+         * Test for Gather with a nested PlayAudio tag
+         */
         [Fact]
         public void TestGatherResponseNestedPlayAudio()
         {
@@ -205,6 +331,9 @@ namespace BandwidthBXML.Tests
             Assert.Equal(response_xml,expected_xml);
         }
 
+        /**
+         * Test for Redirect
+         */
         [Fact]
         public void TestRedirectResponse()
         {

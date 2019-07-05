@@ -10,10 +10,13 @@ namespace BandwidthBXML
   public class Gather : IVerb
   {
     /// <summary>
-    ///   Constructor
+    /// Initialize the integer fields to Bandwidth's default value
     /// </summary>
     public Gather()
     {
+        MaxDigits = 50;
+        InterDigitTimeout = 5;
+        FirstDigitTimeout = 5;
     }
 
     /// <summary>

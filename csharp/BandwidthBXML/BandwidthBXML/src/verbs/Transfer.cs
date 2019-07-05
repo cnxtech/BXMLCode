@@ -10,6 +10,13 @@ namespace BandwidthBXML
   public class Transfer : IVerb
   {
     /// <summary>
+    /// Initialize the integer fields to Bandwidth's default value
+    /// </summary>
+    public Transfer() {
+        CallTimeout = 30;
+    }
+
+    /// <summary>
     ///  The phone number making the transfer call 
     /// </summary>
     [XmlAttribute("transferCallerId")]

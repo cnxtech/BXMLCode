@@ -9,6 +9,13 @@ namespace BandwidthBXML
   public class Forward : IVerb
   {
     /// <summary>
+    /// Initialize the integer fields to Bandwidth's default value
+    /// </summary>
+    public Forward() {
+        CallTimeout = 30;
+    }
+
+    /// <summary>
     /// The phone number destination of the call
     /// </summary>
     [XmlAttribute("to")]
