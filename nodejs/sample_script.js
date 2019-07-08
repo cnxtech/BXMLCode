@@ -60,3 +60,14 @@ var response = new BxmlBuilder.Response();
 response.addVerb(hangup);
 
 console.log(response.toXml());
+
+//Redirect response
+var redirect = new BxmlBuilder.Verbs.Redirect();
+redirect.setUsername("user");
+redirect.setPassword("pass");
+redirect.setRedirectUrl("https://test.com");
+redirect.setRedirectMethod("GET");
+redirect.setTag("tag");
+
+var response = new BxmlBuilder.Response();
+response.addVerb(redirect);

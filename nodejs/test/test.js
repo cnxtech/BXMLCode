@@ -131,3 +131,24 @@ describe("Pause", function() {
         });
     });
 });
+
+//Tests for Redirect
+describe("Redirect", function() {
+    describe("#toXml()", function() {
+        it("should generate a proper Redirect tag", function() {
+            var redirect = new BxmlBuilder.Verbs.Redirect();
+            redirect.setUsername("user");
+            redirect.setPassword("pass");
+            redirect.setRedirectUrl("https://test.com");
+            redirect.setRedirectMethod("GET");
+            redirect.setTag("tag");
+
+            var response = new BxmlBuilder.Response();
+            response.addVerb(redirect);
+
+            var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Redirect username=\"user\" password=\"pass\" redirectUrl=\"https://test.com\" redirectMethod=\"GET\" tag=\"tag\"/></Response>";
+            assert.equal(response.toXml(), expectedString);
+            //validate against xsd
+        });
+    });
+});
