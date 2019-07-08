@@ -15,6 +15,7 @@ describe("Response", function() {
     describe("#toXml()", function() {
         it("should return empty response tag with no verbs", function() {
             var response = new BxmlBuilder.Response()
+            
             var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response/>";
             assert.equal(response.toXml(), expectedString);
         });
@@ -26,8 +27,10 @@ describe("Hangup", function() {
     describe("#toXml()", function() {
         it("should generate a proper Hangup tag", function() {
             var hangup = new BxmlBuilder.Verbs.Hangup();
+            
             var response = new BxmlBuilder.Response();
             response.addVerb(hangup);
+            
             var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Hangup/></Response>";
             assert.equal(response.toXml(), expectedString);
             //validate against xsd
@@ -43,9 +46,31 @@ describe("PlayAudio", function() {
             playAudio.setUrl("https://test.com");
             playAudio.setUsername("user");
             playAudio.setPassword("pass");
+            
             var response = new BxmlBuilder.Response();
             response.addVerb(playAudio);
+            
             var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><PlayAudio username=\"user\" password=\"pass\">https://test.com</PlayAudio></Response>";
+            assert.equal(response.toXml(), expectedString);
+            //validate against xsd
+        });
+    });
+});
+
+//Tests for SpeakSentence
+describe("SpeakSentence", function() {
+    describe("#toXml()", function() {
+        it("should generate a proper SpeakSentence tag", function() {
+            var speakSentence = new BxmlBuilder.Verbs.SpeakSentence();
+            speakSentence.setSentence("test");
+            speakSentence.setVoice("susan");
+            speakSentence.setGender("female");
+            speakSentence.setLocale("en_US");
+
+            var response = new BxmlBuilder.Response();
+            response.addVerb(speakSentence);
+
+            var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><SpeakSentence voice=\"susan\" locale=\"en_US\" gender=\"female\">test</SpeakSentence></Response>";
             assert.equal(response.toXml(), expectedString);
             //validate against xsd
         });

@@ -18,3 +18,15 @@ var response = new BxmlBuilder.Response();
 response.addVerb(playAudio);
 
 console.log(response.toXml());
+
+//SpeakSentence response
+var speakSentence = new BxmlBuilder.Verbs.SpeakSentence();
+speakSentence.setSentence("test");
+speakSentence.setVoice("susan");
+speakSentence.setGender("female");
+speakSentence.setLocale("en_US");
+
+var response = new BxmlBuilder.Response();
+response.addVerb(speakSentence);
+
+console.log(response.toXml());
