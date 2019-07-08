@@ -114,3 +114,20 @@ describe("Forward", function() {
         });
     });
 })
+
+//Tests for Pause
+describe("Pause", function() {
+    describe("#toXml()", function() {
+        it("should generate a proper Pause tag", function() {
+            var pause = new BxmlBuilder.Verbs.Pause();
+            pause.setDuration(3);
+
+            var response = new BxmlBuilder.Response();
+            response.addVerb(pause);
+
+            var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Pause duration=\"3\"/></Response>";
+            assert.equal(response.toXml(), expectedString);
+            //validate against xsd
+        });
+    });
+});

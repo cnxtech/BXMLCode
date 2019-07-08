@@ -52,3 +52,11 @@ var response = new BxmlBuilder.Response();
 response.addVerb(forward);
 
 console.log(response.toXml());
+
+//Pause response
+var hangup = new BxmlBuilder.Verbs.Hangup();
+
+var response = new BxmlBuilder.Response();
+response.addVerb(hangup);
+
+console.log(response.toXml());
