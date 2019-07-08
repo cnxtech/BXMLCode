@@ -12,12 +12,9 @@ var util = require("util");
 
 var Hangup = function() {
     
-    this.toXmlObject = function(callback) {
-        var obj = {
-            Hangup: ""
-        }
-
-        return obj;
+    this.addXml = function(xmlDocument, callback) {
+        xmlDocument.ele("Hangup");
+        return xmlDocument;
     }
 }
 

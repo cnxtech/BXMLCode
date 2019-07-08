@@ -14,10 +14,11 @@ var BaseVerb = function() {
      * BXML conversion. To be overwritten
      * by all verb classes
      *
-     * @return {object} The object representing the verb
+     * @param {XMLDocument} xmlDocument The xml document currently being built
+     * @return {XMLDocument} The xml document with the verb added to it
      */
-    this.toXmlObject = function(callback) {
-        return null;
+    this.addXml = function(xmlDocument, callback) {
+        return xmlDocument;
     }
 }
 

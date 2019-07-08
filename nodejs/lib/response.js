@@ -26,7 +26,7 @@ var Response = function() {
         })
 
         for (i = 0; i < this.verbs.length; i++) {
-            xml.ele(this.verbs[i].toXmlObject());
+            xml = this.verbs[i].addXml(xml);
         }
         return xml.end();
     }
