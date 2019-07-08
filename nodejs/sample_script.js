@@ -39,3 +39,16 @@ var response = new BxmlBuilder.Response();
 response.addVerb(sendDtmf);
 
 console.log(response.toXml());
+
+//Forward response
+var forward = new BxmlBuilder.Verbs.Forward();
+forward.setTo("+18888888888");
+forward.setFrom("+19999999999");
+forward.setCallTimeout(3);
+forward.setDiversionTreatment("none");
+forward.setDiversionReason("away");
+
+var response = new BxmlBuilder.Response();
+response.addVerb(forward);
+
+console.log(response.toXml());

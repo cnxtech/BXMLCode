@@ -93,3 +93,24 @@ describe("SendDtmf", function() {
         });
     });
 });
+
+//Tests for Forward
+describe("Forward", function() {
+    describe("#toXml()", function() {
+        it("should generate a proper Forward tag", function() {
+            var forward = new BxmlBuilder.Verbs.Forward();
+            forward.setTo("+18888888888");
+            forward.setFrom("+19999999999");
+            forward.setCallTimeout(3);
+            forward.setDiversionTreatment("none");
+            forward.setDiversionReason("away");
+
+            var response = new BxmlBuilder.Response();
+            response.addVerb(forward);
+
+            var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Forward to=\"+18888888888\" from=\"+19999999999\" callTimeout=\"3\" diversionTreatment=\"none\" diversionReason=\"away\"/></Response>";
+            assert.equal(response.toXml(), expectedString);
+            //validate against xsd
+        });
+    });
+})
