@@ -71,3 +71,69 @@ redirect.setTag("tag");
 
 var response = new BxmlBuilder.Response();
 response.addVerb(redirect);
+
+console.log(response.toXml());
+
+//Gather response with a nested SpeakSentence
+var speakSentence = new BxmlBuilder.Verbs.SpeakSentence();
+speakSentence.setSentence("test");
+speakSentence.setVoice("susan");
+speakSentence.setGender("female");
+speakSentence.setLocale("en_US");
+
+var gather = new BxmlBuilder.Verbs.Gather();
+gather.setGatherUrl("https://test.com");
+gather.setGatherMethod("GET");
+gather.setUsername("user");
+gather.setPassword("pass");
+gather.setTag("tag");
+gather.setTerminatingDigits("123");
+gather.setMaxDigits(3);
+gather.setInterDigitTimeout(4);
+gather.setFirstDigitTimeout(5);
+gather.setSpeakSentence(speakSentence);
+
+var response = new BxmlBuilder.Response();
+response.addVerb(gather);
+
+console.log(response.toXml());
+
+//Gather response with a nested PlayAudio
+var playAudio = new BxmlBuilder.Verbs.PlayAudio();
+playAudio.setUrl("https://test.com");
+playAudio.setUsername("user");
+playAudio.setPassword("pass");
+
+var gather = new BxmlBuilder.Verbs.Gather();
+gather.setGatherUrl("https://test.com");
+gather.setGatherMethod("GET");
+gather.setUsername("user");
+gather.setPassword("pass");
+gather.setTag("tag");
+gather.setTerminatingDigits("123");
+gather.setMaxDigits(3);
+gather.setInterDigitTimeout(4);
+gather.setFirstDigitTimeout(5);
+gather.setPlayAudio(playAudio);
+
+var response = new BxmlBuilder.Response();
+response.addVerb(gather);
+
+console.log(response.toXml());
+
+//Gather response with no nested verbs
+var gather = new BxmlBuilder.Verbs.Gather();
+gather.setGatherUrl("https://test.com");
+gather.setGatherMethod("GET");
+gather.setUsername("user");
+gather.setPassword("pass");
+gather.setTag("tag");
+gather.setTerminatingDigits("123");
+gather.setMaxDigits(3);
+gather.setInterDigitTimeout(4);
+gather.setFirstDigitTimeout(5);
+
+var response = new BxmlBuilder.Response();
+response.addVerb(gather);
+
+console.log(response.toXml());

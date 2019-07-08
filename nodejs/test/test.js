@@ -152,3 +152,79 @@ describe("Redirect", function() {
         });
     });
 });
+
+//Tests for Gather
+describe("Gather", function() {
+    describe("#toXml()", function() {
+        it("should generate a proper Gather tag with a nested SpeakSentence", function() {
+            var speakSentence = new BxmlBuilder.Verbs.SpeakSentence();
+            speakSentence.setSentence("test");
+            speakSentence.setVoice("susan");
+            speakSentence.setGender("female");
+            speakSentence.setLocale("en_US");
+
+            var gather = new BxmlBuilder.Verbs.Gather();
+            gather.setGatherUrl("https://test.com");
+            gather.setGatherMethod("GET");
+            gather.setUsername("user");
+            gather.setPassword("pass");
+            gather.setTag("tag");
+            gather.setTerminatingDigits("123");
+            gather.setMaxDigits(3);
+            gather.setInterDigitTimeout(4);
+            gather.setFirstDigitTimeout(5);
+            gather.setSpeakSentence(speakSentence);
+
+            var response = new BxmlBuilder.Response();
+            response.addVerb(gather);
+
+            var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Gather gatherUrl=\"https://test.com\" gatherMethod=\"GET\" username=\"user\" password=\"pass\" tag=\"tag\" terminatingDigits=\"123\" maxDigits=\"3\" interDigitTimeout=\"4\" firstDigitTimeout=\"5\"><SpeakSentence voice=\"susan\" locale=\"en_US\" gender=\"female\">test</SpeakSentence></Gather></Response>";
+            assert.equal(response.toXml(), expectedString);
+            //validate against xsd
+        });
+        it("should generate a proper Gather tag with a nested PlayAudio", function() {
+            var playAudio = new BxmlBuilder.Verbs.PlayAudio();
+            playAudio.setUrl("https://test.com");
+            playAudio.setUsername("user");
+            playAudio.setPassword("pass");
+
+            var gather = new BxmlBuilder.Verbs.Gather();
+            gather.setGatherUrl("https://test.com");
+            gather.setGatherMethod("GET");
+            gather.setUsername("user");
+            gather.setPassword("pass");
+            gather.setTag("tag");
+            gather.setTerminatingDigits("123");
+            gather.setMaxDigits(3);
+            gather.setInterDigitTimeout(4);
+            gather.setFirstDigitTimeout(5);
+            gather.setPlayAudio(playAudio);
+
+            var response = new BxmlBuilder.Response();
+            response.addVerb(gather);
+
+            var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Gather gatherUrl=\"https://test.com\" gatherMethod=\"GET\" username=\"user\" password=\"pass\" tag=\"tag\" terminatingDigits=\"123\" maxDigits=\"3\" interDigitTimeout=\"4\" firstDigitTimeout=\"5\"><PlayAudio username=\"user\" password=\"pass\">https://test.com</PlayAudio></Gather></Response>";
+            assert.equal(response.toXml(), expectedString);
+            //validate against xsd
+        });
+        it("should generate a proper Gather tag with no nested tags", function() {
+            var gather = new BxmlBuilder.Verbs.Gather();
+            gather.setGatherUrl("https://test.com");
+            gather.setGatherMethod("GET");
+            gather.setUsername("user");
+            gather.setPassword("pass");
+            gather.setTag("tag");
+            gather.setTerminatingDigits("123");
+            gather.setMaxDigits(3);
+            gather.setInterDigitTimeout(4);
+            gather.setFirstDigitTimeout(5);
+
+            var response = new BxmlBuilder.Response();
+            response.addVerb(gather);
+
+            var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Gather gatherUrl=\"https://test.com\" gatherMethod=\"GET\" username=\"user\" password=\"pass\" tag=\"tag\" terminatingDigits=\"123\" maxDigits=\"3\" interDigitTimeout=\"4\" firstDigitTimeout=\"5\"/></Response>";
+            assert.equal(response.toXml(), expectedString);
+            //validate against xsd
+        });
+    });
+});
