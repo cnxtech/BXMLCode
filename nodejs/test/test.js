@@ -34,3 +34,20 @@ describe("Hangup", function() {
         });
     });
 });
+
+//Tests for PlayAudio
+describe("PlayAudio", function() {
+    describe("#toXml()", function() {
+        it("should generate a proper PlayAudio tag", function() {
+            var playAudio = new BxmlBuilder.Verbs.PlayAudio();
+            playAudio.setUrl("https://test.com");
+            playAudio.setUsername("user");
+            playAudio.setPassword("pass");
+            var response = new BxmlBuilder.Response();
+            response.addVerb(playAudio);
+            var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><PlayAudio username=\"user\" password=\"pass\">https://test.com</PlayAudio></Response>";
+            assert.equal(response.toXml(), expectedString);
+            //validate against xsd
+        });
+    });
+});

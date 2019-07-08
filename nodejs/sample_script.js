@@ -1,9 +1,20 @@
 var BxmlBuilder = require("bandwidthbxml");
 
 //Hangup response
-hangup = new BxmlBuilder.Verbs.Hangup();
+var hangup = new BxmlBuilder.Verbs.Hangup();
 
-response = new BxmlBuilder.Response();
+var response = new BxmlBuilder.Response();
 response.addVerb(hangup);
+
+console.log(response.toXml());
+
+//PlayAudio response
+var playAudio = new BxmlBuilder.Verbs.PlayAudio();
+playAudio.setUrl("https://test.com");
+playAudio.setUsername("user");
+playAudio.setPassword("pass");
+
+var response = new BxmlBuilder.Response();
+response.addVerb(playAudio);
 
 console.log(response.toXml());
