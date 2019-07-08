@@ -30,3 +30,12 @@ var response = new BxmlBuilder.Response();
 response.addVerb(speakSentence);
 
 console.log(response.toXml());
+
+//SendDtmf response
+var sendDtmf = new BxmlBuilder.Verbs.SendDtmf();
+sendDtmf.setDtmf("123");
+
+var response = new BxmlBuilder.Response();
+response.addVerb(sendDtmf);
+
+console.log(response.toXml());

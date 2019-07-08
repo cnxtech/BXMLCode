@@ -76,3 +76,20 @@ describe("SpeakSentence", function() {
         });
     });
 });
+
+//Tests for SendDtmf
+describe("SendDtmf", function() {
+    describe("#toXml()", function() {
+        it("should generate a proper SendDtmf tag", function() {
+            var sendDtmf = new BxmlBuilder.Verbs.SendDtmf();
+            sendDtmf.setDtmf("123");
+
+            var response = new BxmlBuilder.Response();
+            response.addVerb(sendDtmf);
+
+            var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><SendDtmf>123</SendDtmf></Response>";
+            assert.equal(response.toXml(), expectedString);
+            //validate against xsd
+        });
+    });
+});
