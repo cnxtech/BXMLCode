@@ -8,15 +8,36 @@
  * @copyright Bandwidth INC
  */
 
+var xmlbuilder = require("xmlbuilder");
+
 var Response = function() {
     
+    this.verbs = [];
+
     /**
-     * Converts the Response object into an XML string
+     * Converts the Response object into an XML string based on its verbs
      *
      * @return {String} The XML representation of the object
      */
     this.toXml = function(callback) {
-        return "Response";
+        var xml = xmlbuilder.create("Response", {
+            version: "1.0",
+            encoding: "UTF-8"
+        })
+
+        for (i = 0; i < this.verbs.length; i++) {
+            xml.ele(this.verbs[i].toXmlObject());
+        }
+        return xml.end();
+    }
+
+    /**
+     * Adds the Verb object to the list of verbs
+     *
+     * @param {Verb} verb The verb object to add to the list of verbs
+     */
+    this.addVerb = function(verb, callback) {
+        this.verbs.push(verb);
     }
 }
 
