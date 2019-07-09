@@ -228,3 +228,46 @@ describe("Gather", function() {
         });
     });
 });
+
+//Tests for Transfer
+describe("Transfer", function() {
+    describe("#toXml()", function() {
+        it("should generate a proper Transfer tag", function() {
+            var number1 = new BxmlBuilder.Verbs.PhoneNumber();
+            number1.setNumber("+17777777777");
+            number1.setTransferAnswerUrl("https://test.com");
+            number1.setTransferAnswerMethod("GET");
+            number1.setUsername("user");
+            number1.setPassword("pass");
+            number1.setTag("tag");
+            
+            var number2 = new BxmlBuilder.Verbs.PhoneNumber();
+            number2.setNumber("+17777777779");
+            number2.setTransferAnswerUrl("https://test2.com");
+            number2.setTransferAnswerMethod("POST");
+            number2.setUsername("user2");
+            number2.setPassword("pass2");
+            number2.setTag("tag2");
+
+            var transfer = new BxmlBuilder.Verbs.Transfer();
+            transfer.setTransferCallerId("+18888888888");
+            transfer.setCallTimeout(3);
+            transfer.setTag("tagTransfer");
+            transfer.setTransferCompleteUrl("https://testtransfer.com");
+            transfer.setTransferCompleteMethod("GET");
+            transfer.setUsername("usertransfer");
+            transfer.setPassword("passtransfer");
+            transfer.setDiversionTreatment("none");
+            transfer.setDiversionReason("away");
+            transfer.addPhoneNumber(number1);
+            transfer.addPhoneNumber(number2);
+
+            var response = new BxmlBuilder.Response();
+            response.addVerb(transfer);
+
+            var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Transfer transferCallerId=\"+18888888888\" callTimeout=\"3\" tag=\"tagTransfer\" transferCompleteUrl=\"https://testtransfer.com\" transferCompleteMethod=\"GET\" username=\"usertransfer\" password=\"passtransfer\" diversionTreatment=\"none\" diversionReason=\"away\"><PhoneNumber transferAnswerUrl=\"https://test.com\" transferAnswerMethod=\"GET\" username=\"user\" password=\"pass\" tag=\"tag\">+17777777777</PhoneNumber><PhoneNumber transferAnswerUrl=\"https://test2.com\" transferAnswerMethod=\"POST\" username=\"user2\" password=\"pass2\" tag=\"tag2\">+17777777779</PhoneNumber></Transfer></Response>";
+            assert.equal(response.toXml(), expectedString);
+            //validate against xsd
+        });
+    });
+});

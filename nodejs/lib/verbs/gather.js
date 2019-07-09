@@ -162,6 +162,8 @@ var Gather = function() {
             attributes["firstDigitTimeout"] = this.firstDigitTimeout;
         }
 
+        //Generating the element allows the SpeakSentence and PlayAudio
+        //tags to be added easily
         var ele = xmlDocument.ele("Gather", attributes);
 
         if (this.speakSentence !== null) {
