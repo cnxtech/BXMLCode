@@ -10,13 +10,16 @@ TBD
 
 ### Hangup Response
 
+```
 Hangup hangup = new Hangup();
 
 Response response = new Response().with(hangup);
 System.out.println(response.toXml());
+```
 
 ### Forward Response
 
+```
 Forward forward = new Forward()
                         .withTo("+18888888888")
                         .withFrom("+19999999999")
@@ -24,24 +27,30 @@ Forward forward = new Forward()
 
 Response response = new Response().with(forward);
 System.out.println(response.toXml());
+```
 
 ### Pause Response
 
+```
 Pause pause = new Pause()
                     .withDuration(10);
 
 Response response = new Response().with(pause);
 System.out.println(response.toXml());
+```
 
 ### SendDtmf Response
 
+```
 SendDtmf sendDtmf = new SendDtmf("123");
 
 Response response = new Response().with(sendDtmf);
 System.out.println(response.toXml());
+```
 
 ### Redirect Response
 
+```
 Redirect redirect = new Redirect()
                         .withRedirectUrl("https://test.com")
                         .withRedirectMethod("POST")
@@ -50,9 +59,11 @@ Redirect redirect = new Redirect()
 
 Response response = new Response().with(redirect);
 System.out.println(response.toXml());
+```
 
 ### Transfer Response
 
+```
 PhoneNumber number1 = new PhoneNumber("+18888888888")
                             .withTransferAnswerUrl("https://test.com")
                             .withTransferAnswerMethod("POST")
@@ -76,9 +87,11 @@ Transfer transfer = new Transfer()
 
 Response response = new Response().with(transfer);
 System.out.println(response.toXml());
+```
 
 ### SpeakSentence Response
 
+```
 SpeakSentence speakSentence = new SpeakSentence("test")
                                     .withVoice("susan")
                                     .withGender("female")
@@ -86,17 +99,21 @@ SpeakSentence speakSentence = new SpeakSentence("test")
 
 Response response = new Response().with(speakSentence);
 System.out.println(response.toXml());
+```
 
 ### PlayAudio Response
 
+```
 PlayAudio playAudio = new PlayAudio("https://test.com")
                                 .withCredentials("user", "pass");
 
 Response response = new Response().with(playAudio);
 System.out.println(response.toXml());
+```
 
 ### Gather Response With No Nested Verbs
 
+```
 Gather gather = new Gather()
                         .withGatherUrl("https://test.com")
                         .withGatherMethod("POST")
@@ -109,9 +126,11 @@ Gather gather = new Gather()
 
 Response response = new Response().with(gather);
 System.out.println(response.toXml());
+```
 
 ### Gather Response With A Nested SpeakSentence
 
+```
 SpeakSentence speakSentence = new SpeakSentence("test")
                                     .withVoice("susan")
                                     .withGender("female")
@@ -129,9 +148,11 @@ Gather gather = new Gather(speakSentence)
 
 Response response = new Response().with(gather);
 System.out.println(response.toXml());
+```
 
 ### Gather Response With A Nested PlayAudio
 
+```
 PlayAudio playAudio = new PlayAudio("https://test.com")
                                 .withCredentials("user", "pass");
 
@@ -147,6 +168,7 @@ Gather gather = new Gather(playAudio)
 
 Response response = new Response().with(gather);
 System.out.println(response.toXml());
+```
 
 ## BXML Documentation
 
