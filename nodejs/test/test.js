@@ -9,6 +9,7 @@
 
 var assert = require("assert");
 var BxmlBuilder = require("..");
+var validator = require("xsd-schema-validator");
 
 //Tests for Response
 describe("Response", function() {
@@ -34,6 +35,12 @@ describe("Hangup", function() {
             var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Hangup/></Response>";
             assert.equal(response.toXml(), expectedString);
             //validate against xsd
+            validator.validateXML(response.toXml(), "schema.xsd", function(err, result) {
+                if (err) {
+                    throw err;
+                }
+
+            });
         });
     });
 });
@@ -53,6 +60,12 @@ describe("PlayAudio", function() {
             var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><PlayAudio username=\"user\" password=\"pass\">https://test.com</PlayAudio></Response>";
             assert.equal(response.toXml(), expectedString);
             //validate against xsd
+            validator.validateXML(response.toXml(), "schema.xsd", function(err, result) {
+                if (err) {
+                    throw err;
+                }
+
+            });
         });
     });
 });
@@ -73,6 +86,12 @@ describe("SpeakSentence", function() {
             var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><SpeakSentence voice=\"susan\" locale=\"en_US\" gender=\"female\">test</SpeakSentence></Response>";
             assert.equal(response.toXml(), expectedString);
             //validate against xsd
+            validator.validateXML(response.toXml(), "schema.xsd", function(err, result) {
+                if (err) {
+                    throw err;
+                }
+
+            });
         });
     });
 });
@@ -90,6 +109,12 @@ describe("SendDtmf", function() {
             var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><SendDtmf>123</SendDtmf></Response>";
             assert.equal(response.toXml(), expectedString);
             //validate against xsd
+            validator.validateXML(response.toXml(), "schema.xsd", function(err, result) {
+                if (err) {
+                    throw err;
+                }
+
+            });
         });
     });
 });
@@ -111,6 +136,12 @@ describe("Forward", function() {
             var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Forward to=\"+18888888888\" from=\"+19999999999\" callTimeout=\"3\" diversionTreatment=\"none\" diversionReason=\"away\"/></Response>";
             assert.equal(response.toXml(), expectedString);
             //validate against xsd
+            validator.validateXML(response.toXml(), "schema.xsd", function(err, result) {
+                if (err) {
+                    throw err;
+                }
+
+            });
         });
     });
 })
@@ -128,6 +159,12 @@ describe("Pause", function() {
             var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Pause duration=\"3\"/></Response>";
             assert.equal(response.toXml(), expectedString);
             //validate against xsd
+            validator.validateXML(response.toXml(), "schema.xsd", function(err, result) {
+                if (err) {
+                    throw err;
+                }
+
+            });
         });
     });
 });
@@ -149,6 +186,12 @@ describe("Redirect", function() {
             var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Redirect username=\"user\" password=\"pass\" redirectUrl=\"https://test.com\" redirectMethod=\"GET\" tag=\"tag\"/></Response>";
             assert.equal(response.toXml(), expectedString);
             //validate against xsd
+            validator.validateXML(response.toXml(), "schema.xsd", function(err, result) {
+                if (err) {
+                    throw err;
+                }
+
+            });
         });
     });
 });
@@ -181,6 +224,12 @@ describe("Gather", function() {
             var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Gather gatherUrl=\"https://test.com\" gatherMethod=\"GET\" username=\"user\" password=\"pass\" tag=\"tag\" terminatingDigits=\"123\" maxDigits=\"3\" interDigitTimeout=\"4\" firstDigitTimeout=\"5\"><SpeakSentence voice=\"susan\" locale=\"en_US\" gender=\"female\">test</SpeakSentence></Gather></Response>";
             assert.equal(response.toXml(), expectedString);
             //validate against xsd
+            validator.validateXML(response.toXml(), "schema.xsd", function(err, result) {
+                if (err) {
+                    throw err;
+                }
+
+            });
         });
         it("should generate a proper Gather tag with a nested PlayAudio", function() {
             var playAudio = new BxmlBuilder.Verbs.PlayAudio();
@@ -206,6 +255,12 @@ describe("Gather", function() {
             var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Gather gatherUrl=\"https://test.com\" gatherMethod=\"GET\" username=\"user\" password=\"pass\" tag=\"tag\" terminatingDigits=\"123\" maxDigits=\"3\" interDigitTimeout=\"4\" firstDigitTimeout=\"5\"><PlayAudio username=\"user\" password=\"pass\">https://test.com</PlayAudio></Gather></Response>";
             assert.equal(response.toXml(), expectedString);
             //validate against xsd
+            validator.validateXML(response.toXml(), "schema.xsd", function(err, result) {
+                if (err) {
+                    throw err;
+                }
+
+            });
         });
         it("should generate a proper Gather tag with no nested tags", function() {
             var gather = new BxmlBuilder.Verbs.Gather();
@@ -225,6 +280,12 @@ describe("Gather", function() {
             var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Gather gatherUrl=\"https://test.com\" gatherMethod=\"GET\" username=\"user\" password=\"pass\" tag=\"tag\" terminatingDigits=\"123\" maxDigits=\"3\" interDigitTimeout=\"4\" firstDigitTimeout=\"5\"/></Response>";
             assert.equal(response.toXml(), expectedString);
             //validate against xsd
+            validator.validateXML(response.toXml(), "schema.xsd", function(err, result) {
+                if (err) {
+                    throw err;
+                }
+
+            });
         });
     });
 });
@@ -268,6 +329,12 @@ describe("Transfer", function() {
             var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Transfer transferCallerId=\"+18888888888\" callTimeout=\"3\" tag=\"tagTransfer\" transferCompleteUrl=\"https://testtransfer.com\" transferCompleteMethod=\"GET\" username=\"usertransfer\" password=\"passtransfer\" diversionTreatment=\"none\" diversionReason=\"away\"><PhoneNumber transferAnswerUrl=\"https://test.com\" transferAnswerMethod=\"GET\" username=\"user\" password=\"pass\" tag=\"tag\">+17777777777</PhoneNumber><PhoneNumber transferAnswerUrl=\"https://test2.com\" transferAnswerMethod=\"POST\" username=\"user2\" password=\"pass2\" tag=\"tag2\">+17777777779</PhoneNumber></Transfer></Response>";
             assert.equal(response.toXml(), expectedString);
             //validate against xsd
+            validator.validateXML(response.toXml(), "schema.xsd", function(err, result) {
+                if (err) {
+                    throw err;
+                }
+
+            });
         });
     });
 });
