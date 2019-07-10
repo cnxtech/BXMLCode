@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.bandwidth.sdk</groupId>
+    <artifactId>voice</artifactId>
+    <version>1.9-SNAPSHOT</version>
+
+    <name>Bandwidth Voice V2 Java SDK BXML Generator</name>
+    <description>The SDK for Bandwidth's Voice v2 BXML</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <javax.servlet.version>3.1.0</javax.servlet.version>
+        <jackson.version>2.8.10</jackson.version>
+        <org.immutables.version>2.5.6</org.immutables.version>
+        <jaxb.version>2.3.0</jaxb.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.immutables</groupId>
+            <artifactId>value</artifactId>
+            <version>${org.immutables.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <compilerVersion>${java.version}</compilerVersion>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+
+                    <compilerArgs>
+                        <!-- emit compiler warnings on bad style (verbypes, ...) -->
+                        <compilerArg>-Xlint:all</compilerArg>
+                        <!-- disable warning on "No processor claimed any of these annotations" -->
+                        <compilerArg>-Xlint:-processing</compilerArg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
