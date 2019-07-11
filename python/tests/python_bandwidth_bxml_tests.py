@@ -10,7 +10,7 @@ import unittest
 
 from lxml import etree
 
-import python_bandwidth_bxml.response as response
+from python_bandwidth_bxml.response import Response
 from python_bandwidth_bxml.verbs import hangup as hangup
 from python_bandwidth_bxml.verbs import send_dtmf as send_dtmf
 from python_bandwidth_bxml.verbs import forward as forward
@@ -32,7 +32,7 @@ PARSER = etree.XMLParser(schema=schema)
 class TestPythonBandwidthBxml(unittest.TestCase):
 
     def setUp(self):
-        self.response_class = response.Response()
+        self.response_class = Response()
 
     def tearDown(self):
         self.response_class = None
