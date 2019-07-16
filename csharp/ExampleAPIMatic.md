@@ -7,4 +7,6 @@ pause.Duration = 3;
 
 Response response = new Response();
 response.Add(pause);
+
+Console.Write(response.ToXml());
 ```
