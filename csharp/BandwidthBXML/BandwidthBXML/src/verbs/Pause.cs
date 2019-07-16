@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace BandwidthBXML
+namespace Bandwidth.Standard.BandwidthV2Voice.BandwidthBXML
 {
   /// <summary>
   ///   Pause the execution of an ongoing BXML document

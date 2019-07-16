@@ -6,7 +6,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace BandwidthBXML
+namespace Bandwidth.Standard.BandwidthV2Voice.BandwidthBXML
 {
   /// <summary>
   ///   Response class for Bandwidth XML
