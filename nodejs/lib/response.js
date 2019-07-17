@@ -10,22 +10,23 @@
 
 var xmlbuilder = require("xmlbuilder");
 
-var Response = function() {
-    
-    this.verbs = [];
+class Response {
+    constructor() {    
+      this.verbs = [];
+    }
 
     /**
      * Converts the Response object into an XML string based on its verbs
      *
      * @return {String} The XML representation of the object
      */
-    this.toXml = function(callback) {
+    toXml() {
         var xml = xmlbuilder.create("Response", {
             version: "1.0",
             encoding: "UTF-8"
         })
 
-        for (i = 0; i < this.verbs.length; i++) {
+        for (var i = 0; i < this.verbs.length; i++) {
             xml = this.verbs[i].addXml(xml);
         }
         return xml.end();
@@ -36,7 +37,7 @@ var Response = function() {
      *
      * @param {Verb} verb The verb object to add to the list of verbs
      */
-    this.addVerb = function(verb, callback) {
+    addVerb(verb) {
         this.verbs.push(verb);
     }
 }
