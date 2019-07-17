@@ -8,28 +8,30 @@
  */
 
 var BaseVerb = require("./baseVerb");
-var util = require("util");
 
-var Gather = function() {
+class Gather extends BaseVerb {
 
-    this.gatherUrl = null;
-    this.gatherMethod = null;
-    this.username = null;
-    this.password = null;
-    this.tag = null;
-    this.terminatingDigits = null;
-    this.maxDigits = null;
-    this.interDigitTimeout = null;
-    this.firstDigitTimeout = null;
-    this.speakSentence = null;
-    this.playAudio = null;
+    constructor() {
+        super();
+        this.gatherUrl = null;
+        this.gatherMethod = null;
+        this.username = null;
+        this.password = null;
+        this.tag = null;
+        this.terminatingDigits = null;
+        this.maxDigits = null;
+        this.interDigitTimeout = null;
+        this.firstDigitTimeout = null;
+        this.speakSentence = null;
+        this.playAudio = null;
+    }
 
     /**
      * Sets the gatherUrl attribute
      *
      * @param {String} gatherUrl The value to set gatherUrl to
      */
-    this.setGatherUrl = function(gatherUrl, callback) {
+    setGatherUrl(gatherUrl) {
         this.gatherUrl = gatherUrl;
     }
 
@@ -38,7 +40,7 @@ var Gather = function() {
      *
      * @param {String} gatherMethod The value to set gatherMethod to
      */
-    this.setGatherMethod = function(gatherMethod, callback) {
+    setGatherMethod(gatherMethod) {
         this.gatherMethod = gatherMethod;
     }
 
@@ -47,7 +49,7 @@ var Gather = function() {
      *
      * @param {String} username The value to set username to
      */
-    this.setUsername = function(username, callback) {
+    setUsername(username) {
         this.username = username;
     }
 
@@ -56,7 +58,7 @@ var Gather = function() {
      *
      * @param {String} password The value to set password to
      */
-    this.setPassword = function(password, callback) {
+    setPassword(password) {
         this.password = password;
     }
 
@@ -65,7 +67,7 @@ var Gather = function() {
      *
      * @param {String} tag The value to set tag to
      */
-    this.setTag = function(tag, callback) {
+    setTag(tag) {
         this.tag = tag;
     }
 
@@ -74,7 +76,7 @@ var Gather = function() {
      *
      * @param {String} terminatingDigits The value to set terminatingDigits to
      */
-    this.setTerminatingDigits = function(terminatingDigits, callback) {
+    setTerminatingDigits(terminatingDigits) {
         this.terminatingDigits = terminatingDigits;
     }
 
@@ -83,7 +85,7 @@ var Gather = function() {
      *
      * @param {String} maxDigits The value to set maxDigits to
      */
-    this.setMaxDigits = function(maxDigits, callback) {
+    setMaxDigits(maxDigits) {
         this.maxDigits = maxDigits;
     }
 
@@ -92,7 +94,7 @@ var Gather = function() {
      *
      * @param {int} interDigitTimeout The value to set interDigitTimeout to
      */
-    this.setInterDigitTimeout = function(interDigitTimeout, callback) {
+    setInterDigitTimeout(interDigitTimeout) {
         this.interDigitTimeout = interDigitTimeout;
     }
 
@@ -101,7 +103,7 @@ var Gather = function() {
      *
      * @param {int} firstDigitTimeout The value to set firstDigitTimeout to
      */
-    this.setFirstDigitTimeout = function(firstDigitTimeout, callback) {
+    setFirstDigitTimeout(firstDigitTimeout) {
         this.firstDigitTimeout = firstDigitTimeout;
     }
 
@@ -110,7 +112,7 @@ var Gather = function() {
      *
      * @param {SpeakSentence} speakSentence The object to set speakSentence to
      */
-    this.setSpeakSentence = function(speakSentence, callback) {
+    setSpeakSentence(speakSentence) {
         this.speakSentence = speakSentence;
     }
 
@@ -119,11 +121,11 @@ var Gather = function() {
      *
      * @param {PlayAudio} playAudio The object to set playAudio to
      */
-    this.setPlayAudio = function(playAudio, callback) {
+    setPlayAudio(playAudio) {
         this.playAudio = playAudio;
     }
 
-    this.addXml = function(xmlDocument, callback) {
+    addXml(xmlDocument) {
         var attributes = {};
 
         if (this.gatherUrl !== null) {
@@ -178,8 +180,5 @@ var Gather = function() {
     }
 
 }
-
-//Sets that Gather inherits from BaseVerb
-util.inherits(Gather, BaseVerb);
 
 module.exports = Gather;

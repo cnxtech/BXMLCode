@@ -7,7 +7,7 @@
  * @copyright Bandwidth INC
  */
 
-var BaseVerb = function() {
+class BaseVerb {
 
     /**
      * Converts the verb class into its object representation for
@@ -17,7 +17,7 @@ var BaseVerb = function() {
      * @param {XMLDocument} xmlDocument The xml document currently being built
      * @return {XMLDocument} The xml document with the verb added to it
      */
-    this.addXml = function(xmlDocument, callback) {
+    addXml(xmlDocument) {
         return xmlDocument;
     }
 }

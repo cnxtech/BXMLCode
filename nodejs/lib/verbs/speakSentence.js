@@ -8,21 +8,23 @@
  */
 
 var BaseVerb = require("./baseVerb");
-var util = require("util");
 
-var SpeakSentence = function() {
+class SpeakSentence extends BaseVerb {
 
-    this.sentence = null;
-    this.voice = null;
-    this.locale = null;
-    this.gender = null;
+    constructor() {
+        super();
+        this.sentence = null;
+        this.voice = null;
+        this.locale = null;
+        this.gender = null;
+    }
 
     /**
      * Sets the sentence attribute
      *
      * @param {String} sentence The value to set sentence to
      */
-    this.setSentence = function(sentence, callback) {
+    setSentence(sentence) {
         this.sentence = sentence;
     }
 
@@ -31,7 +33,7 @@ var SpeakSentence = function() {
      *
      * @param {String} voice The value to set voice to
      */
-    this.setVoice = function(voice, callback) {
+    setVoice(voice) {
         this.voice = voice;
     }
 
@@ -40,7 +42,7 @@ var SpeakSentence = function() {
      *
      * @param {String} locale The value to set locale to
      */
-    this.setLocale = function(locale, callback) {
+    setLocale(locale) {
         this.locale = locale;
     }
 
@@ -49,11 +51,11 @@ var SpeakSentence = function() {
      *
      * @param {String} gender The value to set gender to
      */
-    this.setGender = function(gender, callback) {
+    setGender(gender) {
         this.gender = gender;
     }
 
-    this.addXml = function(xmlDocument, callback) {
+    addXml(xmlDocument) {
         var attributes = {};
 
         if (this.voice !== null) {
@@ -72,8 +74,5 @@ var SpeakSentence = function() {
         return xmlDocument;
     }
 }
-
-//Sets that SpeakSentence inherits from BaseVerb
-util.inherits(SpeakSentence, BaseVerb);
 
 module.exports = SpeakSentence;

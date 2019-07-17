@@ -8,17 +8,13 @@
  */
 
 var BaseVerb = require("./baseVerb");
-var util = require("util");
 
-var Hangup = function() {
+class Hangup extends BaseVerb {
     
-    this.addXml = function(xmlDocument, callback) {
+    addXml(xmlDocument) {
         xmlDocument.ele("Hangup");
         return xmlDocument;
     }
 }
-
-//Sets that Hangup inherits from BaseVerb
-util.inherits(Hangup, BaseVerb);
 
 module.exports = Hangup;

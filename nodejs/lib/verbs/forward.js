@@ -8,22 +8,24 @@
  */
 
 var BaseVerb = require("./baseVerb");
-var util = require("util");
 
-var Forward = function() {
+class Forward extends BaseVerb {
 
-    this.to = null;
-    this.from = null;
-    this.callTimeout = null;
-    this.diversionTreatment = null;
-    this.diversionReason = null;
+    constructor() {
+        super();
+        this.to = null;
+        this.from = null;
+        this.callTimeout = null;
+        this.diversionTreatment = null;
+        this.diversionReason = null;
+    }
 
     /**
      * Sets the to attribute
      *
      * @param {String} to The value to set `to` to
      */
-    this.setTo = function(to, callback) {
+    setTo(to) {
         this.to = to;
     }
 
@@ -32,7 +34,7 @@ var Forward = function() {
      *
      * @param {String} from The value to set `from` to
      */
-    this.setFrom = function(from, callback) {
+    setFrom(from) {
         this.from = from;
     }
 
@@ -41,7 +43,7 @@ var Forward = function() {
      *
      * @param {int} callTimeout The value to set callTimeout to
      */
-    this.setCallTimeout = function(callTimeout, callback) {
+    setCallTimeout(callTimeout) {
         this.callTimeout = callTimeout;
     }
 
@@ -50,7 +52,7 @@ var Forward = function() {
      *
      * @param {String} diversionTreatment The value to set diversionTreatment to
      */
-    this.setDiversionTreatment = function(diversionTreatment, callback) {
+    setDiversionTreatment(diversionTreatment) {
         this.diversionTreatment = diversionTreatment;
     }  
 
@@ -59,11 +61,11 @@ var Forward = function() {
      *
      * @param {String} diversionReason The value to set diversionReason to
      */
-    this.setDiversionReason = function(diversionReason, callback) {
+    setDiversionReason(diversionReason) {
         this.diversionReason = diversionReason;
     }  
 
-    this.addXml = function(xmlDocument, callback) {
+    addXml(xmlDocument) {
         var attributes = {};
 
         if (this.to !== null) {
@@ -90,8 +92,5 @@ var Forward = function() {
         return xmlDocument;
     }
 }
-
-//Sets that Forward inherits from BaseVerb
-util.inherits(Forward, BaseVerb);
 
 module.exports = Forward;

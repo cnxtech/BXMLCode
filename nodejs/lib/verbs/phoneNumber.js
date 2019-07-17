@@ -8,23 +8,25 @@
  */
 
 var BaseVerb = require("./baseVerb");
-var util = require("util");
 
-var PhoneNumber = function() {
+class PhoneNumber extends BaseVerb {
 
-    this.number = null;
-    this.transferAnswerUrl = null;
-    this.transferAnswerMethod = null;
-    this.username = null;
-    this.password = null;
-    this.tag = null;
+    constructor() {
+        super();
+        this.number = null;
+        this.transferAnswerUrl = null;
+        this.transferAnswerMethod = null;
+        this.username = null;
+        this.password = null;
+        this.tag = null;
+    }
 
     /**
      * Sets the number attribute
      *
      * @param {String} number The value to set number to
      */
-    this.setNumber = function(number, callback) {
+    setNumber(number) {
         this.number = number;
     }
 
@@ -33,7 +35,7 @@ var PhoneNumber = function() {
      *
      * @param {String} transferAnswerUrl The value to set transferAnswerUrl to
      */
-    this.setTransferAnswerUrl = function(transferAnswerUrl, callback) {
+    setTransferAnswerUrl(transferAnswerUrl) {
         this.transferAnswerUrl = transferAnswerUrl;
     }
 
@@ -42,7 +44,7 @@ var PhoneNumber = function() {
      *
      * @param {String} transferAnswerMethod The value to set transferAnswerMethod to
      */
-    this.setTransferAnswerMethod = function(transferAnswerMethod, callback) {
+    setTransferAnswerMethod(transferAnswerMethod) {
         this.transferAnswerMethod = transferAnswerMethod;
     }
 
@@ -51,7 +53,7 @@ var PhoneNumber = function() {
      *
      * @param {String} username The value to set username to
      */
-    this.setUsername = function(username, callback) {
+    setUsername(username) {
         this.username = username;
     }
 
@@ -60,7 +62,7 @@ var PhoneNumber = function() {
      *
      * @param {String} password The value to set password to
      */
-    this.setPassword = function(password, callback) {
+    setPassword(password) {
         this.password = password;
     }
 
@@ -69,11 +71,11 @@ var PhoneNumber = function() {
      *
      * @param {String} tag The value to set tag to
      */
-    this.setTag = function(tag, callback) {
+    setTag(tag) {
         this.tag = tag;
     }
 
-    this.addXml = function(xmlDocument, callback) {
+    addXml(xmlDocument) {
         var attributes = {};
 
         if (this.transferAnswerUrl !== null) {
@@ -100,8 +102,5 @@ var PhoneNumber = function() {
         return xmlDocument;
     }
 }
-
-//Sets that PhoneNumber inherits from BaseVerb
-util.inherits(PhoneNumber, BaseVerb);
 
 module.exports = PhoneNumber;

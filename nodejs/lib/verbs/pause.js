@@ -8,22 +8,24 @@
  */
 
 var BaseVerb = require("./baseVerb");
-var util = require("util");
 
-var Pause = function() {
+class Pause extends BaseVerb {
 
-    this.duration = null;
+    constructor() {
+        super();
+        this.duration = null;
+    }
 
     /**
      * Sets the duration attribute
      *
      * @param {int} duration The value to set duration to
      */
-    this.setDuration = function(duration, callback) {
+    setDuration(duration) {
         this.duration = duration;
     }
 
-    this.addXml = function(xmlDocument, callback) {
+    addXml(xmlDocument) {
         var attributes = {};
 
         if (this.duration !== null) {
@@ -35,8 +37,5 @@ var Pause = function() {
     }
 
 }
-
-//Sets that Pause inherits from BaseVerb
-util.inherits(Pause, BaseVerb);
 
 module.exports = Pause;

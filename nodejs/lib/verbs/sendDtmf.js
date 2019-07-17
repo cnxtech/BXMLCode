@@ -8,28 +8,27 @@
  */
 
 var BaseVerb = require("./baseVerb");
-var util = require("util");
 
-var SendDtmf = function() {
+class SendDtmf extends BaseVerb {
 
-    this.dtmf = null;
+    constructor() {
+        super();
+        this.dtmf = null;
+    }
 
     /**
      * Sets the dtmf attribute
      *
      * @param {String} dtmf The value to set dtmf to
      */
-    this.setDtmf = function(dtmf, callback) {
+    setDtmf(dtmf) {
         this.dtmf = dtmf;
     }
 
-    this.addXml = function(xmlDocument, callback) {
+    addXml(xmlDocument) {
         xmlDocument.ele("SendDtmf", {}, this.dtmf);
         return xmlDocument;
     }
 }
-
-//Sets that SendDtmf inherits from BaseVerb
-util.inherits(SendDtmf, BaseVerb);
 
 module.exports = SendDtmf;

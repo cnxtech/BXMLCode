@@ -8,20 +8,22 @@
  */
 
 var BaseVerb = require("./baseVerb");
-var util = require("util");
 
-var PlayAudio = function() {
+class PlayAudio extends BaseVerb {
 
-    this.url = null;
-    this.username = null;
-    this.password = null;
+    constructor() {
+        super();
+        this.url = null;
+        this.username = null;
+        this.password = null;
+    }
 
     /**
      * Sets the URL attribute
      *
      * @param {String} url The value to set url to
      */
-    this.setUrl = function(url, callback) {
+    setUrl(url) {
         this.url = url;
     }
 
@@ -30,7 +32,7 @@ var PlayAudio = function() {
      *
      * @param {String} username The value to set username to
      */
-    this.setUsername = function(username, callback) {
+    setUsername(username) {
         this.username = username;
     }
 
@@ -39,11 +41,11 @@ var PlayAudio = function() {
      *
      * @param {String} password The value to set password to
      */
-    this.setPassword = function(password, callback) {
+    setPassword(password) {
         this.password = password;
     }
 
-    this.addXml = function(xmlDocument, callback) {
+    addXml(xmlDocument) {
         var attributes = {};
         
         if (this.username !== null) {
@@ -58,8 +60,5 @@ var PlayAudio = function() {
         return xmlDocument;
     }
 }
-
-//Sets that PlayAudio inherits from BaseVerb
-util.inherits(PlayAudio, BaseVerb);
 
 module.exports = PlayAudio;

@@ -8,27 +8,29 @@
  */
 
 var BaseVerb = require("./baseVerb");
-var util = require("util");
 
-var Transfer = function() {
+class Transfer extends BaseVerb {
 
-    this.transferCallerId = null;
-    this.callTimeout = null;
-    this.tag = null;
-    this.transferCompleteUrl = null;
-    this.transferCompleteMethod = null;
-    this.username = null;
-    this.password = null;
-    this.diversionTreatment = null;
-    this.diversionReason = null;
-    this.phoneNumbers = [];
+    constructor() {
+        super();
+        this.transferCallerId = null;
+        this.callTimeout = null;
+        this.tag = null;
+        this.transferCompleteUrl = null;
+        this.transferCompleteMethod = null;
+        this.username = null;
+        this.password = null;
+        this.diversionTreatment = null;
+        this.diversionReason = null;
+        this.phoneNumbers = [];
+    }
 
     /**
      * Sets the transferCallerId attribute
      *
      * @param {String} transferCallerId The value to set transferCallerId to
      */
-    this.setTransferCallerId = function(transferCallerId, callback) {
+    setTransferCallerId(transferCallerId) {
         this.transferCallerId = transferCallerId;
     }
 
@@ -37,7 +39,7 @@ var Transfer = function() {
      *
      * @param {int} callTimeout The value to set callTimeout to
      */
-    this.setCallTimeout = function(callTimeout, callback) {
+    setCallTimeout(callTimeout) {
         this.callTimeout = callTimeout;
     }
 
@@ -46,7 +48,7 @@ var Transfer = function() {
      *
      * @param {String} tag The value to set tag to
      */
-    this.setTag = function(tag, callback) {
+    setTag(tag) {
         this.tag = tag;
     }
 
@@ -55,7 +57,7 @@ var Transfer = function() {
      *
      * @param {String} transferCompleteUrl The value to set transferCompleteUrl to
      */
-    this.setTransferCompleteUrl = function(transferCompleteUrl, callback) {
+    setTransferCompleteUrl(transferCompleteUrl) {
         this.transferCompleteUrl = transferCompleteUrl;
     }
 
@@ -64,7 +66,7 @@ var Transfer = function() {
      *
      * @param {String} transferCompleteMethod The value to set transferCompleteMethod to
      */
-    this.setTransferCompleteMethod = function(transferCompleteMethod, callback) {
+    setTransferCompleteMethod(transferCompleteMethod) {
         this.transferCompleteMethod = transferCompleteMethod;
     }
 
@@ -73,7 +75,7 @@ var Transfer = function() {
      *
      * @param {String} username The value to set username to
      */
-    this.setUsername = function(username, callback) {
+    setUsername(username) {
         this.username = username;
     }
 
@@ -82,7 +84,7 @@ var Transfer = function() {
      *
      * @param {String} password The value to set password to
      */
-    this.setPassword = function(password, callback) {
+    setPassword(password) {
         this.password = password;
     }
 
@@ -91,7 +93,7 @@ var Transfer = function() {
      *
      * @param {String} diversionTreatment The value to set diversionTreatment to
      */
-    this.setDiversionTreatment = function(diversionTreatment, callback) {
+    setDiversionTreatment(diversionTreatment) {
         this.diversionTreatment = diversionTreatment;
     }
 
@@ -100,7 +102,7 @@ var Transfer = function() {
      *
      * @param {String} diversionReason The value to set diversionReason to
      */
-    this.setDiversionReason = function(diversionReason, callback) {
+    setDiversionReason(diversionReason) {
         this.diversionReason = diversionReason;
     }
 
@@ -109,11 +111,11 @@ var Transfer = function() {
      *
      * @param {PhoneNumber} phoneNumber The PhoneNumber to add to the verb
      */
-    this.addPhoneNumber = function(phoneNumber, callback) {
+    addPhoneNumber(phoneNumber) {
         this.phoneNumbers.push(phoneNumber);
     }
 
-    this.addXml = function(xmlDocument, callback) {
+    addXml(xmlDocument) {
         var attributes = {};
 
         if (this.transferCallerId !== null) {
@@ -156,15 +158,12 @@ var Transfer = function() {
         //to be added easily
         var ele = xmlDocument.ele("Transfer", attributes);
 
-        for (i = 0; i < this.phoneNumbers.length; i++) {
+        for (var i = 0; i < this.phoneNumbers.length; i++) {
             this.phoneNumbers[i].addXml(ele);
         }
 
         return xmlDocument;
     }
 }
-
-//Sets that Transfer inherits from BaseVerb
-util.inherits(Transfer, BaseVerb);
 
 module.exports = Transfer;

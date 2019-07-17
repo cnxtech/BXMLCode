@@ -8,22 +8,24 @@
  */
 
 var BaseVerb = require("./baseVerb");
-var util = require("util");
 
-var Redirect = function() {
+class Redirect extends BaseVerb {
 
-    this.username = null;
-    this.password = null;
-    this.redirectUrl = null;
-    this.redirectMethod = null;
-    this.tag = null;
+    constructor() {
+        super();
+        this.username = null;
+        this.password = null;
+        this.redirectUrl = null;
+        this.redirectMethod = null;
+        this.tag = null;
+    }
 
     /**
      * Sets the username attribute
      *
      * @param {String} username The value to set username to
      */
-    this.setUsername = function(username, callback) {
+    setUsername(username) {
         this.username = username;
     }
 
@@ -32,7 +34,7 @@ var Redirect = function() {
      *
      * @param {String} password The value to set password to
      */
-    this.setPassword = function(password, callback) {
+    setPassword(password) {
         this.password = password;
     }
     
@@ -41,7 +43,7 @@ var Redirect = function() {
      *
      * @param {String} redirectUrl The value to set redirectUrl to
      */
-    this.setRedirectUrl = function(redirectUrl, callback) {
+    setRedirectUrl(redirectUrl) {
         this.redirectUrl = redirectUrl;
     }
     
@@ -50,7 +52,7 @@ var Redirect = function() {
      *
      * @param {String} redirectMethod The value to set redirectMethod to
      */
-    this.setRedirectMethod = function(redirectMethod, callback) {
+    setRedirectMethod(redirectMethod) {
         this.redirectMethod = redirectMethod;
     }
 
@@ -59,11 +61,11 @@ var Redirect = function() {
      *
      * @param {String} tag The value to set tag to
      */
-    this.setTag = function(tag, callback) {
+    setTag(tag) {
         this.tag = tag;
     }
 
-    this.addXml = function(xmlDocument, callback) {
+    addXml(xmlDocument) {
         var attributes = {};
 
         if (this.username !== null) {
@@ -91,8 +93,5 @@ var Redirect = function() {
     }
 
 }
-
-//Sets that Redirect inherits from BaseVerb
-util.inherits(Redirect, BaseVerb);
 
 module.exports = Redirect;
