@@ -40,12 +40,12 @@ public class Response {
         return verbs;
     }
 
-    public Response with(Verb verb) {
+    public Response add(Verb verb) {
         this.verbs.add(verb);
         return this;
     }
 
-    public Response withVerbs(Verb... verbs) {
+    public Response addAll(Verb... verbs) {
         this.verbs.addAll(Arrays.asList(verbs));
         return this;
     }
