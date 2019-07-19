@@ -42,9 +42,6 @@ public class Response {
 
     public Response with(Verb verb) {
         this.verbs.add(verb);
-
-        Gather g = Gather.builder().password("").username("").build();
-
         return this;
     }
 
