@@ -351,5 +351,33 @@ namespace BandwidthBXML.Tests
 
             Assert.Equal(response_xml,expected_xml);
         }
+
+        /**
+         * Test for SpeakSentence and PlayAudio
+         */
+        [Fact]
+        public void TestSpeakSentencePlayAudioResponse()
+        {
+            SpeakSentence speakSentence = new SpeakSentence();
+            speakSentence.Sentence = "test";
+            speakSentence.Locale = "en_US";
+            speakSentence.Voice = "susan";
+            speakSentence.Gender = "female";
+
+            PlayAudio playAudio = new PlayAudio();
+            playAudio.Url = "https://test.com";
+            playAudio.Username = "user";
+            playAudio.Password = "pass";
+
+            Response response = new Response();
+            response.Add(speakSentence);
+            response.Add(playAudio);
+
+
+            string response_xml = response.ToXml();
+            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <PlayAudio username=\"user\" password=\"pass\">https://test.com</PlayAudio></Response>";
+
+            Assert.Equal(response_xml,expected_xml);
+        }
     }
 }
