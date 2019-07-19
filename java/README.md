@@ -21,10 +21,10 @@ System.out.println(response.toXml());
 
 ```
 Forward forward = Forward.builder()
-                         .to("to")
-                         .from("from")
-                         .callTimeout(10)
-                         .build();
+                .to("to")
+                .from("from")
+                .callTimeout(10)
+                .build();
 
 Response response = new Response().with(forward);
 System.out.println(response.toXml());
@@ -34,8 +34,8 @@ System.out.println(response.toXml());
 
 ```
 Pause pause =  Pause.builder()
-                    .duration(10)
-                    .build();
+                .duration(10)
+                .build();
 
 Response response = new Response().with(pause);
 System.out.println(response.toXml());
@@ -45,8 +45,8 @@ System.out.println(response.toXml());
 
 ```
 SendDtmf sendDtmf = SendDtmf.builder()
-                            .digits("34")
-                            .build();
+                .digits("34")
+                .build();
 
 Response response = new Response().with(sendDtmf);
 System.out.println(response.toXml());
@@ -56,10 +56,10 @@ System.out.println(response.toXml());
 
 ```
 Redirect redirect =  Redirect.builder()
-                             .redirectUrl("http://url.com")
-                             .redirectMethod("POST")
-                             .tag("tag")
-                             .build();
+                .redirectUrl("http://url.com")
+                .redirectMethod("POST")
+                .tag("tag")
+                .build();
 
 Response response = new Response().with(redirect);
 System.out.println(response.toXml());
