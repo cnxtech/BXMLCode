@@ -375,7 +375,7 @@ namespace BandwidthBXML.Tests
 
 
             string response_xml = response.ToXml();
-            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <PlayAudio username=\"user\" password=\"pass\">https://test.com</PlayAudio></Response>";
+            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <SpeakSentence gender=\"female\" locale=\"en_US\" voice=\"susan\">test</SpeakSentence>  <PlayAudio username=\"user\" password=\"pass\">https://test.com</PlayAudio></Response>";
 
             Assert.Equal(response_xml,expected_xml);
         }
