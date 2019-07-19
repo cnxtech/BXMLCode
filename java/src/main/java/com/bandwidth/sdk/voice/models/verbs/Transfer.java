@@ -60,6 +60,11 @@ public class Transfer implements Verb {
             return transferCompleteMethod(Method.fromValue(method));
         }
 
+        public TransferBuilder phoneNumbers(PhoneNumber ... phoneNumbers){
+            this.phoneNumbers = Arrays.asList(phoneNumbers);
+            return this;
+        }
+
     }
 
 

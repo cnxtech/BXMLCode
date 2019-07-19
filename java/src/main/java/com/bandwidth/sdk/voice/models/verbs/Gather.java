@@ -16,6 +16,9 @@ public class Gather implements Verb {
     @XmlElements({@XmlElement(name = PlayAudio.TYPE_NAME, type = PlayAudio.class)})
     private AudioProducer audioProducer;
 
+    @XmlElements({@XmlElement(name = SpeakSentence.TYPE_NAME, type = SpeakSentence.class)})
+    private SpeakSentence speakSentence;
+
     @XmlAttribute
     private URI gatherUrl;
 
