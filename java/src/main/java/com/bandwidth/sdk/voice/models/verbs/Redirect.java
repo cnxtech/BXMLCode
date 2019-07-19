@@ -1,10 +1,12 @@
 package com.bandwidth.sdk.voice.models.verbs;
 
+import lombok.Builder;
+
 import java.net.URI;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name = Redirect.TYPE_NAME)
+@XmlType(name = Redirect.TYPE_NAME) @Builder
 public class Redirect implements Verb {
 
     public static final String TYPE_NAME = "Redirect";
@@ -24,33 +26,26 @@ public class Redirect implements Verb {
     @XmlAttribute
     protected String password;
 
-    public Redirect withRedirectUrl(String url) {
-        return withRedirectUrl(URI.create(url));
-    }
+    public static class RedirectBuilder {
 
-    public Redirect withRedirectUrl(URI uri) {
-        this.redirectUrl = uri;
-        return this;
-    }
+        public RedirectBuilder redirectUrl(URI uri ){
+            this.redirectUrl = uri;
+            return this;
+        }
 
-    public Redirect withRedirectMethod(Method method) {
-        this.redirectMethod = method;
-        return this;
-    }
+        public RedirectBuilder redirectUrl(String uri){
+            return redirectUrl(URI.create(uri));
+        }
 
-    public Redirect withRedirectMethod(String method) {
-        return withRedirectMethod(Method.fromValue(method));
-    }
+        public RedirectBuilder redirectMethod(Method method){
+            this.redirectMethod = method;
+            return this;
+        }
 
-    public Redirect withTag(String tag) {
-        this.tag = tag;
-        return this;
-    }
+        public RedirectBuilder redirectMethod(String method){
+            return redirectMethod(Method.fromValue(method));
+        }
 
-    public Redirect withCredentials(String username, String password) {
-        this.username = username;
-        this.password = password;
-        return this;
     }
 
 }

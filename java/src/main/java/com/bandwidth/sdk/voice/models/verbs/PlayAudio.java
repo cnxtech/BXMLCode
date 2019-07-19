@@ -1,11 +1,13 @@
 package com.bandwidth.sdk.voice.models.verbs;
 
+import lombok.Builder;
+
 import java.net.URI;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
-@XmlType(name = PlayAudio.TYPE_NAME)
+@XmlType(name = PlayAudio.TYPE_NAME) @Builder
 public class PlayAudio implements Verb, AudioProducer {
 
     public static final String TYPE_NAME = "PlayAudio";
@@ -19,17 +21,14 @@ public class PlayAudio implements Verb, AudioProducer {
     @XmlAttribute
     protected String password;
 
-    public PlayAudio(String audioUrl) {
-        this(URI.create(audioUrl));
-    }
+    public static class PlayAudioBuilder{
 
-    public PlayAudio(URI audioUrl) {
-        this.audioUri = audioUrl;
-    }
+        public PlayAudioBuilder audioUri(String uri){ return this.audioUri(URI.create(uri)); }
 
-    public PlayAudio withCredentials(String username, String password) {
-        this.username = username;
-        this.password = password;
-        return this;
+        public PlayAudioBuilder audioUri(URI uri){
+            this.audioUri = uri;
+            return this;
+        }
+
     }
 }

@@ -1,10 +1,12 @@
 package com.bandwidth.sdk.voice.models.verbs;
 
+import lombok.Builder;
+
 import java.net.URI;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name = Record.TYPE_NAME)
+@XmlType(name = Record.TYPE_NAME) @Builder
 public class Record implements Verb {
 
     public static final String TYPE_NAME = "Record";
@@ -42,86 +44,59 @@ public class Record implements Verb {
     @XmlAttribute
     private Method transcriptionAvailableMethod;
 
-    public Record withRecordCompleteUrl(String url) {
-        return withRecordCompleteUrl(URI.create(url));
+    public static class RecordBuilder {
+
+        public RecordBuilder recordCompleteUrl(URI uri ){
+            this.recordCompleteUrl = uri;
+            return this;
+        }
+
+        public RecordBuilder recordCompleteUrl(String uri){
+            return recordCompleteUrl(URI.create(uri));
+        }
+
+        public RecordBuilder recordCompleteMethod(Method method){
+            this.recordCompleteMethod = method;
+            return this;
+        }
+
+        public RecordBuilder recordCompleteMethod(String method){
+            return recordCompleteMethod(Method.fromValue(method));
+        }
+
+        public RecordBuilder recordingAvailableUrl(URI uri){
+            this.recordingAvailableUrl = uri;
+            return this;
+        }
+
+        public RecordBuilder recordingAvailableUrl(String uri){ return recordingAvailableUrl(URI.create(uri));}
+
+        public RecordBuilder recordingAvailableMethod(Method method){
+            this.recordingAvailableMethod = method;
+            return this;
+        }
+
+        public RecordBuilder recordingAvailableMethod(String method){return recordingAvailableMethod(Method.fromValue(method));}
+
+
+        public RecordBuilder transcriptionAvailableUrl(URI uri) {
+            this.transcriptionAvailableUrl =  uri;
+            return this;
+        }
+
+        public RecordBuilder transcriptionAvailableUrl(String uri){return transcriptionAvailableUrl(URI.create(uri));}
+
+        public RecordBuilder transcriptionAvailableMethod(Method method){
+            this.transcriptionAvailableMethod = method;
+            return this;
+        }
+
+        public RecordBuilder transcriptionAvailableMethod(String method){
+            return transcriptionAvailableMethod(Method.fromValue(method));
+        }
+
+
     }
 
-    public Record withRecordCompleteUrl(URI url) {
-        this.recordCompleteUrl = url;
-        return this;
-    }
 
-    public Record withRecordCompleteMethod(Method method) {
-        this.recordCompleteMethod = method;
-        return this;
-    }
-
-    public Record withRecordCompleteMethod(String method) {
-        return withRecordCompleteMethod(Method.fromValue(method));
-    }
-
-    public Record withTag(String tag) {
-        this.tag = tag;
-        return this;
-    }
-
-    public Record withTerminatingDigits(String terminatingDigits) {
-        this.terminatingDigits = terminatingDigits;
-        return this;
-    }
-
-    public Record withFileFormat(FileFormat fileFormat) {
-        this.fileFormat = fileFormat;
-        return this;
-    }
-
-    public Record withFileFormat(String fileFormat) {
-        return withFileFormat(FileFormat.fromValue(fileFormat));
-    }
-
-    public Record withMaxDuration(Integer maxDuration) {
-        this.maxDuration = maxDuration;
-        return this;
-    }
-
-    public Record withRecordingAvailableUrl(String url) {
-        return withRecordingAvailableUrl(URI.create(url));
-    }
-
-    public Record withRecordingAvailableUrl(URI url) {
-        this.recordingAvailableUrl = url;
-        return this;
-    }
-
-    public Record withRecordingAvailableMethod(Method method) {
-        this.recordingAvailableMethod = method;
-        return this;
-    }
-
-    public Record withRecordingAvailableMethod(String method) {
-        return withRecordingAvailableMethod(Method.fromValue(method));
-    }
-
-    public Record withSubscribe(boolean transcribe) {
-        this.transcribe = transcribe;
-        return this;
-    }
-
-    public Record withTranscriptionAvailableUrl(String uri) {
-        return withTranscriptionAvailableUrl(URI.create(uri));
-    }
-
-    public Record withTranscriptionAvailableUrl(URI uri) {
-        this.transcriptionAvailableUrl = uri;
-        return this;
-    }
-
-    public Record withTranscriptionAvailableMethod(Method method) {
-        this.transcriptionAvailableMethod = method;
-        return this;
-    }
-
-    public Record withTranscriptionAvailableMethod(String method) {
-        return withTranscriptionAvailableMethod(Method.fromValue(method));
-    }
 }

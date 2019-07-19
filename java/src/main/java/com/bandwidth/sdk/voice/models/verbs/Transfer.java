@@ -1,5 +1,7 @@
 package com.bandwidth.sdk.voice.models.verbs;
 
+import lombok.Builder;
+
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +11,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name = Transfer.TYPE_NAME)
+@XmlType(name = Transfer.TYPE_NAME) @Builder
 public class Transfer implements Verb {
 
     public static final String TYPE_NAME = "Transfer";
@@ -38,57 +40,27 @@ public class Transfer implements Verb {
     @XmlAttribute
     private String tag;
 
-    public Transfer() {
-        phoneNumbers = new ArrayList<>();
+    public static class TransferBuilder {
+
+        public TransferBuilder transferCompleteUrl(URI uri){
+            this.transferCompleteUrl = uri;
+            return this;
+        }
+
+        public TransferBuilder transferCompleteUrl(String uri){
+            return transferCompleteUrl(URI.create(uri));
+        }
+
+        public TransferBuilder transferCompleteMethod(Method method){
+            this.transferCompleteMethod = method;
+            return this;
+        }
+
+        public TransferBuilder transferCompleteMethod(String method){
+            return transferCompleteMethod(Method.fromValue(method));
+        }
+
     }
 
-    public Transfer(PhoneNumber... phoneNumbers) {
-        this();
-        withPhoneNumber(phoneNumbers);
-    }
-
-    public Transfer withPhoneNumber(PhoneNumber... phoneNumbers) {
-        this.phoneNumbers.addAll(Arrays.asList(phoneNumbers));
-        return this;
-    }
-
-    public Transfer withTransferCompleteUrl(String url) {
-        return withTransferCompleteUrl(URI.create(url));
-    }
-
-    public Transfer withTransferCompleteUrl(URI url) {
-        this.transferCompleteUrl = url;
-        return this;
-    }
-
-    public Transfer withTransferCompleteMethod(Method method) {
-        this.transferCompleteMethod = method;
-        return this;
-    }
-
-    public Transfer withTransferCompleteMethod(String method) {
-        return withTransferCompleteMethod(Method.fromValue(method));
-    }
-
-    public Transfer withCredentials(String username, String password) {
-        this.username = username;
-        this.password = password;
-        return this;
-    }
-
-    public Transfer withTag(String tag) {
-        this.tag = tag;
-        return this;
-    }
-
-    public Transfer withTransferCallerId(String transferCallerId) {
-        this.transferCallerId = transferCallerId;
-        return this;
-    }
-
-    public Transfer withCallTimeout(Double callTimeout) {
-        this.callTimeout = callTimeout;
-        return this;
-    }
 
 }
