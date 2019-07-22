@@ -273,11 +273,12 @@ describe("Gather", function() {
             gather.setMaxDigits(3);
             gather.setInterDigitTimeout(4);
             gather.setFirstDigitTimeout(5);
+            gather.setRepeatCount(6);
 
             var response = new BxmlBuilder.Response();
             response.addVerb(gather);
 
-            var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Gather gatherUrl=\"https://test.com\" gatherMethod=\"GET\" username=\"user\" password=\"pass\" tag=\"tag\" terminatingDigits=\"123\" maxDigits=\"3\" interDigitTimeout=\"4\" firstDigitTimeout=\"5\"/></Response>";
+            var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Gather gatherUrl=\"https://test.com\" gatherMethod=\"GET\" username=\"user\" password=\"pass\" tag=\"tag\" terminatingDigits=\"123\" maxDigits=\"3\" interDigitTimeout=\"4\" firstDigitTimeout=\"5\" repeatCount=\"6\"/></Response>";
             assert.equal(response.toXml(), expectedString);
             //validate against xsd
             validator.validateXML(response.toXml(), "schema.xsd", function(err, result) {

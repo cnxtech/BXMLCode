@@ -11,12 +11,9 @@
                 <xs:element name="Gather" type="Gather"/>
                 <xs:element name="Hangup" type="Hangup"/>
                 <xs:element name="PlayAudio" type="PlayAudio"/>
-                <xs:element name="Record" type="Record"/>
                 <xs:element name="Redirect" type="Redirect"/>
                 <xs:element name="SpeakSentence" type="SpeakSentence"/>
                 <xs:element name="Transfer" type="Transfer"/>
-                <xs:element name="StartRecording" type="StartRecording"/>
-                <xs:element name="StopRecording" type="StopRecording"/>
                 <xs:element name="Pause" type="Pause"/>
                 <xs:element name="SendDtmf" type="SendDtmfDigits"/>
             </xs:choice>
@@ -43,9 +40,10 @@
         <xs:attribute name="username" type="username"/>
         <xs:attribute name="password" type="password"/>
         <xs:attribute name="terminatingDigits" type="terminatingDigits"/>
-        <xs:attribute name="maxDigits" type="xs:int"/>
+        <xs:attribute name="maxDigits" type="maxDigits"/>
         <xs:attribute name="interDigitTimeout" type="interDigitTimeout"/>
         <xs:attribute name="firstDigitTimeout" type="firstDigitTimeout"/>
+        <xs:attribute name="repeatCount" type="repeatCount"/>
         <xs:attribute name="tag" type="tag"/>
     </xs:complexType>
 
@@ -66,20 +64,6 @@
                 <xs:attribute name="password" type="password"/>
             </xs:extension>
         </xs:simpleContent>
-    </xs:complexType>
-
-    <xs:complexType name="Record">
-        <xs:attribute name="recordCompleteUrl" type="xs:anyURI"/>
-        <xs:attribute name="recordCompleteMethod" type="requestMethod"/>
-        <xs:attribute name="fileFormat" type="audioFormat"/>
-        <xs:attribute name="terminatingDigits" type="terminatingDigits"/>
-        <xs:attribute name="maxDuration" type="maxRecordingDuration"/>
-        <xs:attribute name="recordingAvailableUrl" type="xs:anyURI"/>
-        <xs:attribute name="recordingAvailableMethod" type="requestMethod"/>
-        <xs:attribute name="transcribe" type="xs:boolean"/>
-        <xs:attribute name="transcriptionAvailableUrl" type="xs:anyURI"/>
-        <xs:attribute name="transcriptionAvailableMethod" type="requestMethod"/>
-        <xs:attribute name="tag" type="tag"/>
     </xs:complexType>
 
     <xs:complexType name="Redirect">
@@ -128,21 +112,8 @@
         </xs:simpleContent>
     </xs:complexType>
 
-    <xs:complexType name="StartRecording">
-        <xs:attribute name="recordingAvailableUrl" type="xs:anyURI"/>
-        <xs:attribute name="recordingAvailableMethod" type="requestMethod"/>
-        <xs:attribute name="fileFormat" type="audioFormat"/>
-        <xs:attribute name="transcribe" type="xs:boolean"/>
-        <xs:attribute name="transcriptionAvailableUrl" type="xs:anyURI"/>
-        <xs:attribute name="transcriptionAvailableMethod" type="requestMethod"/>
-        <xs:attribute name="multiChannel" type="xs:boolean"/>
-    </xs:complexType>
-
-    <xs:complexType name="StopRecording">
-    </xs:complexType>
-
     <xs:complexType name="Pause">
-        <xs:attribute name="duration" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="duration" type="pauseDuration"/>
     </xs:complexType>
 
     <xs:simpleType name="audioFormat">
@@ -232,6 +203,20 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="maxDigits">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="50"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="pauseDuration">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0.1"/>
+            <xs:maxInclusive value="86400"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="callTimeout">
         <xs:restriction base="xs:decimal">
             <xs:minInclusive value="1"/>
@@ -239,10 +224,10 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="maxRecordingDuration">
-        <xs:restriction base="xs:decimal">
+    <xs:simpleType name="repeatCount">
+        <xs:restriction base="xs:positiveInteger">
             <xs:minInclusive value="1"/>
-            <xs:maxInclusive value="10800"/>
+            <xs:maxInclusive value="25"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
