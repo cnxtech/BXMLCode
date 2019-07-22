@@ -248,7 +248,7 @@ namespace BandwidthBXML.Tests
             gather.Username = "user";
             gather.Password = "pass";
             gather.FirstDigitTimeout = 3;
-            gather.RepeatCount = 4
+            gather.RepeatCount = 4;
             Response response = new Response(gather);
 
             string response_xml = response.ToXml();
@@ -300,7 +300,7 @@ namespace BandwidthBXML.Tests
             Response response = new Response(gather);
 
             string response_xml = response.ToXml();
-            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Gather gatherUrl=\"https://test.com\" gatherMethod=\"POST\" terminatingDigits=\"123\" tag=\"tag\" maxDigits=\"3\" interDigitTimeout=\"3\" username=\"user\" password=\"pass\" firstDigitTimeout=\"3\">    <SpeakSentence>Test</SpeakSentence>  </Gather></Response>";
+            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Gather gatherUrl=\"https://test.com\" gatherMethod=\"POST\" terminatingDigits=\"123\" tag=\"tag\" maxDigits=\"3\" interDigitTimeout=\"3\" username=\"user\" password=\"pass\" firstDigitTimeout=\"3\" repeatCount=\"1\">    <SpeakSentence>Test</SpeakSentence>  </Gather></Response>";
 
             Assert.Equal(response_xml,expected_xml);
         }
@@ -327,7 +327,7 @@ namespace BandwidthBXML.Tests
             Response response = new Response(gather);
 
             string response_xml = response.ToXml();
-            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Gather gatherUrl=\"https://test.com\" gatherMethod=\"POST\" terminatingDigits=\"123\" tag=\"tag\" maxDigits=\"3\" interDigitTimeout=\"3\" username=\"user\" password=\"pass\" firstDigitTimeout=\"3\">    <PlayAudio>https://test.com</PlayAudio>  </Gather></Response>";
+            string expected_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Response>  <Gather gatherUrl=\"https://test.com\" gatherMethod=\"POST\" terminatingDigits=\"123\" tag=\"tag\" maxDigits=\"3\" interDigitTimeout=\"3\" username=\"user\" password=\"pass\" firstDigitTimeout=\"3\" repeatCount=\"1\">    <PlayAudio>https://test.com</PlayAudio>  </Gather></Response>";
 
             Assert.Equal(response_xml,expected_xml);
         }

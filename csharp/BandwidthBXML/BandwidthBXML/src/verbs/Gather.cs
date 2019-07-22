@@ -75,6 +75,12 @@ namespace BandwidthBXML
     public int FirstDigitTimeout { get; set; }
 
     /// <summary>
+    ///  Integer between 1 and 30 that specifies how many times to play the audio. This parameter will be honored both inside and outside of a Gather verb. Default is 1.
+    ///  </summary>
+    [XmlAttribute("repeatCount")]    
+    public int RepeatCount { get; set; }
+
+    /// <summary>
     ///  Using the SpeakSentence inside the Gather verb will speak the text to the callee.
     /// </summary>
     public SpeakSentence SpeakSentence { get; set; }
@@ -83,10 +89,5 @@ namespace BandwidthBXML
     /// Using the PlayAudio inside the Gather verb will play the media to the callee.
     /// </summary>
     public PlayAudio PlayAudio { get; set; }
-
-    /// <summary>
-    ///  Integer between 1 and 30 that specifies how many times to play the audio. This parameter will be honored both inside and outside of a Gather verb. Default is 1.
-    ///  </summary>
-    public int RepeatCount { get; set; }
   }
 }
