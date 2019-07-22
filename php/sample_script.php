@@ -127,6 +127,7 @@ $gather->terminatingDigits("123");
 $gather->maxDigits(3);
 $gather->interDigitTimeout(4);
 $gather->firstDigitTimeout(5);
+$gather->repeatCount(3);
 $response = new BxmlVerbs\Response();
 $response->addVerb($gather);
 

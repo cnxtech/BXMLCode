@@ -107,6 +107,15 @@ class Gather extends Verb {
     }
 
     /**
+     * Sets the repeatCount attribute for the Gather
+     *
+     * @param int $repeatCount The number of times to repeat the played audio
+     */
+    public function repeatCount($repeatCount) {
+        $this->repeatCount = $repeatCount;
+    }
+
+    /**
      * Sets the SpeakSentence tag for Gather
      *
      * @param SpeakSentence $speakSentence The SpeakSentence tag to include in the Gather
@@ -152,6 +161,10 @@ class Gather extends Verb {
 
         if(isset($this->firstDigitTimeout)) {
             $element->setAttribute("firstDigitTimeout", $this->firstDigitTimeout);
+        }
+
+        if(isset($this->repeatCount)) {
+            $element->setAttribute("repeatCount", $this->repeatCount);
         }
         
         if(isset($this->playAudio)) {

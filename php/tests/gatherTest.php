@@ -30,9 +30,10 @@ class GatherTest extends TestCase {
         $gather->maxDigits(3);
         $gather->interDigitTimeout(4);
         $gather->firstDigitTimeout(5);
+        $gather->repeatCount(3);
         $response = new BxmlVerbs\Response();
         $response->addVerb($gather);
-        $expectedXml = '<?xml version="1.0" encoding="UTF-8"?><Response><Gather username="user" password="pass" tag="tag" gatherUrl="https://test.com" gatherMethod="GET" terminatingDigits="123" maxDigits="3" interDigitTimeout="4" firstDigitTimeout="5"/></Response>';
+        $expectedXml = '<?xml version="1.0" encoding="UTF-8"?><Response><Gather username="user" password="pass" tag="tag" gatherUrl="https://test.com" gatherMethod="GET" terminatingDigits="123" maxDigits="3" interDigitTimeout="4" firstDigitTimeout="5" repeatCount="3"/></Response>';
         $responseXml = $response->toXml();
         $this->assertEquals($expectedXml, $responseXml);
         //Validate against schema
