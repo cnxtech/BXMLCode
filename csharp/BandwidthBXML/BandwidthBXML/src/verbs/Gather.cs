@@ -17,6 +17,7 @@ namespace BandwidthBXML
         MaxDigits = 50;
         InterDigitTimeout = 5;
         FirstDigitTimeout = 5;
+        RepeatCount = 1;
     }
 
     /// <summary>
@@ -82,5 +83,10 @@ namespace BandwidthBXML
     /// Using the PlayAudio inside the Gather verb will play the media to the callee.
     /// </summary>
     public PlayAudio PlayAudio { get; set; }
+
+    /// <summary>
+    ///  Integer between 1 and 30 that specifies how many times to play the audio. This parameter will be honored both inside and outside of a Gather verb. Default is 1.
+    ///  </summary>
+    public int RepeatCount { get; set; }
   }
 }
