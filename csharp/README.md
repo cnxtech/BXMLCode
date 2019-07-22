@@ -122,6 +122,7 @@ gather.InterDigitTimeout = 3;
 gather.Username = "user";
 gather.Password = "pass";
 gather.FirstDigitTimeout = 3;
+gather.RepeatCount = 4;
 
 Response response = new Response(gather);
 string response_xml = response.ToXml();
