@@ -176,3 +176,20 @@ $response->addVerb($gather);
 
 echo $response->toXml();
 echo "\n";
+
+//PlayAudio and SpeakSentence together
+$speakSentence = new BxmlVerbs\SpeakSentence("Test");
+$speakSentence->gender("female");
+$speakSentence->voice("susan");
+$speakSentence->locale("en_US");
+
+$playAudio = new BxmlVerbs\PlayAudio("https://test.com");
+$playAudio->username("user");
+$playAudio->password("pass");
+
+$response = new BxmlVerbs\Response();
+$response->addVerb($speakSentence);
+$response->addVerb($playAudio);
+
+echo $response->toXml();
+echo "\n";
