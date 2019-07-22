@@ -123,7 +123,7 @@ class TestPythonBandwidthBxml(unittest.TestCase):
         Test case for the gather verb with no nested verbs
         """
         self.response_class.add_verb(gather.Gather(gather_url="https://test.com", gather_method="GET", terminating_digits="123", tag="tag",
-                max_digits=3, inter_digit_timeout=3, username="user", password="pass", first_digit_timeout=3))
+                max_digits=3, inter_digit_timeout=3, username="user", password="pass", first_digit_timeout=3, repeat_count=4))
         etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
 
     def test_gather_nested_speak_sentence(self):

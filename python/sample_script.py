@@ -137,7 +137,8 @@ gather = Gather(
     inter_digit_timeout=3,
     username="user",
     password="pass",
-    first_digit_timeout=3
+    first_digit_timeout=3,
+    repeat_count=4
 )
 
 #Gathers can be optionally nested with one of the PlayAudio or SpeakSentence verbs
