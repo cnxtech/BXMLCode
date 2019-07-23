@@ -82,7 +82,7 @@ class TestPythonBandwidthBxml(unittest.TestCase):
         """
         Test case for the pause verb
         """
-        self.response_class.add_verb(pause.Pause(3))
+        self.response_class.add_verb(pause.Pause(duration=3))
         etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
 
     def test_redirect(self):
@@ -118,6 +118,18 @@ class TestPythonBandwidthBxml(unittest.TestCase):
                 diversion_reason="away", phone_numbers=[phone_number_1, phone_number_2]))
         etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
 
+    def test_transfer_no_ints(self):
+        """
+        Test case for the transfer verb with no ints being set
+        """
+        phone_number_1 = phone_number.PhoneNumber(number="+18888888888", transfer_answer_url="https://test.com", transfer_answer_method="GET", username="user", password="pass", tag="tag")
+        phone_number_2 = phone_number.PhoneNumber(number="+18888888889", transfer_answer_url="https://test.com", transfer_answer_method="GET", username="user", password="pass", tag="tag")
+
+        self.response_class.add_verb(transfer.Transfer(transfer_caller_id="+17777777777", tag="tag", transfer_complete_url="https://test.com",
+                transfer_complete_method="GET", username="user", password="pass", diversion_treatment="none",
+                diversion_reason="away", phone_numbers=[phone_number_1, phone_number_2]))
+        etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
+
     def test_gather_no_nested_verbs(self):
         """
         Test case for the gather verb with no nested verbs
@@ -144,6 +156,14 @@ class TestPythonBandwidthBxml(unittest.TestCase):
         self.response_class.add_verb(gather.Gather(gather_url="https://test.com", gather_method="GET", terminating_digits="123", tag="tag",
                 max_digits=3, inter_digit_timeout=3, username="user", password="pass", first_digit_timeout=3,
                 play_audio=play_audio_))
+        etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
+
+    def test_gather_no_ints(self):
+        """
+        Test case for the gather verb with no ints set
+        """
+        self.response_class.add_verb(gather.Gather(gather_url="https://test.com", gather_method="GET", terminating_digits="123", tag="tag",
+                username="user", password="pass"))
         etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
 
 if __name__ == '__main__':

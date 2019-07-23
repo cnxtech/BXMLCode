@@ -29,7 +29,7 @@ print(response.to_xml())
 ### Make a pause response ###
 
 response = Response()
-pause = Pause(3)
+pause = Pause(duration=3)
 
 response.add_verb(pause)
 print(response.to_xml())
