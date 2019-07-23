@@ -286,4 +286,24 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
     assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
   end
 
+  # Validate speak_sentence and play_audio combined against xsd
+  def test_validate_speak_sentence_and_play_audio()
+    speak_sentence = RubyBandwidthBxml::SpeakSentence.new({
+        :sentence => "Test",
+        :voice => "susan",
+        :locale => "en_US",
+        :gender => "female"
+    })
+    play_audio = RubyBandwidthBxml::PlayAudio.new({
+        :url => "https://test.mp3",
+        :username => "user",
+        :password => "pass"
+    })
+    @response_class.push(play_audio)
+    @response_class.push(speak_sentence)
+    xml_string = @response_class.to_xml()
+    xml_object = Nokogiri::XML(xml_string)
+    assert_equal(0, $XSD_SCHEMA.validate(xml_object).length)
+  end
+
 end
