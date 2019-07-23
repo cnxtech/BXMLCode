@@ -1,0 +1,16 @@
+{
+  "name": "bandwidthbxml",
+  "version": "1.0.0",
+  "description": "Generator for Bandwidth's BXML writtein in NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Jacob Mulford",
+  "license": "MIT",
+  "dependencies": {
+    "mocha": "^6.1.4",
+    "xmlbuilder": "^13.0.2",
+    "xsd-schema-validator": "^0.6.0"
+  }
+}
