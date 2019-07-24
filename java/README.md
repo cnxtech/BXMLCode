@@ -10,7 +10,7 @@ TBD
 
 ### Hangup Response
 
-```
+```java
 Hangup hangup = = Hangup.builder().build();
 
 Response response = new Response().add(hangup);
@@ -19,7 +19,7 @@ System.out.println(response.toXml());
 
 ### Forward Response
 
-```
+```java
 Forward forward = Forward.builder()
                 .to("to")
                 .from("from")
@@ -32,7 +32,7 @@ System.out.println(response.toXml());
 
 ### Pause Response
 
-```
+```java
 Pause pause =  Pause.builder()
                 .duration(10)
                 .build();
@@ -43,7 +43,7 @@ System.out.println(response.toXml());
 
 ### SendDtmf Response
 
-```
+```java
 SendDtmf sendDtmf = SendDtmf.builder()
                 .digits("34")
                 .build();
@@ -54,7 +54,7 @@ System.out.println(response.toXml());
 
 ### Redirect Response
 
-```
+```java
 Redirect redirect =  Redirect.builder()
                 .redirectUrl("http://url.com")
                 .redirectMethod("POST")
@@ -67,7 +67,7 @@ System.out.println(response.toXml());
 
 ### Transfer Response
 
-```
+```java
 PhoneNumber number1 = PhoneNumber.builder()
                 .transferAnswerMethod("POST")
                 .transferAnswerUrl("http://url.com")
@@ -95,7 +95,7 @@ System.out.println(response.toXml());
 
 ### SpeakSentence Response
 
-```
+```java
 SpeakSentence speakSentence = SpeakSentence.builder()
                 .text("hello world!")
                 .gender("female")
@@ -108,7 +108,7 @@ System.out.println(response.toXml());
 
 ### PlayAudio Response
 
-```
+```java
 PlayAudio playAudio = PlayAudio.builder()
                 .audioUri("http://url.com")
                 .build();
@@ -119,7 +119,7 @@ System.out.println(response.toXml());
 
 ### Gather Response With No Nested Verbs
 
-```
+```java
 Gather gather = Gather.builder()
                 .gatherMethod("POST")
                 .terminatingDigits("#")
@@ -133,7 +133,8 @@ System.out.println(response.toXml());
 
 ### Gather Response With A Nested SpeakSentence
 
-```
+```java
+
 SpeakSentence speakSentence = SpeakSentence.builder()
                 .text("Thing to say")
                 .build();
@@ -152,7 +153,7 @@ System.out.println(response.toXml());
 
 ### Gather Response With A Nested PlayAudio
 
-```
+```java
 PlayAudio playAudio = PlayAudio.builder()
                 .audioUri("http://uri.com")
                 .build();
@@ -172,7 +173,7 @@ System.out.println(response.toXml());
 
 ### Multi-Verb Response
 
-```
+```java
 
 SpeakSentence speakSentence = SpeakSentence.builder()
                 .text("hello world!")

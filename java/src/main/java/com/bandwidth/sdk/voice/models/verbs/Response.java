@@ -1,7 +1,11 @@
 package com.bandwidth.sdk.voice.models.verbs;
 
+import lombok.Builder;
+
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,17 +15,18 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.crypto.dsig.TransformService;
 
+@Builder
 @XmlRootElement(name = Response.TYPE_NAME)
 public class Response {
     public static final String TYPE_NAME = "Response";
 
     private static JAXBContext jaxbContext;
 
-    private final List<Verb> verbs;
+    private final List<Verb> verbs = new ArrayList<>();
 
-    public Response() {
-        verbs = new ArrayList<>();
+    public Response(){
     }
 
     @XmlElements({
@@ -36,15 +41,30 @@ public class Response {
             @XmlElement(name = Forward.TYPE_NAME, type = Forward.class),
             @XmlElement(name = SendDtmf.TYPE_NAME, type = SendDtmf.class)
     })
+
+
+    /**
+     * Returns list of verbs in this Response
+     */
     public List<Verb> getVerbs() {
         return verbs;
     }
 
+    /**
+     * Adds a Verb to the list of Verbs in this Response
+     * @param verb
+     * @return Response (this)
+     */
     public Response add(Verb verb) {
         this.verbs.add(verb);
         return this;
     }
 
+    /**
+     * Adds Verbs to the list of Verbs in this Response
+     * @param verbs
+     * @return This Response
+     */
     public Response addAll(Verb... verbs) {
         this.verbs.addAll(Arrays.asList(verbs));
         return this;
