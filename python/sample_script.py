@@ -29,7 +29,7 @@ print(response.to_xml())
 ### Make a pause response ###
 
 response = Response()
-pause = Pause(3)
+pause = Pause(duration=3)
 
 response.add_verb(pause)
 print(response.to_xml())
@@ -181,4 +181,23 @@ gather_nested_play_audio = Gather(
 response.add_verb(gather)
 response.add_verb(gather_nested_speak_sentence)
 response.add_verb(gather_nested_play_audio)
+print(response.to_xml())
+
+### Make a play audio and speak sentence response ###
+
+response = Response()
+play_audio = PlayAudio(
+    url="https://test.com",
+    username="user",
+    password="pass"
+)
+speak_sentence = SpeakSentence(
+    sentence="Test",
+    voice="susan",
+    locale="en_US",
+    gender="female"
+)
+
+response.add_verb(play_audio)
+response.add_verb(speak_sentence)
 print(response.to_xml())

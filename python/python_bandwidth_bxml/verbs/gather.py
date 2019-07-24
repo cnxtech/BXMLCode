@@ -40,11 +40,11 @@ class Gather(AbstractBxmlVerb):
         self.gather_method = gather_method
         self.terminating_digits = terminating_digits
         self.tag = tag
-        self.max_digits = str(max_digits)
-        self.inter_digit_timeout = str(inter_digit_timeout)
+        self.max_digits = max_digits
+        self.inter_digit_timeout = inter_digit_timeout
         self.username = username
         self.password = password
-        self.first_digit_timeout = str(first_digit_timeout)
+        self.first_digit_timeout = first_digit_timeout
         self.play_audio = play_audio
         self.speak_sentence = speak_sentence
         self.repeat_count = repeat_count
@@ -60,15 +60,15 @@ class Gather(AbstractBxmlVerb):
         if self.tag is not None:
             root.set("tag", self.tag)
         if self.max_digits is not None:
-            root.set("maxDigits", self.max_digits)
+            root.set("maxDigits", str(self.max_digits))
         if self.inter_digit_timeout is not None:
-            root.set("interDigitTimeout", self.inter_digit_timeout)
+            root.set("interDigitTimeout", str(self.inter_digit_timeout))
         if self.username is not None:
             root.set("username", self.username)
         if self.password is not None:
             root.set("password", self.password)
         if self.first_digit_timeout is not None:
-            root.set("firstDigitTimeout", self.first_digit_timeout)
+            root.set("firstDigitTimeout", str(self.first_digit_timeout))
         if self.repeat_count is not None:
             root.set("repeatCount", str(self.repeat_count))
         if self.play_audio is not None:

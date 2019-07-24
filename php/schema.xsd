@@ -1,0 +1,233 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="synthesis-nonamespace.xsd"/>
+
+    <xs:element name="Response" type="Response"/>
+
+    <xs:complexType name="Response">
+        <xs:sequence>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Forward" type="Forward"/>
+                <xs:element name="Gather" type="Gather"/>
+                <xs:element name="Hangup" type="Hangup"/>
+                <xs:element name="PlayAudio" type="PlayAudio"/>
+                <xs:element name="Redirect" type="Redirect"/>
+                <xs:element name="SpeakSentence" type="SpeakSentence"/>
+                <xs:element name="Transfer" type="Transfer"/>
+                <xs:element name="Pause" type="Pause"/>
+                <xs:element name="SendDtmf" type="SendDtmfDigits"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Forward">
+        <xs:attribute name="to" type="xs:string" use="required"/>
+        <xs:attribute name="from" type="xs:string"/>
+        <xs:attribute name="callTimeout" type="callTimeout"/>
+        <xs:attribute name="diversionTreatment" type="diversionTreatment"/>
+        <xs:attribute name="diversionReason" type="diversionReason"/>
+    </xs:complexType>
+
+    <xs:complexType name="Gather">
+        <xs:sequence>
+            <xs:choice minOccurs="0" maxOccurs="1">
+                <xs:element name="SpeakSentence" type="SpeakSentence"/>
+                <xs:element name="PlayAudio" type="PlayAudio"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="gatherUrl" type="xs:anyURI"/>
+        <xs:attribute name="gatherMethod" type="requestMethod"/>
+        <xs:attribute name="username" type="username"/>
+        <xs:attribute name="password" type="password"/>
+        <xs:attribute name="terminatingDigits" type="terminatingDigits"/>
+        <xs:attribute name="maxDigits" type="maxDigits"/>
+        <xs:attribute name="interDigitTimeout" type="interDigitTimeout"/>
+        <xs:attribute name="firstDigitTimeout" type="firstDigitTimeout"/>
+        <xs:attribute name="repeatCount" type="repeatCount"/>
+        <xs:attribute name="tag" type="tag"/>
+    </xs:complexType>
+
+    <xs:simpleType name="SendDtmfDigits">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9*#A-Da-dWw,]{1,50}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="Hangup">
+        <xs:sequence/>
+    </xs:complexType>
+
+    <xs:complexType name="PlayAudio">
+        <xs:simpleContent>
+            <xs:extension base="xs:anyURI">
+                <xs:attribute name="username" type="username"/>
+                <xs:attribute name="password" type="password"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="Redirect">
+        <xs:attribute name="redirectUrl" type="xs:anyURI" use="required"/>
+        <xs:attribute name="redirectMethod" type="requestMethod"/>
+        <xs:attribute name="username" type="username"/>
+        <xs:attribute name="password" type="password"/>
+        <xs:attribute name="tag" type="tag"/>
+    </xs:complexType>
+
+    <xs:complexType name="SpeakSentence" mixed="true">
+        <xs:sequence>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:group ref="sentenceAndStructure.class"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="gender" type="voiceGender"/>
+        <xs:attribute name="locale" type="voiceLocale"/>
+        <xs:attribute name="voice" type="ttsVoice"/>
+    </xs:complexType>
+
+    <xs:complexType name="Transfer">
+        <xs:sequence>
+            <xs:element name="PhoneNumber" type="PhoneNumber" minOccurs="1" maxOccurs="8"/>
+        </xs:sequence>
+        <xs:attribute name="transferCallerId" type="transferCallerId"/>
+        <xs:attribute name="callTimeout" type="callTimeout"/>
+        <xs:attribute name="username" type="username"/>
+        <xs:attribute name="password" type="password"/>
+        <xs:attribute name="transferCompleteUrl" type="xs:anyURI"/>
+        <xs:attribute name="transferCompleteMethod" type="requestMethod"/>
+        <xs:attribute name="tag" type="tag"/>
+        <xs:attribute name="diversionTreatment" type="diversionTreatment"/>
+        <xs:attribute name="diversionReason" type="diversionReason"/>
+    </xs:complexType>
+
+    <xs:complexType name="PhoneNumber">
+        <xs:simpleContent>
+            <xs:extension base="xs:token">
+                <xs:attribute name="username" type="username"/>
+                <xs:attribute name="password" type="password"/>
+                <xs:attribute name="transferAnswerUrl" type="xs:anyURI"/>
+                <xs:attribute name="transferAnswerMethod" type="requestMethod"/>
+                <xs:attribute name="tag" type="tag"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="Pause">
+        <xs:attribute name="duration" type="pauseDuration"/>
+    </xs:complexType>
+
+    <xs:simpleType name="audioFormat">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="mp3|wav"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="terminatingDigits">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9#*]{1,12}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ttsVoice">
+        <xs:restriction base="xs:string">
+            <xs:pattern
+                value="susan|paul|julie|kate|bridget|katrin|esperanza|violeta|jolie|paola|dave|simon|stefan|jorge|bernard|luca"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="voiceGender">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="male|female"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="requestMethod">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="GET|POST"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="tag">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(.*){0,256}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="username">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(.*){0,1024}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="password">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(.*){0,1024}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="voiceLocale">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="en_US|en_UK|de|es|fr|it"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="diversionTreatment">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="none|propagate|stack"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="diversionReason">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="away|deflection|do-not-disturb|follow-me|no-answer|out-of-service|time-of-day|unavailable|unconditional|unknown|user-busy"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="transferCallerId">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(\+[0-9]{11,14})"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="interDigitTimeout">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="60"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="firstDigitTimeout">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="60"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="maxDigits">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="50"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="pauseDuration">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0.1"/>
+            <xs:maxInclusive value="86400"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="callTimeout">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="300"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="repeatCount">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="25"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

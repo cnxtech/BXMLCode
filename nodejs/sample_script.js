@@ -1,3 +1,14 @@
+/**
+ * sample_script.js
+ *
+ * A script demonstrating how to use the bandwidthbxml package
+ *
+ * NOTE: This script WILL NOT run in the project repo. You will need to copy it into your
+ * own project and install "bandwidthbxml"
+ *
+ * @author Jacob Mulford
+ */
+
 var BxmlBuilder = require("bandwidthbxml");
 
 //Hangup response
@@ -172,5 +183,23 @@ transfer.addPhoneNumber(number2);
 
 var response = new BxmlBuilder.Response();
 response.addVerb(transfer);
+
+console.log(response.toXml());
+
+//PlayAudio and SpeakSentence together response
+var playAudio = new BxmlBuilder.Verbs.PlayAudio();
+playAudio.setUrl("https://test.com");
+playAudio.setUsername("user");
+playAudio.setPassword("pass");
+
+var speakSentence = new BxmlBuilder.Verbs.SpeakSentence();
+speakSentence.setSentence("test");
+speakSentence.setVoice("susan");
+speakSentence.setGender("female");
+speakSentence.setLocale("en_US");
+
+var response = new BxmlBuilder.Response();
+response.addVerb(playAudio);
+response.addVerb(speakSentence);
 
 console.log(response.toXml());

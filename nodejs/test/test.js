@@ -339,3 +339,34 @@ describe("Transfer", function() {
         });
     });
 });
+
+//Tests for PlayAudio and SpeakSentence combined
+describe("PlayAudioSpeakSentence", function() {
+    describe("#toXml()", function() {
+        it("should generate a proper PlayAudio and SpeakSentence tag combined", function() {
+            var playAudio = new BxmlBuilder.Verbs.PlayAudio();
+            playAudio.setUrl("https://test.com");
+            playAudio.setUsername("user");
+            playAudio.setPassword("pass");
+
+            var speakSentence = new BxmlBuilder.Verbs.SpeakSentence();
+            speakSentence.setSentence("test");
+            speakSentence.setVoice("susan");
+            speakSentence.setGender("female");
+            speakSentence.setLocale("en_US");
+
+            var response = new BxmlBuilder.Response();
+            response.addVerb(playAudio);
+            response.addVerb(speakSentence);
+            var expectedString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><PlayAudio username=\"user\" password=\"pass\">https://test.com</PlayAudio><SpeakSentence voice=\"susan\" locale=\"en_US\" gender=\"female\">test</SpeakSentence></Response>";
+            assert.equal(response.toXml(), expectedString);
+            //validate against xsd
+            validator.validateXML(response.toXml(), "schema.xsd", function(err, result) {
+                if (err) {
+                    throw err;
+                }
+
+            });
+        });
+    });
+});

@@ -163,3 +163,22 @@ send_dtmf = RubyBandwidthBxml::SendDtmf.new({
 
 response.push(send_dtmf)
 puts response.to_xml()
+
+### Create a response that has speak sentence and play audio tags ###
+response = RubyBandwidthBxml::Response.new()
+speak_sentence = RubyBandwidthBxml::SpeakSentence.new({
+    :sentence => "Test",
+    :voice => "susan",
+    :locale => "en_US",
+    :gender => "female"
+})
+
+play_audio = RubyBandwidthBxml::PlayAudio.new({
+    :url => "https://test.mp3",
+    :username => "user",
+    :password => "pass"
+})
+
+response.push(speak_sentence)
+response.push(play_audio)
+puts response.to_xml()
