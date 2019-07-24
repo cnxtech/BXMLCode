@@ -1,0 +1,9 @@
+{
+    "name": "bandwidth/bxml",
+    "description": "PHP generator for Bandwidth's BXML",
+    "license": "MIT",
+    "require": {
+        "phpunit/phpunit": "^8.2",
+        "ext-SimpleXML": "^7.3"
+    }
+}

@@ -164,6 +164,24 @@ class TestPythonBandwidthBxml(unittest.TestCase):
         """
         self.response_class.add_verb(gather.Gather(gather_url="https://test.com", gather_method="GET", terminating_digits="123", tag="tag",
                 username="user", password="pass"))
+
+    def test_speak_sentence_play_audio_combined(self):
+        """
+        Test case for chaining 2 verbs together with SpeakSentence and PlayAudio
+        """
+        play_audio_ = play_audio.PlayAudio(
+            url="https://test.com",
+            username="user",
+            password="pass"
+        )
+        speak_sentence_ = speak_sentence.SpeakSentence(
+            sentence="Test",
+            voice="susan",
+            locale="en_US",
+            gender="female"
+        )
+        self.response_class.add_verb(play_audio_)
+        self.response_class.add_verb(speak_sentence_)
         etree.fromstring(self.response_class.to_xml().encode('utf-8'), PARSER)
 
 if __name__ == '__main__':

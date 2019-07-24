@@ -185,6 +185,26 @@ Response response = new Response(redirect);
 string response_xml = response.ToXml();
 ``` 
 
+### SpeakSentence and PlayAudio Response
+
+```
+SpeakSentence speakSentence = new SpeakSentence();
+speakSentence.Sentence = "test";
+speakSentence.Locale = "en_US";
+speakSentence.Voice = "susan";
+speakSentence.Gender = "female";
+
+PlayAudio playAudio = new PlayAudio();
+playAudio.Url = "https://test.com";
+playAudio.Username = "user";
+playAudio.Password = "pass";
+
+Response response = new Response();
+response.Add(speakSentence);
+response.Add(playAudio);
+string response_xml = response.ToXml();
+```
+
 ## BXML Documentation
 
 Bandwidth's BXML documentation can be found on the [currently non existent docsite](https://dev.bandwidth.com)
