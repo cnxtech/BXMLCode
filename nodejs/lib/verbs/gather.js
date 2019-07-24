@@ -24,6 +24,7 @@ class Gather extends BaseVerb {
         this.firstDigitTimeout = null;
         this.speakSentence = null;
         this.playAudio = null;
+        this.repeatCount = null;
     }
 
     /**
@@ -125,6 +126,15 @@ class Gather extends BaseVerb {
         this.playAudio = playAudio;
     }
 
+    /**
+     * Sets the repeatCount attribute
+     *
+     * @param {int} repeatCount The value to set repeatCount to
+     */
+    setRepeatCount(repeatCount) {
+        this.repeatCount = repeatCount;
+    }
+
     addXml(xmlDocument) {
         var attributes = {};
 
@@ -162,6 +172,10 @@ class Gather extends BaseVerb {
 
         if (this.firstDigitTimeout !== null) {
             attributes["firstDigitTimeout"] = this.firstDigitTimeout;
+        }
+
+        if (this.repeatCount !== null) {
+            attributes["repeatCount"] = this.repeatCount;
         }
 
         //Generating the element allows the SpeakSentence and PlayAudio

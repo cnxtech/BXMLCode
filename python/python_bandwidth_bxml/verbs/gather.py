@@ -18,7 +18,7 @@ class Gather(AbstractBxmlVerb):
 
     def __init__(self, gather_url=None, gather_method=None, terminating_digits=None, tag=None, max_digits=None,
                 inter_digit_timeout=None, username=None, password=None, first_digit_timeout=None,
-                play_audio=None, speak_sentence=None):
+                play_audio=None, speak_sentence=None, repeat_count=None):
         """
         Initializes the Gather class with the following parameters
         
@@ -33,6 +33,7 @@ class Gather(AbstractBxmlVerb):
         :param int first_digit_timeout: Seconds allowed before the first digit press before terminating the gather
         :param PlayAudio play_audio: The PlayAudio tag to include in the gather
         :param SpeakSentence speak_sentence: The SpeakSentence tag to include in the gather
+        :param int repeat_count: The number of times to repeat the audio prompt
         """
 
         self.gather_url = gather_url
@@ -46,6 +47,7 @@ class Gather(AbstractBxmlVerb):
         self.first_digit_timeout = first_digit_timeout
         self.play_audio = play_audio
         self.speak_sentence = speak_sentence
+        self.repeat_count = repeat_count
 
     def to_xml(self):
         root = etree.Element(GATHER_TAG)
@@ -67,6 +69,8 @@ class Gather(AbstractBxmlVerb):
             root.set("password", self.password)
         if self.first_digit_timeout is not None:
             root.set("firstDigitTimeout", str(self.first_digit_timeout))
+        if self.repeat_count is not None:
+            root.set("repeatCount", str(self.repeat_count))
         if self.play_audio is not None:
             root.append(self.play_audio.to_etree_element())
         if self.speak_sentence is not None:

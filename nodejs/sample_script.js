@@ -144,6 +144,7 @@ gather.setTerminatingDigits("123");
 gather.setMaxDigits(3);
 gather.setInterDigitTimeout(4);
 gather.setFirstDigitTimeout(5);
+gather.setRepeatCount(6);
 
 var response = new BxmlBuilder.Response();
 response.addVerb(gather);

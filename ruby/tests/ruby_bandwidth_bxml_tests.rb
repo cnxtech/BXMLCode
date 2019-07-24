@@ -186,7 +186,8 @@ class RubyBandwidthBxmlTest < Test::Unit::TestCase
         :inter_digit_timeout => "3",
         :username => "username",
         :password => "password",
-        :first_digit_timeout => "3"
+        :first_digit_timeout => "3",
+        :repeat_count => "4"
     })
     @response_class.push(gather)
     xml_string = @response_class.to_xml()

@@ -15,7 +15,8 @@ module RubyBandwidthBxml
        'interDigitTimeout' => inter_digit_timeout,
        'username' => username,
        'password' => password,
-       'firstDigitTimeout' => first_digit_timeout
+       'firstDigitTimeout' => first_digit_timeout,
+       'repeatCount' => repeat_count
         })) do
         def embedded_xml(xml, property, type)
           if property
