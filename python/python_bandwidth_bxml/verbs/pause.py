@@ -22,8 +22,10 @@ class Pause(AbstractBxmlVerb):
 
         :param int duration: The number of seconds to pause
         """
-        self.duration = str(duration)
+        self.duration = duration
 
     def to_xml(self):
-        root = etree.Element(PAUSE_TAG, duration=self.duration)
+        root = etree.Element(PAUSE_TAG)
+        if self.duration is not None:
+            root.set("duration", str(self.duration))
         return etree.tostring(root).decode()
