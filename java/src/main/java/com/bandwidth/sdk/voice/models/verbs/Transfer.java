@@ -22,7 +22,6 @@ public class Transfer implements Verb {
 
     /**
      * A collection of phone numbers to transfer the call to. The first to answer will be transferred.
-     * @param phoneNumbers List of PhoneNumbers
      */
     @XmlElement(name = PhoneNumber.TYPE_NAME)
     private final List<PhoneNumber> phoneNumbers;
@@ -31,42 +30,36 @@ public class Transfer implements Verb {
      * 	(optional) The caller ID to use when the call is transferred, if different. Must be in E.164 format (e.g. +15555555555).
      * <br/>
      * Note: Leave blank to pass along the number of the remote party
-     * @param transferCallerId String
      */
     @XmlAttribute
     private String transferCallerId;
 
     /**
      * <i>(optional)</i> This is the timeout (in seconds) for the callee to answer the call. Range: decimal values between 1 - 300
-     * @param callTimeout Double
      */
     @XmlAttribute
     private Double callTimeout;
 
     /**
      * <i>(optional)</i> URL to send the Transfer Complete event to and request new BXML.
-     * @param transferCompleteUrl
      */
     @XmlAttribute
     private URI transferCompleteUrl;
 
     /**
      * <i>(optional)</i> The HTTP method to use for the request to transferCompleteUrl. GET or POST. Default value is POST.
-     * @param transferCompleteMethod Method
      */
     @XmlAttribute
     private Method transferCompleteMethod;
 
     /**
      * <i>(optional)</i> The username to send in the HTTP request to transferCompleteUrl.
-     * @param username String
      */
     @XmlAttribute
     protected String username;
 
     /**
      * <i>(optional)</i> The password to send in the HTTP request to transferCompleteUrl.
-     * @param password String
      */
     @XmlAttribute
     protected String password;
@@ -78,7 +71,6 @@ public class Transfer implements Verb {
      * May be cleared by setting tag=""
      * <br/>
      * Max length 256 characters.
-     * @param tag String
      */
     @XmlAttribute
     private String tag;
@@ -92,7 +84,6 @@ public class Transfer implements Verb {
      * <br/>
      * <b>stack</b>: After propagating any Diversion header from the inbound leg to the outbound leg, stack on top another Diversion header based on the Request-URI of the inbound call.
      *
-     * @param diversionTreatment String either: "none", "propagate", or "stack"
      */
     @XmlAttribute
     private String diversionTreatment;
@@ -124,7 +115,6 @@ public class Transfer implements Verb {
      * <br/>
      * away
      *
-     * @param diversionReason String matching one of the options
      */
     @XmlAttribute
     private String diversionReason;
@@ -133,7 +123,6 @@ public class Transfer implements Verb {
 
         /**
          * <i>(optional)</i> URL to send the Transfer Complete event to and request new BXML.
-         * @param uri URI
          */
         public TransferBuilder transferCompleteUrl(URI uri){
             this.transferCompleteUrl = uri;
@@ -142,7 +131,6 @@ public class Transfer implements Verb {
 
         /**
          * <i>(optional)</i> URL to send the Transfer Complete event to and request new BXML. Converts String using URI.create(uri)
-         * @param uri String
          */
         public TransferBuilder transferCompleteUrl(String uri){
             return transferCompleteUrl(URI.create(uri));
@@ -150,7 +138,6 @@ public class Transfer implements Verb {
 
         /**
          * <i>(optional)</i> The HTTP method to use for the request to transferCompleteUrl. GET or POST. Default value is POST.
-         * @param method Method
          */
         public TransferBuilder transferCompleteMethod(Method method){
             this.transferCompleteMethod = method;
@@ -159,7 +146,6 @@ public class Transfer implements Verb {
 
         /**
          * <i>(optional)</i> The HTTP method to use for the request to transferCompleteUrl. GET or POST. Default value is POST. Converts from String using Method.fromValue(method)
-         * @param method String
          */
         public TransferBuilder transferCompleteMethod(String method){
             return transferCompleteMethod(Method.fromValue(method));
@@ -168,8 +154,6 @@ public class Transfer implements Verb {
 
         /**
          * A collection of phone numbers to transfer the call to. The first to answer will be transferred.
-         * @param phoneNumbers the phonenumbers to include
-         * @return TransferBuilder
          */
         public TransferBuilder phoneNumbers(PhoneNumber ... phoneNumbers){
             this.phoneNumbers = Arrays.asList(phoneNumbers);
@@ -178,8 +162,6 @@ public class Transfer implements Verb {
 
         /**
          * A collection of phone numbers to transfer the call to. The first to answer will be transferred.
-         * @param phoneNumbers List of phonenumbers
-         * @return TransferBuilder
          */
         public TransferBuilder phoneNumbers(List<PhoneNumber> phoneNumbers){
             this.phoneNumbers = phoneNumbers;

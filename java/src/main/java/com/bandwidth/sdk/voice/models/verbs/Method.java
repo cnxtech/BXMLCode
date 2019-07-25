@@ -19,8 +19,6 @@ public enum Method {
 
     /**
      * Translates a String value to a Method if applicable
-     * @param value String
-     * @return
      */
     public static Method fromValue(String value) {
         return Arrays.stream(Method.values())

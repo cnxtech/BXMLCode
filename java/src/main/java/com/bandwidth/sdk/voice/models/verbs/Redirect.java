@@ -18,14 +18,12 @@ public class Redirect implements Verb {
 
     /**
      * <b>(required)</b> URL to request new BXML from. A Redirect event will be sent to this endpoint.
-     * @param uri
      */
     @XmlAttribute
     private URI redirectUrl;
 
     /**
      * <i>(optional)</i> The HTTP method to use for the request to redirectUrl. GET or POST. Default Value is POST.
-     * @param redirectMethod
      */
     @XmlAttribute
     private Method redirectMethod;
@@ -36,21 +34,18 @@ public class Redirect implements Verb {
      * May be cleared by setting tag=""
      * <br/>
      * Max length 256 characters.
-     * @param tag
      */
     @XmlAttribute
     private String tag;
 
     /**
      * <i>(optional)</i> The username to send in the HTTP request to redirectUrl.
-     * @param username
      */
     @XmlAttribute
     protected String username;
 
     /**
      * <i>(optional)</i> The password to send in the HTTP request to redirectUrl.
-     * @param password
      */
     @XmlAttribute
     protected String password;
@@ -59,8 +54,6 @@ public class Redirect implements Verb {
 
         /**
          * <b>(required)</b> URL to request new BXML from. A Redirect event will be sent to this endpoint.
-         * @param uri
-         * @return RedirectBuilder
          */
         public RedirectBuilder redirectUrl(URI uri ){
             this.redirectUrl = uri;
@@ -69,8 +62,6 @@ public class Redirect implements Verb {
 
         /**
          * <b>(required)</b> URL to request new BXML from. A Redirect event will be sent to this endpoint.  Converts to URI using URI.create(url)
-         * @param uri
-         * @return RedirectBuilder
          */
         public RedirectBuilder redirectUrl(String uri){
             return redirectUrl(URI.create(uri));
@@ -78,8 +69,6 @@ public class Redirect implements Verb {
 
         /**
          * <i>(optional)</i> The HTTP method to use for the request to redirectUrl. GET or POST. Default Value is POST.
-         * @param method
-         * @return RedirectBuilder
          */
         public RedirectBuilder redirectMethod(Method method){
             this.redirectMethod = method;
@@ -88,8 +77,6 @@ public class Redirect implements Verb {
 
         /**
          * <i>(optional)</i> The HTTP method to use for the request to redirectUrl. GET or POST. Default Value is POST.  Converts String to Method using Method.fromValue(method)
-         * @param method
-         * @return RedirectBuilder
          */
         public RedirectBuilder redirectMethod(String method){
             return redirectMethod(Method.fromValue(method));

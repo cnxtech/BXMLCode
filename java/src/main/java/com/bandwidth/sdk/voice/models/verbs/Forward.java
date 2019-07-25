@@ -18,21 +18,18 @@ public class Forward implements Verb {
 
     /**
      * Number to forward the call to. Must be in E.164 format (e.g. +15555555555)
-     * @param to String must be in E.164 format.
      */
     @XmlAttribute
     private String to;
 
     /**
      * <i>(optional)</i> Number to use for caller ID on the outgoing leg. Must be in E.164 format (e.g. +15555555555). If omitted, assumes the "to" number of the original leg.
-     * @param from String must be in E.164 format.
      */
     @XmlAttribute
     private String from;
 
     /**
      * <i>(optional)</i> Number of seconds to wait for an answer before abandoning the call. Default: 30.
-     * @param long number of seconds to wait.
      */
     @XmlAttribute
     private long callTimeout;
@@ -46,7 +43,6 @@ public class Forward implements Verb {
      * <br/>
      * <b>stack</b>: After propagating any Diversion header from the inbound leg to the outbound leg, stack on top another Diversion header based on the Request-URI of the inbound call.
      *
-     * @param diversionTreatment String either: "none", "propagate", or "stack"
      */
     @XmlAttribute
     private String diversionTreatment;
@@ -79,7 +75,6 @@ public class Forward implements Verb {
      * <br/>
      * away
      *
-     * @param diversionReason String matching one of the options
      */
     @XmlAttribute
     private String diversionReason;

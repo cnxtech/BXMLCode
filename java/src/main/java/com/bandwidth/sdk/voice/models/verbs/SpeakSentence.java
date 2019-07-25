@@ -23,14 +23,12 @@ public class SpeakSentence implements Verb, AudioProducer {
 
     /**
      * String representation of audio to speak
-     * @param text
      */
     @XmlValue
     private String text;
 
     /**
      * Selects the voice of the speaker.
-     * @param voice
      */
     @XmlAttribute
     private String voice;
@@ -39,7 +37,6 @@ public class SpeakSentence implements Verb, AudioProducer {
      * Selects the gender of the speaker. Valid values are "male" or "female".
      * <br/>
      * Default "female"
-     * @param gender
      */
     @XmlAttribute
     private String gender;
@@ -48,7 +45,6 @@ public class SpeakSentence implements Verb, AudioProducer {
      *Selects the locale of the speaker.
      * <br/>
      * Default "en_US"
-     * @param locale
      */
     @XmlAttribute
     private String locale;

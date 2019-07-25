@@ -32,7 +32,6 @@ public class Response {
     @XmlElements({
             @XmlElement(name = Gather.TYPE_NAME, type = Gather.class),
             @XmlElement(name = Hangup.TYPE_NAME, type = Hangup.class),
-            @XmlElement(name = Record.TYPE_NAME, type = Record.class),
             @XmlElement(name = Redirect.TYPE_NAME, type = Redirect.class),
             @XmlElement(name = PlayAudio.TYPE_NAME, type = PlayAudio.class),
             @XmlElement(name = SpeakSentence.TYPE_NAME, type = SpeakSentence.class),
@@ -52,8 +51,6 @@ public class Response {
 
     /**
      * Adds a Verb to the list of Verbs in this Response
-     * @param verb
-     * @return Response (this)
      */
     public Response add(Verb verb) {
         this.verbs.add(verb);
@@ -62,8 +59,6 @@ public class Response {
 
     /**
      * Adds Verbs to the list of Verbs in this Response
-     * @param verbs
-     * @return This Response
      */
     public Response addAll(Verb... verbs) {
         this.verbs.addAll(Arrays.asList(verbs));
@@ -73,7 +68,6 @@ public class Response {
     /**
      * Convert this Response and its verbs into their corresponding XML and get the result as a String
      *
-     * @return This Response and its children in XML form
      */
     public String toXml() {
         OutputStream outputStream = new ByteArrayOutputStream();

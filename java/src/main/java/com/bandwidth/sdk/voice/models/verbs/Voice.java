@@ -22,8 +22,6 @@ public enum Voice {
 
     /**
      * Translates a string into a Voice Enum
-     * @param value String value
-     * @return
      */
     public static Voice fromValue(String value) {
         return Arrays.stream(Voice.values())

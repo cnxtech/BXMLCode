@@ -20,21 +20,18 @@ public class PlayAudio implements Verb, AudioProducer {
 
     /**
      * URL of audio to play
-     * @param audioUri URI that the audio file is located
      */
     @XmlValue
     private URI audioUri;
 
     /**
      * username to authenticate at the audioUri endpoint
-     * @param uername String username
      */
     @XmlAttribute
     protected String username;
 
     /**
      * password to use to authenticate at the audioUri endpoint
-     * @param password String
      */
     @XmlAttribute
     protected String password;
@@ -43,8 +40,6 @@ public class PlayAudio implements Verb, AudioProducer {
 
         /**
          * URL of audio to play
-         * @param uri String URI representation that the audio file is located.  Converts the String to URI using URI.create(uri).
-         * @return PlayAudoBuilder
          */
         public PlayAudioBuilder audioUri(String uri){
             return this.audioUri(URI.create(uri));
@@ -52,8 +47,6 @@ public class PlayAudio implements Verb, AudioProducer {
 
         /**
          * URL of audio to play
-         * @param uri URI that the audio file is located
-         * @return PlayAudoBuilder
          */
         public PlayAudioBuilder audioUri(URI uri){
             this.audioUri = uri;

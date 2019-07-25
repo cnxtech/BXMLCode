@@ -22,7 +22,6 @@ public class SendDtmf implements Verb {
 
     /**
      * String containing the DTMF characters to be sent in a call. Allows a maximum of 50 characters. The digits will be sent one-by-one with a marginal delay.
-     * @param digits
      */
     @XmlValue
     private String digits;

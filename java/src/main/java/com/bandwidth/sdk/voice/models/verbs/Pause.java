@@ -15,8 +15,7 @@ public class Pause implements Verb {
 
     /**
      * <i>(optional)</i> The 'duration' attribute specifies how many seconds Bandwidth will wait silently before continuing on. Default value is 1. Range: decimal values between 0.1 - 86400.
-     * @param duration int in seconds.
      */
     @XmlAttribute
-    private int duration;
+    private Double duration;
 }

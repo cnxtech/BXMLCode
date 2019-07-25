@@ -4,6 +4,9 @@ import com.bandwidth.sdk.voice.models.verbs.adapter.FileFormatAdapter;
 import java.util.Arrays;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+/**
+ * File format that AudioProducer can handle
+ */
 @XmlJavaTypeAdapter(FileFormatAdapter.class)
 public enum FileFormat {
     MP3("mp3"), WAV("wav");
@@ -14,6 +17,9 @@ public enum FileFormat {
         this.name = name;
     }
 
+    /**
+     * Converts a string value to an  FileFormat Enum
+     */
     public static FileFormat fromValue(String value) {
         return Arrays.asList(FileFormat.values()).stream().filter(e -> e.name().equalsIgnoreCase(value)).findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(String.format("Unsupported file format '%s'", value)));
